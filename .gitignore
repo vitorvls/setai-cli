@@ -1,3 +1,6 @@
+# Cursor configuration files
+.cursor/
+
 # Dependencies
 node_modules/
 .pnp
