@@ -10,7 +10,6 @@ import {
   getConfigPath,
   getLanguageConfig,
   saveLanguageConfig,
-  type AIConfig,
 } from '../config/config-manager.js';
 import { info, success, error, warning, gray } from '../utils/output.js';
 import { tMessage, tValidation, setLocale, type SupportedLocale } from '../utils/i18n.js';
@@ -54,9 +53,6 @@ export async function configCommand(): Promise<void> {
       case 'list':
         await handleListAPIKeys();
         break;
-      case 'language':
-        await handleSetLanguage();
-        break;
       case 'exit':
         info(tMessage('config.goodbye'), true);
         return;
@@ -68,9 +64,10 @@ export async function configCommand(): Promise<void> {
  * Lida com adição/atualização de API key
  */
 async function handleSetAPIKey(): Promise<void> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const answers = (await inquirer.prompt([
     {
-      type: 'list',
+      type: 'list' as const,
       name: 'provider',
       message: 'Qual provedor de IA?',
       choices: [
@@ -128,7 +125,8 @@ async function handleSetAPIKey(): Promise<void> {
         default: 'gemini-1.5-pro',
         when: (answers: InquirerAnswers) => answers.provider === 'google',
       },
-  ])) as InquirerAnswers;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ] as any)) as InquirerAnswers;
 
   try {
     await setAPIKey(answers.provider!, answers.apiKey!, answers.defaultModel);
@@ -218,8 +216,11 @@ async function handleListAPIKeys(): Promise<void> {
 
 /**
  * Lida com configuração de idioma
+ * @internal Função não utilizada no momento - mantida para uso futuro
  */
-async function handleSetLanguage(): Promise<void> {
+// Função mantida para uso futuro
+// @ts-expect-error - Função não utilizada
+async function _handleSetLanguage(): Promise<void> {
   const { questionsLang, filesLang } = await inquirer.prompt([
     {
       type: 'list',

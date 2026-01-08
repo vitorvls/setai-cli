@@ -75,7 +75,7 @@ export class AnthropicProvider {
           });
 
           const content = response.content[0];
-          if (content.type !== 'text') {
+          if (!content || content.type !== 'text') {
             throw new Error('Resposta inválida da API da Anthropic');
           }
 
@@ -121,33 +121,114 @@ export class AnthropicProvider {
       const extracted = extractJSON(response);
       const validated = validateAIContent(extracted);
 
-      return {
-        enhancedDescription: validated.enhancedDescription,
-        problemImportance: validated.problemImportance,
-        businessGoals: validated.businessGoals,
-        architectureDecisions: validated.architectureDecisions,
-        bestPractices: validated.bestPractices,
-        aiUsageGuidelines: validated.aiUsageGuidelines,
-        communicationPattern: validated.communicationPattern,
-        interactionModel: validated.interactionModel,
-        sourceOfTruth: validated.sourceOfTruth,
-        cachingStrategy: validated.cachingStrategy,
-        stateManagement: validated.stateManagement,
-        authentication: validated.authentication,
-        authorization: validated.authorization,
-        securityConstraints: validated.securityConstraints,
-        expectedScale: validated.expectedScale,
-        scalingStrategy: validated.scalingStrategy,
-        failureHandling: validated.failureHandling,
-        loggingStrategy: validated.loggingStrategy,
-        monitoringMetrics: validated.monitoringMetrics,
-        alertsIncidentHandling: validated.alertsIncidentHandling,
-        architecturalStyle: validated.architecturalStyle,
-        designPatterns: validated.designPatterns,
-        architectureDiagrams: validated.architectureDiagrams,
-        tradeOffs: validated.tradeOffs,
-        limitations: validated.limitations,
-      };
+      const result: AIGeneratedContent = {};
+      
+      if (validated.enhancedDescription !== undefined) {
+        result.enhancedDescription = validated.enhancedDescription;
+      }
+      if (validated.problemImportance !== undefined) {
+        result.problemImportance = validated.problemImportance;
+      }
+      if (validated.businessGoals !== undefined) {
+        result.businessGoals = validated.businessGoals;
+      }
+      if (validated.architectureDecisions !== undefined) {
+        result.architectureDecisions = validated.architectureDecisions;
+      }
+      if (validated.bestPractices !== undefined) {
+        result.bestPractices = validated.bestPractices;
+      }
+      if (validated.aiUsageGuidelines !== undefined) {
+        result.aiUsageGuidelines = validated.aiUsageGuidelines;
+      }
+      if (validated.communicationPattern !== undefined) {
+        result.communicationPattern = validated.communicationPattern;
+      }
+      if (validated.interactionModel !== undefined) {
+        result.interactionModel = validated.interactionModel;
+      }
+      if (validated.sourceOfTruth !== undefined) {
+        result.sourceOfTruth = validated.sourceOfTruth;
+      }
+      if (validated.cachingStrategy !== undefined) {
+        result.cachingStrategy = validated.cachingStrategy;
+      }
+      if (validated.stateManagement !== undefined) {
+        result.stateManagement = validated.stateManagement;
+      }
+      if (validated.authentication !== undefined) {
+        result.authentication = validated.authentication;
+      }
+      if (validated.authorization !== undefined) {
+        result.authorization = validated.authorization;
+      }
+      if (validated.securityConstraints !== undefined) {
+        result.securityConstraints = validated.securityConstraints;
+      }
+      if (validated.expectedScale !== undefined) {
+        result.expectedScale = validated.expectedScale;
+      }
+      if (validated.scalingStrategy !== undefined) {
+        result.scalingStrategy = validated.scalingStrategy;
+      }
+      if (validated.failureHandling !== undefined) {
+        result.failureHandling = validated.failureHandling;
+      }
+      if (validated.loggingStrategy !== undefined) {
+        result.loggingStrategy = validated.loggingStrategy;
+      }
+      if (validated.monitoringMetrics !== undefined) {
+        result.monitoringMetrics = validated.monitoringMetrics;
+      }
+      if (validated.alertsIncidentHandling !== undefined) {
+        result.alertsIncidentHandling = validated.alertsIncidentHandling;
+      }
+      if (validated.architecturalStyle !== undefined) {
+        result.architecturalStyle = validated.architecturalStyle;
+      }
+      if (validated.designPatterns !== undefined) {
+        result.designPatterns = validated.designPatterns;
+      }
+      if (validated.architectureDiagrams !== undefined) {
+        const diagrams: AIGeneratedContent['architectureDiagrams'] = {};
+        if (validated.architectureDiagrams.highLevelFlow !== undefined) {
+          diagrams.highLevelFlow = validated.architectureDiagrams.highLevelFlow;
+        }
+        if (validated.architectureDiagrams.componentInteraction !== undefined) {
+          diagrams.componentInteraction = validated.architectureDiagrams.componentInteraction;
+        }
+        if (Object.keys(diagrams).length > 0) {
+          result.architectureDiagrams = diagrams;
+        }
+      }
+      if (validated.tradeOffs !== undefined && validated.tradeOffs.length > 0) {
+        result.tradeOffs = validated.tradeOffs.map((to) => {
+          const tradeOff: {
+            decision?: string;
+            alternative?: string;
+            chosen?: string;
+            sacrificed?: string;
+          } = {};
+          if (to.decision !== undefined) {
+            tradeOff.decision = to.decision;
+          }
+          if (to.alternative !== undefined) {
+            tradeOff.alternative = to.alternative;
+          }
+          if (to.chosen !== undefined) {
+            tradeOff.chosen = to.chosen;
+          }
+          if (to.sacrificed !== undefined) {
+            tradeOff.sacrificed = to.sacrificed;
+          }
+          return tradeOff;
+        });
+      }
+      if (validated.limitations !== undefined) {
+        result.limitations = validated.limitations;
+      }
+      
+      return result;
     } catch (err) {
       error('Erro ao processar resposta da IA:');
       if (err instanceof Error) {

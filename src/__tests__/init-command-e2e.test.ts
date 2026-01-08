@@ -44,7 +44,6 @@ vi.mock('process', async () => {
 
 describe('Init Command E2E', () => {
   let testDir: string;
-  let originalExit: typeof process.exit;
 
   beforeEach(async () => {
     // Cria diretório temporário para testes
@@ -54,7 +53,6 @@ describe('Init Command E2E', () => {
     // Mock do process.cwd() - já está mockado no vi.mock acima
 
     // Mock do process.exit para não encerrar o processo durante testes
-    originalExit = process.exit;
     process.exit = vi.fn() as typeof process.exit;
 
     // Inicializa i18n
@@ -111,7 +109,7 @@ describe('Init Command E2E', () => {
     // Act - Executa o comando init
     try {
       await initCommand(false, false);
-    } catch (error) {
+    } catch {
       // Ignora erros de process.exit em testes
     }
 
@@ -204,7 +202,7 @@ describe('Init Command E2E', () => {
     // Act
     try {
       await initCommand(false, true);
-    } catch (error) {
+    } catch {
       // Ignora erros
     }
 
@@ -248,7 +246,7 @@ describe('Init Command E2E', () => {
     // Act
     try {
       await initCommand(false, false);
-    } catch (error) {
+    } catch {
       // Ignora erros
     }
 
@@ -272,7 +270,7 @@ describe('Init Command E2E', () => {
     // Act
     try {
       await initCommand(false, false);
-    } catch (error) {
+    } catch {
       // Ignora erros
     }
 
@@ -289,7 +287,7 @@ describe('Init Command E2E', () => {
     // Act
     try {
       await initCommand(false, false);
-    } catch (error) {
+    } catch {
       // Ignora erros
     }
 
@@ -331,7 +329,7 @@ describe('Init Command E2E', () => {
     // Act
     try {
       await initCommand(false, true);
-    } catch (error) {
+    } catch {
       // Ignora erros
     }
 
@@ -375,7 +373,7 @@ describe('Init Command E2E', () => {
     // Act
     try {
       await initCommand(false, false, 'en');
-    } catch (error) {
+    } catch {
       // Ignora erros
     }
 

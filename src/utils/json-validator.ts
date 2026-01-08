@@ -65,7 +65,7 @@ export function validateAIContent(data: unknown): ValidatedAIContent {
 export function extractJSON(text: string): unknown {
   // Tenta extrair JSON de markdown code blocks
   const jsonMatch = text.match(/```(?:json)?\s*(\{[\s\S]*\})\s*```/);
-  if (jsonMatch) {
+  if (jsonMatch && jsonMatch[1]) {
     try {
       return JSON.parse(jsonMatch[1]);
     } catch {

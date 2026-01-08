@@ -50,7 +50,7 @@ export async function retryWithBackoff<T>(
       }
 
       // Aguarda antes de tentar novamente (backoff exponencial)
-      await new Promise((resolve) => setTimeout(resolve, delay));
+      await new Promise((resolve) => globalThis.setTimeout(resolve, delay));
       delay = Math.min(delay * backoffMultiplier, maxDelay);
     }
   }

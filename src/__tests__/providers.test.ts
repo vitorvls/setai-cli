@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { OpenAIProvider } from '../services/providers/openai-provider.js';
 import { AnthropicProvider } from '../services/providers/anthropic-provider.js';
 import { GoogleProvider } from '../services/providers/google-provider.js';
-import { getAPIKey, setAPIKey, loadConfig } from '../config/config-manager.js';
+import { getAPIKey, loadConfig } from '../config/config-manager.js';
 
 /**
  * Testes para Providers de IA

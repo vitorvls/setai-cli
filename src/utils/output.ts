@@ -18,7 +18,6 @@ export function success(message: string, useTranslation: boolean = false): void 
 }
 
 export function error(message: string, useTranslation: boolean = false): void {
-  // eslint-disable-next-line no-console
   console.error(chalk.red(useTranslation ? tMessage(message) : message));
 }
 

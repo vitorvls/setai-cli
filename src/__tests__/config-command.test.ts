@@ -7,7 +7,6 @@ import {
   listAPIKeys,
   getConfigPath,
   getLanguageConfig,
-  saveLanguageConfig,
 } from '../config/config-manager.js';
 import { initI18n, setLocale } from '../utils/i18n.js';
 

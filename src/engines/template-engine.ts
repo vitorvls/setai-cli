@@ -3,6 +3,7 @@ import { join } from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import { getLocale, type SupportedLocale } from '../utils/i18n.js';
+import type { AIGeneratedContent } from '../services/ai-service.js';
 
 /**
  * Template Engine - Processa templates e preenche com dados coletados
@@ -23,7 +24,7 @@ export function processTemplate(
   // Remove blocos condicionais vazios ({{#if KEY}}...{{/if}})
   // Se o valor estiver vazio ou não existir, remove o bloco inteiro
   const conditionalPattern = /\{\{#if\s+(\w+)\}\}([\s\S]*?)\{\{\/if\}\}/g;
-  result = result.replace(conditionalPattern, (match, key, content) => {
+  result = result.replace(conditionalPattern, (_match, key, content) => {
     const value = data[key];
     if (value && value.trim().length > 0) {
       // Remove os marcadores {{#if}} e {{/if}}, mantém o conteúdo
@@ -85,7 +86,7 @@ export async function loadTemplate(templatePath: string, locale?: SupportedLocal
       try {
         const content = await readFile(fallbackPath, 'utf-8');
         return content;
-      } catch (fallbackError) {
+      } catch {
         throw new Error(
           `Erro ao carregar template ${templatePath} (tentou ${localizedPath} e fallback): ${error instanceof Error ? error.message : String(error)}`
         );
@@ -153,14 +154,7 @@ interface ProcessAllTemplatesParams {
     apiDocumentation?: string;
     codeComments?: string;
   };
-  aiGenerated?: {
-    projectDescription?: string;
-    problemImportance?: string;
-    businessGoals?: string[];
-    architectureDecisions?: string[];
-    bestPractices?: string[];
-    aiUsageGuidelines?: string;
-  };
+  aiGenerated?: AIGeneratedContent;
 }
 
 export async function processAllTemplates(
@@ -368,7 +362,7 @@ export async function processAllTemplates(
     if (projectInfo.advanced.designPatterns && projectInfo.advanced.designPatterns.length > 0) {
       templateData.DESIGN_PATTERNS = projectInfo.advanced.designPatterns.map((pattern) => `- ${pattern}`).join('\n');
     } else if (projectInfo.aiGenerated?.designPatterns && projectInfo.aiGenerated.designPatterns.length > 0) {
-      templateData.DESIGN_PATTERNS = projectInfo.aiGenerated.designPatterns.map((pattern) => `- ${pattern}`).join('\n');
+      templateData.DESIGN_PATTERNS = projectInfo.aiGenerated.designPatterns.map((pattern: string) => `- ${pattern}`).join('\n');
     } else if (projectInfo.aiGenerated?.bestPractices && projectInfo.aiGenerated.bestPractices.length > 0) {
       // Usa bestPractices da IA como design patterns se não houver design patterns específicos
       templateData.DESIGN_PATTERNS = projectInfo.aiGenerated.bestPractices.map((practice) => `- ${practice}`).join('\n');
@@ -438,7 +432,7 @@ export async function processAllTemplates(
     }
     
     if (projectInfo.aiGenerated?.designPatterns && projectInfo.aiGenerated.designPatterns.length > 0) {
-      templateData.DESIGN_PATTERNS = projectInfo.aiGenerated.designPatterns.map((pattern) => `- ${pattern}`).join('\n');
+      templateData.DESIGN_PATTERNS = projectInfo.aiGenerated.designPatterns.map((pattern: string) => `- ${pattern}`).join('\n');
     } else if (projectInfo.aiGenerated?.bestPractices && projectInfo.aiGenerated.bestPractices.length > 0) {
       templateData.DESIGN_PATTERNS = projectInfo.aiGenerated.bestPractices.map((practice) => `- ${practice}`).join('\n');
     } else {

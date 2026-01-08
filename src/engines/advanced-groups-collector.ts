@@ -363,13 +363,14 @@ export async function collectAdvancedGroups(): Promise<AdvancedConfig> {
     groupChoices.push({
       name: tQuestion('advanced.finish'),
       value: 'finish',
+      disabled: false,
     });
 
     // Pergunta qual grupo responder
     const groupSelection = await inquirer.prompt([
       {
-        type: 'list',
-        name: 'selectedGroup',
+        type: 'list' as const,
+        name: 'selectedGroup' as const,
         message: tQuestion('advanced.groupSelection'),
         choices: groupChoices,
       },
@@ -390,7 +391,8 @@ export async function collectAdvancedGroups(): Promise<AdvancedConfig> {
 
     // Faz as perguntas do grupo selecionado
     info(tMessage('advanced.group.answering', { name: selectedGroup.name }), true);
-    const groupAnswers = (await inquirer.prompt(selectedGroup.questions)) as InquirerAnswers;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const groupAnswers = (await inquirer.prompt(selectedGroup.questions as any)) as InquirerAnswers;
 
     // Salva as respostas
     Object.assign(allAnswers, groupAnswers);
@@ -420,85 +422,161 @@ function processGroupAnswers(
   config: AdvancedConfig
 ): void {
   switch (groupId) {
-    case 'ai-usage':
-      config.preferredAIModels = {
-        architecture: answers.preferredModelArchitecture,
-        implementation: answers.preferredModelImplementation,
-        refactoring: answers.preferredModelRefactoring,
-        debug: answers.preferredModelDebug,
-        boilerplate: answers.preferredModelBoilerplate,
-      };
-      config.aiUsageRules = {
-        allowArchitecturePlanning: answers.allowArchitecturePlanning,
-        allowCodeGeneration: answers.allowCodeGeneration,
-        allowRefactoring: answers.allowRefactoring,
-        allowDebug: answers.allowDebug,
-        allowDocumentation: answers.allowDocumentation,
-      };
-      config.customConstraints = answers.customConstraints;
+    case 'ai-usage': {
+      const preferredAIModels: AdvancedConfig['preferredAIModels'] = {};
+      if (answers.preferredModelArchitecture !== undefined) {
+        preferredAIModels.architecture = answers.preferredModelArchitecture;
+      }
+      if (answers.preferredModelImplementation !== undefined) {
+        preferredAIModels.implementation = answers.preferredModelImplementation;
+      }
+      if (answers.preferredModelRefactoring !== undefined) {
+        preferredAIModels.refactoring = answers.preferredModelRefactoring;
+      }
+      if (answers.preferredModelDebug !== undefined) {
+        preferredAIModels.debug = answers.preferredModelDebug;
+      }
+      if (answers.preferredModelBoilerplate !== undefined) {
+        preferredAIModels.boilerplate = answers.preferredModelBoilerplate;
+      }
+      if (Object.keys(preferredAIModels).length > 0) {
+        config.preferredAIModels = preferredAIModels;
+      }
+      
+      const aiUsageRules: AdvancedConfig['aiUsageRules'] = {};
+      if (answers.allowArchitecturePlanning !== undefined) {
+        aiUsageRules.allowArchitecturePlanning = answers.allowArchitecturePlanning;
+      }
+      if (answers.allowCodeGeneration !== undefined) {
+        aiUsageRules.allowCodeGeneration = answers.allowCodeGeneration;
+      }
+      if (answers.allowRefactoring !== undefined) {
+        aiUsageRules.allowRefactoring = answers.allowRefactoring;
+      }
+      if (answers.allowDebug !== undefined) {
+        aiUsageRules.allowDebug = answers.allowDebug;
+      }
+      if (answers.allowDocumentation !== undefined) {
+        aiUsageRules.allowDocumentation = answers.allowDocumentation;
+      }
+      if (Object.keys(aiUsageRules).length > 0) {
+        config.aiUsageRules = aiUsageRules;
+      }
+      
+      if (answers.customConstraints !== undefined) {
+        config.customConstraints = answers.customConstraints;
+      }
       break;
+    }
 
-    case 'responsibilities':
-      config.responsibilities = {
-        cto: answers.ctoResponsibility,
-        techLead: answers.techLeadResponsibility,
-        dev: answers.devResponsibility,
-      };
+    case 'responsibilities': {
+      const responsibilities: AdvancedConfig['responsibilities'] = {};
+      if (answers.ctoResponsibility !== undefined) {
+        responsibilities.cto = answers.ctoResponsibility;
+      }
+      if (answers.techLeadResponsibility !== undefined) {
+        responsibilities.techLead = answers.techLeadResponsibility;
+      }
+      if (answers.devResponsibility !== undefined) {
+        responsibilities.dev = answers.devResponsibility;
+      }
+      if (Object.keys(responsibilities).length > 0) {
+        config.responsibilities = responsibilities;
+      }
       break;
+    }
 
     case 'libraries':
-      config.allowedLibraries = answers.allowedLibraries
-        ?.split(',')
-        .map((lib) => lib.trim())
-        .filter((lib) => lib.length > 0);
-      config.forbiddenLibraries = answers.forbiddenLibraries
-        ?.split(',')
-        .map((lib) => lib.trim())
-        .filter((lib) => lib.length > 0);
-      config.libraryNotes = answers.libraryNotes;
+      if (answers.allowedLibraries !== undefined) {
+        config.allowedLibraries = answers.allowedLibraries
+          .split(',')
+          .map((lib) => lib.trim())
+          .filter((lib) => lib.length > 0);
+      }
+      if (answers.forbiddenLibraries !== undefined) {
+        config.forbiddenLibraries = answers.forbiddenLibraries
+          .split(',')
+          .map((lib) => lib.trim())
+          .filter((lib) => lib.length > 0);
+      }
+      if (answers.libraryNotes !== undefined) {
+        config.libraryNotes = answers.libraryNotes;
+      }
       break;
 
     case 'architecture':
-      config.architecturalStyle = answers.architecturalStyle;
-      config.architecturalDecisions = answers.architecturalDecisions
-        ?.split(',')
-        .map((dec) => dec.trim())
-        .filter((dec) => dec.length > 0);
-      config.designPatterns = answers.designPatterns
-        ?.split(',')
-        .map((pattern) => pattern.trim())
-        .filter((pattern) => pattern.length > 0);
+      if (answers.architecturalStyle !== undefined) {
+        config.architecturalStyle = answers.architecturalStyle;
+      }
+      if (answers.architecturalDecisions !== undefined) {
+        config.architecturalDecisions = answers.architecturalDecisions
+          .split(',')
+          .map((dec) => dec.trim())
+          .filter((dec) => dec.length > 0);
+      }
+      if (answers.designPatterns !== undefined) {
+        config.designPatterns = answers.designPatterns
+          .split(',')
+          .map((pattern) => pattern.trim())
+          .filter((pattern) => pattern.length > 0);
+      }
       break;
 
     case 'security':
-      config.authenticationMethod = answers.authenticationMethod;
-      config.dataProtection = answers.dataProtection;
-      config.securityRules = answers.securityRules
-        ?.split(',')
-        .map((rule) => rule.trim())
-        .filter((rule) => rule.length > 0);
+      if (answers.authenticationMethod !== undefined) {
+        config.authenticationMethod = answers.authenticationMethod;
+      }
+      if (answers.dataProtection !== undefined) {
+        config.dataProtection = answers.dataProtection;
+      }
+      if (answers.securityRules !== undefined) {
+        config.securityRules = answers.securityRules
+          .split(',')
+          .map((rule) => rule.trim())
+          .filter((rule) => rule.length > 0);
+      }
       break;
 
     case 'testing':
-      config.testStrategy = answers.testStrategy;
-      config.testCoverage = answers.testCoverage;
-      config.testTools = answers.testTools
-        ?.split(',')
-        .map((tool) => tool.trim())
-        .filter((tool) => tool.length > 0);
+      if (answers.testStrategy !== undefined) {
+        config.testStrategy = answers.testStrategy;
+      }
+      if (answers.testCoverage !== undefined) {
+        config.testCoverage = answers.testCoverage;
+      }
+      if (answers.testTools !== undefined) {
+        config.testTools = answers.testTools
+          .split(',')
+          .map((tool) => tool.trim())
+          .filter((tool) => tool.length > 0);
+      }
       break;
 
     case 'deployment':
-      config.deploymentMethod = answers.deploymentMethod;
-      config.infrastructure = answers.infrastructure;
-      config.ciCd = answers.ciCd;
-      config.environments = answers.environments;
+      if (answers.deploymentMethod !== undefined) {
+        config.deploymentMethod = answers.deploymentMethod;
+      }
+      if (answers.infrastructure !== undefined) {
+        config.infrastructure = answers.infrastructure;
+      }
+      if (answers.ciCd !== undefined) {
+        config.ciCd = answers.ciCd;
+      }
+      if (answers.environments !== undefined) {
+        config.environments = answers.environments;
+      }
       break;
 
     case 'documentation':
-      config.documentationStandards = answers.documentationStandards;
-      config.apiDocumentation = answers.apiDocumentation;
-      config.codeComments = answers.codeComments;
+      if (answers.documentationStandards !== undefined) {
+        config.documentationStandards = answers.documentationStandards;
+      }
+      if (answers.apiDocumentation !== undefined) {
+        config.apiDocumentation = answers.apiDocumentation;
+      }
+      if (answers.codeComments !== undefined) {
+        config.codeComments = answers.codeComments;
+      }
       break;
   }
 }

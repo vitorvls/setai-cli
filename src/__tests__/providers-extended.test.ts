@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { OpenAIProvider } from '../services/providers/openai-provider.js';
 import { AnthropicProvider } from '../services/providers/anthropic-provider.js';
 import { GoogleProvider } from '../services/providers/google-provider.js';
@@ -64,7 +64,7 @@ describe('AI Providers Extended', () => {
       });
 
       // Acessa método privado através de análise do projeto
-      const result = await provider.analyzeProject(mockProjectInfo).catch(() => ({}));
+      await provider.analyzeProject(mockProjectInfo).catch(() => ({}));
 
       // Verifica que o método foi chamado (mesmo que falhe por falta de API key real)
       expect(provider).toBeInstanceOf(OpenAIProvider);
@@ -77,9 +77,7 @@ describe('AI Providers Extended', () => {
       });
 
       // Deve retornar objeto vazio em caso de erro
-      const result = await provider.analyzeProject(mockProjectInfo).catch(() => ({}));
-
-      expect(result).toBeDefined();
+      await provider.analyzeProject(mockProjectInfo).catch(() => ({}));
     });
   });
 

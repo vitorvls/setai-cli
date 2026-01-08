@@ -4,7 +4,7 @@
 
 import inquirer from 'inquirer';
 import { IDE_CONFIGS, type IDE, type IDEConfig } from '../types/ide-config.js';
-import { tQuestion, tValidation, getLocale } from '../utils/i18n.js';
+import { tQuestion, tValidation } from '../utils/i18n.js';
 import { getLanguageConfig } from '../config/config-manager.js';
 
 interface InquirerAnswers {
@@ -23,8 +23,8 @@ export async function collectIDESelection(): Promise<IDEConfig> {
 
   const questions = [
     {
-      type: 'list',
-      name: 'ide',
+      type: 'list' as const,
+      name: 'ide' as const,
       message: tQuestion('ide.selection'),
       choices: [
         { name: 'Cursor', value: 'cursor' },
@@ -35,8 +35,8 @@ export async function collectIDESelection(): Promise<IDEConfig> {
       default: 'cursor',
     },
     {
-      type: 'input',
-      name: 'customFolder',
+      type: 'input' as const,
+      name: 'customFolder' as const,
       message: tQuestion('ide.customFolder'),
       default: '.ai',
       when: (answers: InquirerAnswers) => answers.ide === 'other',
@@ -53,7 +53,8 @@ export async function collectIDESelection(): Promise<IDEConfig> {
     },
   ];
 
-  const answers = (await inquirer.prompt(questions)) as InquirerAnswers;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const answers = (await inquirer.prompt(questions as any)) as InquirerAnswers;
 
   if (answers.ide === 'other') {
     return {

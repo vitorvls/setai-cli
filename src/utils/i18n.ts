@@ -55,7 +55,7 @@ async function loadLocaleData(locale: SupportedLocale): Promise<LocaleData> {
       validation: validation || {},
       templates: templates || {},
     };
-  } catch (error) {
+  } catch {
     // Se não encontrar tradução, retorna pt-BR como fallback
     if (locale !== 'pt-BR') {
       return loadLocaleData('pt-BR');

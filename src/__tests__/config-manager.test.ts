@@ -21,7 +21,6 @@ import {
  */
 
 const TEST_CONFIG_DIR = join(homedir(), '.setai-test');
-const TEST_CONFIG_FILE = join(TEST_CONFIG_DIR, 'config.json');
 
 describe('Config Manager', () => {
   beforeEach(async () => {

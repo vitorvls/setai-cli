@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { retryWithBackoff } from '../utils/retry.js';
 
 /**
@@ -107,22 +107,23 @@ describe('Retry Utility', () => {
       initialDelay: 100,
     });
     
+    // Aguarda a promise ser rejeitada enquanto avançamos os timers
+    const resultPromise = promise.catch((error) => error);
+    
     // Primeira tentativa falha imediatamente
     // Avança para o primeiro retry (100ms)
     await vi.advanceTimersByTimeAsync(100);
     // Avança para o segundo retry (200ms)
     await vi.advanceTimersByTimeAsync(200);
     
-    // Aguarda a promise ser rejeitada e captura o erro
-    // Usa Promise.allSettled para garantir que a promise seja aguardada
-    const result = await Promise.allSettled([promise]);
+    // Processa todos os timers pendentes
+    await vi.runAllTimersAsync();
     
-    expect(result[0].status).toBe('rejected');
-    if (result[0].status === 'rejected') {
-      expect(result[0].reason).toBeInstanceOf(Error);
-      expect((result[0].reason as Error).message).toBe('rate limit');
-    }
+    // Aguarda a promise ser rejeitada corretamente
+    const error = await resultPromise;
     
+    expect(error).toBeInstanceOf(Error);
+    expect((error as Error).message).toBe('rate limit');
     expect(fn).toHaveBeenCalledTimes(3); // 1 inicial + 2 retries
   });
 

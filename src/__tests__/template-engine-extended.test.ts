@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { processTemplate } from '../engines/template-engine.js';
-import { initI18n, setLocale } from '../utils/i18n.js';
+import { initI18n } from '../utils/i18n.js';
 
 /**
  * Testes estendidos para Template Engine

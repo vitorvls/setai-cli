@@ -9,6 +9,7 @@ export default defineConfig({
   splitting: false,
   sourcemap: true,
   minify: false,
+  dts: true,
   banner: {
     js: '#!/usr/bin/env node\n',
   },

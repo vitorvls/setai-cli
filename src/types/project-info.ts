@@ -2,6 +2,8 @@
  * Tipos para informações do projeto coletadas do usuário
  */
 
+import type { AIGeneratedContent } from '../services/ai-service.js';
+
 export interface ProjectInfo {
   projectName: string;
   projectDescription: string;
@@ -19,14 +21,7 @@ export interface ProjectInfo {
     configFolder: string;
   };
   advanced?: AdvancedConfig;
-  aiGenerated?: {
-    projectDescription?: string;
-    problemImportance?: string;
-    businessGoals?: string[];
-    architectureDecisions?: string[];
-    bestPractices?: string[];
-    aiUsageGuidelines?: string;
-  };
+  aiGenerated?: AIGeneratedContent;
 }
 
 export interface TechStack {

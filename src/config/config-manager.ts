@@ -57,7 +57,6 @@ export async function loadConfig(): Promise<CLIConfig> {
   } catch (err) {
     // Se houver erro ao ler, retorna config vazia
     if (err instanceof Error) {
-      // eslint-disable-next-line no-console
       console.error(`Erro ao carregar configuração: ${err.message}`);
     }
   }
