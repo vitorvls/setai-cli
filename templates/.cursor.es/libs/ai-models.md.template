@@ -1,0 +1,169 @@
+# Modelos de IA
+
+## Objetivo
+Este archivo define qué modelos de IA están permitidos y cuándo usar cada uno, basado en comparativo de modelos.
+
+## Alcance
+- Modelos permitidos por fase
+- Cuándo usar cada modelo
+- Configuraciones recomendadas
+
+---
+
+## Modelos Permitidos
+
+### Claude 4.5 Opus (Anthropic)
+- **Contexto:** 200k tokens
+- **Estado:** PERMITIDO
+- **Mejor para:**
+  - Arquitectura y decisiones técnicas complejas
+  - Trade-offs (rendimiento vs costo vs mantenimiento)
+  - Antes de que exista código
+- **Punto fuerte:** Pensamiento profundo, menos over-engineering
+
+---
+
+### Claude 4.5 Sonnet (Anthropic)
+- **Contexto:** 200k → 1M tokens
+- **Estado:** PERMITIDO
+- **Mejor para:**
+  - Refactorización de código legado
+  - Lectura de código grande
+  - Ajustes incrementales
+- **Punto fuerte:** Conservador, respeta código existente, no rompe producción
+
+---
+
+### GPT-5.2 (OpenAI)
+- **Contexto:** 272k tokens
+- **Estado:** PERMITIDO
+- **Mejor para:**
+  - Planificación técnica
+  - Definición de patrones
+  - Documentación estructurada
+  - Revisiones de PR conceptuales
+- **Punto fuerte:** Consistencia, estandarización, gobernanza técnica
+
+---
+
+### GPT-5.1 Codex Max (OpenAI)
+- **Contexto:** 272k tokens
+- **Estado:** PERMITIDO
+- **Mejor para:**
+  - Escritura de código
+  - APIs
+  - Pruebas
+  - Integraciones
+- **Punto fuerte:** Ejecución precisa, menos alucinaciones, ideal para producción
+
+---
+
+### Cursor Composer + GPT-5.1 Codex
+- **Contexto:** 200k tokens
+- **Estado:** PERMITIDO (preferido para trabajo diario)
+- **Mejor para:**
+  - Desarrollo diario
+  - Trabajar con código real
+  - Evolución incremental
+- **Punto fuerte:** Contexto del repositorio, trabajar en código (no solo generar)
+
+---
+
+### Gemini 3 Flash (Google)
+- **Contexto:** 200k → 1M tokens
+- **Estado:** PERMITIDO
+- **Mejor para:**
+  - Boilerplate
+  - Scripts rápidos
+  - Conversiones simples
+- **Punto fuerte:** Velocidad extrema, bajo costo
+- **Límite:** No ideal para decisiones arquitectónicas
+
+---
+
+### Gemini 3 Pro (Google)
+- **Contexto:** 200k → 1M tokens
+- **Estado:** PERMITIDO
+- **Mejor para:**
+  - Análisis de grandes bases de código
+  - Debug complejo
+  - Revisión de múltiples archivos
+- **Punto fuerte:** Lectura de contexto masivo, buen análisis estático
+
+---
+
+### Grok Code (xAI)
+- **Estado:** PERMITIDO (con precaución)
+- **Mejor para:**
+  - Explorar alternativas
+  - Cuestionar decisiones
+  - Pensamiento no convencional
+- **Punto fuerte:** Menos alineado, más provocativo
+- **Límite:** Exige más validación humana
+
+---
+
+## Uso por Fase del Ciclo
+
+### Ideación y Arquitectura
+- **Principal:** {{AI_MODEL_ARCHITECTURE}}
+- **Alternativa:** GPT-5.2
+
+### Planificación Técnica
+- **Principal:** GPT-5.2
+- **Alternativa:** Claude 4.5 Opus
+
+### Implementación Guiada
+- **Principal:** {{AI_MODEL_IMPLEMENTATION}}
+- **Alternativa:** GPT-5.1 Codex Max
+
+### Refactorización y Legado
+- **Principal:** {{AI_MODEL_REFACTORING}}
+- **Alternativa:** Gemini 3 Pro
+
+### Debug y Análisis
+- **Principal:** {{AI_MODEL_DEBUG}}
+- **Alternativa:** Claude 4.5 Sonnet
+
+### Código Rápido / Boilerplate
+- **Principal:** {{AI_MODEL_BOILERPLATE}}
+- **Alternativa:** GPT-5.1 Codex
+
+### Exploración y Alternativas
+- **Principal:** Grok Code
+- **Alternativa:** Claude 4.5 Opus
+
+---
+
+## Reglas de Uso
+
+### Obligatorio
+- Siempre revisar output de la IA
+- Validar código generado con pruebas
+- No aceptar decisiones arquitectónicas sin revisión humana
+
+### Prohibido
+- Usar IA para decisiones de seguridad sin revisión
+- Aceptar código sin entender
+- Saltar pruebas en código generado
+
+---
+
+## Configuración en Cursor
+
+### Selección de Modelo
+- Configurar modelos permitidos en settings
+- Usar modelo apropiado para cada tarea
+- No usar modelos no listados sin aprobación
+
+### Configuración de Contexto
+- Configurar contexto máximo disponible
+- Usar contexto completo cuando sea necesario
+- No desperdiciar tokens con contexto innecesario
+
+---
+
+## Documentación Relacionada
+
+- **Reglas de Uso de IA:** `.cursor/rules/ai-usage-rules.md`
+- **Comandos:** `.cursor/commands/` (prompts específicos)

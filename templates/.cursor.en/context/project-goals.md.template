@@ -1,0 +1,66 @@
+# Project Goals
+
+## Objective
+This file documents the business context, objectives, and constraints of the project. It serves to align understanding before any implementation.
+
+## Scope
+- Problem we are solving
+- End user
+- Business objective
+- Technical or legal constraints
+
+---
+
+## 1. Problem Statement
+
+**Problem we are solving:**
+
+{{PROJECT_DESCRIPTION}}
+
+**Why this problem matters:**
+
+{{PROBLEM_IMPORTANCE}}
+
+---
+
+## 2. Target Users
+
+### Primary Users
+
+{{TARGET_USERS}}
+
+---
+
+## 3. Business Objectives
+
+### Primary Goals
+
+{{BUSINESS_GOALS}}
+
+---
+
+## 4. Constraints
+
+### Technical Constraints
+
+{{TECHNICAL_CONSTRAINTS}}
+
+### Business Constraints
+
+{{BUSINESS_CONSTRAINTS}}
+
+---
+
+## 5. Non-Goals
+
+**What this project does NOT do:**
+
+{{NON_GOALS}}
+
+---
+
+## Related Documentation
+
+- **Architecture:** `.cursor/context/architecture.md`
+- **Business Rules:** `.cursor/rules/business-rules.md`
+

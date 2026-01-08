@@ -1,0 +1,203 @@
+# Reglas de Seguridad
+
+## Objetivo
+Este archivo define reglas obligatorias de seguridad. Las violaciones se consideran críticas.
+
+## Alcance
+- Reglas de seguridad obligatorias
+- Qué nunca hacer
+- Validaciones obligatorias
+- Manejo de datos sensibles
+
+---
+
+## Autenticación y Autorización
+
+### Método de Autenticación
+{{AUTHENTICATION_METHOD}}
+
+### Reglas
+- Siempre validar autenticación del usuario
+- Nunca confiar solo en validación del lado del cliente
+- Usar gestión de sesión adecuada
+- Implementar logout adecuado
+
+### Prohibido
+- NO almacenar contraseñas en texto plano
+- NO exponer tokens de autenticación en URLs
+- NO saltar verificaciones de autorización
+
+---
+
+## Validación de Inputs
+
+### Reglas
+- Validar todos los inputs del usuario
+- Sanitizar inputs antes de procesar
+- Usar consultas parametrizadas (prevención de inyección SQL)
+- Validar carga de archivos (tipo, tamaño, contenido)
+
+### Prohibido
+- NO confiar en input del usuario
+- NO usar eval() o similar
+- NO concatenar input del usuario en consultas
+
+---
+
+## Protección de Datos
+
+### Medidas de Protección de Datos
+{{DATA_PROTECTION}}
+
+### Datos Sensibles
+- Nunca registrar datos sensibles (contraseñas, tokens, PII)
+- Cifrar datos sensibles en reposo
+- Usar HTTPS para todas las comunicaciones
+- Hashear contraseñas con algoritmos adecuados (bcrypt, argon2)
+
+### Prohibido
+- NO commitear secretos al repositorio
+- NO exponer API keys en código frontend
+- NO almacenar datos sensibles en localStorage
+
+{{#if SECURITY_RULES_CUSTOM}}
+### Reglas de Seguridad Personalizadas
+
+{{SECURITY_RULES_CUSTOM}}
+
+---
+{{/if}}
+## Gestión de Secretos
+
+### Reglas
+- Usar variables de ambiente para secretos
+- Nunca hardcodear secretos
+- Usar herramientas de gestión de secretos en producción
+- Rotar secretos regularmente
+
+### Prohibido
+- NO commitear archivos .env
+- NO compartir secretos en chat/email
+- NO usar credenciales por defecto
+
+---
+
+## Seguridad de API
+
+### Reglas
+- Implementar rate limiting
+- Usar configuración CORS adecuada
+- Validar orígenes de solicitudes
+- Implementar límites de tamaño de solicitud
+
+### Prohibido
+- NO permitir llamadas API ilimitadas
+- NO exponer endpoints internos públicamente
+- NO saltar validación CORS
+
+---
+
+## Manejo de Errores
+
+### Reglas
+- Nunca exponer errores internos a clientes
+- Registrar errores de forma segura
+- Usar mensajes de error genéricos para usuarios
+- Incluir seguimiento de errores (Sentry, etc.)
+
+### Prohibido
+- NO exponer stack traces a usuarios
+- NO registrar datos sensibles en errores
+- NO revelar internos del sistema en errores
+
+---
+
+## Dependencias
+
+### Reglas
+- Mantener dependencias actualizadas
+- Escanear vulnerabilidades regularmente
+- Usar solo paquetes confiables
+- Revisar cambios de dependencias
+
+### Prohibido
+- NO usar paquetes con vulnerabilidades conocidas
+- NO ignorar advertencias de seguridad
+- NO usar paquetes sin mantenimiento
+
+---
+
+## Carga de Archivos
+
+### Reglas
+- Validar tipos de archivo
+- Limitar tamaños de archivo
+- Escanear archivos en busca de malware
+- Almacenar cargas fuera de la raíz web
+
+### Prohibido
+- NO permitir carga de archivos ejecutables
+- NO confiar en extensiones de archivo
+- NO servir cargas directamente
+
+---
+
+## Prevención de XSS
+
+### Reglas
+- Sanitizar contenido generado por usuario
+- Usar Content Security Policy (CSP)
+- Escapar output adecuadamente
+- Usar protecciones incorporadas del framework
+
+### Prohibido
+- NO usar innerHTML con input del usuario
+- NO deshabilitar CSP
+- NO confiar ciegamente en scripts de terceros
+
+---
+
+## Prevención de Inyección SQL
+
+### Reglas
+- Siempre usar consultas parametrizadas
+- Usar ORM/query builder
+- Validar tipos de input
+- Limitar permisos de base de datos
+
+### Prohibido
+- NO concatenar input del usuario en SQL
+- NO usar SQL crudo con input del usuario
+- NO usar cuenta de administrador de base de datos para la app
+
+---
+
+## Checklist de Seguridad
+
+Antes de desplegar:
+- [ ] Todos los inputs validados
+- [ ] Secretos gestionados adecuadamente
+- [ ] Dependencias escaneadas
+- [ ] HTTPS configurado
+- [ ] Manejo de errores seguro
+- [ ] Autenticación/autorización probada
+- [ ] Rate limiting configurado
+
+---
+
+## Respuesta a Incidentes
+
+### Si se Encuentra Problema de Seguridad
+1. Evaluar severidad inmediatamente
+2. Corregir o mitigar rápidamente
+3. Documentar el problema
+4. Revisar código similar
+5. Actualizar reglas de seguridad si es necesario
+
+---
+
+## Documentación Relacionada
+
+- **Arquitectura:** `.cursor/context/architecture.md`
+- **Despliegue:** `.cursor/context/deployment.md`
+- **Estilo de Código:** `.cursor/rules/code-style.md`

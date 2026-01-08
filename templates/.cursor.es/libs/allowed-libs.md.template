@@ -1,0 +1,162 @@
+# Bibliotecas Permitidas
+
+## Objetivo
+Este archivo lista todas las bibliotecas permitidas en el proyecto, con motivo de la elección y casos de uso.
+
+## Alcance
+- Bibliotecas permitidas
+- Motivo de la elección
+- Casos de uso específicos
+
+---
+
+## Bibliotecas CLI
+
+### Framework CLI
+- **Commander.js** → Framework CLI
+  - **Razón:** Estándar de la industria, bien mantenido, soporte a subcommands
+  - **Caso de Uso:** Parsing de argumentos, definición de comandos
+
+- **Inquirer.js** → Prompts interactivos
+  - **Razón:** Mejor UX, soporte a múltiples tipos de preguntas
+  - **Caso de Uso:** Preguntas interactivas (múltiple elección, input, confirmación)
+
+### Sistema de Archivos
+- **fs-extra** → Operaciones de sistema de archivos
+  - **Razón:** Multiplataforma, API mejor que fs nativo, operaciones asíncronas
+  - **Caso de Uso:** Crear directorios, escribir archivos, verificar existencia
+
+- **path** → Utilidades de path (built-in Node.js)
+  - **Razón:** Built-in, paths multiplataforma
+  - **Caso de Uso:** Manipulación de rutas de archivos
+
+### Procesamiento de Plantillas
+- **Handlebars** → Motor de plantillas (si es necesario)
+  - **Razón:** Simple, popular, soporta helpers
+  - **Caso de Uso:** Llenar plantillas con datos del usuario
+
+- **Template Strings nativas** → Alternativa simple
+  - **Razón:** Sin dependencias, suficiente para casos simples
+  - **Caso de Uso:** Plantillas básicas sin lógica compleja
+
+---
+
+{{#if ALLOWED_LIBRARIES_CUSTOM}}
+## Bibliotecas Personalizadas Permitidas
+
+{{ALLOWED_LIBRARIES_CUSTOM}}
+
+---
+{{/if}}
+
+{{#if LIBRARY_NOTES}}
+### Notas sobre Política de Bibliotecas
+
+{{LIBRARY_NOTES}}
+
+---
+{{/if}}
+
+## Bibliotecas de Utilidad
+
+### Validación
+- **Zod** → Validación de esquema (TypeScript)
+  - **Razón:** TypeScript-first, validación en runtime, inferencia de tipos
+  - **Caso de Uso:** Validar inputs del usuario, validar configuraciones
+
+### Colores y Formateo
+- **chalk** → Estilizado de strings en terminal
+  - **Razón:** Popular, bien mantenido, soporta colores multiplataforma
+  - **Caso de Uso:** Output coloreado en terminal, destacar mensajes
+
+- **ora** → Spinners de terminal
+  - **Razón:** Simple, bien mantenido, buena UX
+  - **Caso de Uso:** Mostrar progreso durante operaciones largas
+
+### Información de Paquete
+- **read-pkg** → Leer package.json
+  - **Razón:** Simple, type-safe
+  - **Caso de Uso:** Detectar información del proyecto (nombre, versión, etc.)
+
+### Manejo de Errores
+- **error-stack-parser** → Parsear stacks de error (si es necesario)
+  - **Razón:** Mejorar mensajes de error
+  - **Caso de Uso:** Debugging y mensajes de error más claros
+
+---
+
+## Bibliotecas de Pruebas
+
+### Pruebas Unitarias
+- **Vitest** → Framework de pruebas (preferido)
+  - **Razón:** Rápido, compatible con ESM, TypeScript nativo
+  - **Caso de Uso:** Pruebas unitarias e integración
+
+- **Jest** → Framework de pruebas (alternativa si es necesario)
+  - **Razón:** Popular, buen ecosistema
+  - **Caso de Uso:** Si Vitest no atiende necesidades específicas
+
+### Utilidades de Pruebas
+- **@vitest/ui** → UI para Vitest (opcional)
+  - **Razón:** Mejor DX para visualizar pruebas
+  - **Caso de Uso:** Desarrollo y debug de pruebas
+
+- **mock-fs** → Mock de sistema de archivos (si es necesario)
+  - **Razón:** Probar operaciones de archivo sin crear archivos reales
+  - **Caso de Uso:** Pruebas de generación de archivos sin side effects
+
+---
+
+## Herramientas de Build y Desarrollo
+
+### Herramientas de Build
+- **tsup** → Bundler de TypeScript (preferido)
+  - **Razón:** Rápido, simple, soporta ESM, zero config
+  - **Caso de Uso:** Compilar TypeScript para distribución
+
+- **esbuild** → Bundler rápido (alternativa)
+  - **Razón:** Extremadamente rápido
+  - **Caso de Uso:** Si tsup no atiende necesidades
+
+### Verificación de Tipos
+- **TypeScript** → Type checker
+  - **Razón:** Type safety, mejor DX
+  - **Caso de Uso:** Verificación de tipos durante desarrollo
+
+### Calidad de Código
+- **ESLint** → Linter
+  - **Razón:** Estándar de la industria, plugins TypeScript
+  - **Caso de Uso:** Linting de código
+
+- **Prettier** → Formateador de código
+  - **Razón:** Formateo consistente, integración con ESLint
+  - **Caso de Uso:** Formateo automático
+
+---
+
+## Gestión de Paquetes
+
+### Gestor de Paquetes
+- **pnpm** → Gestor de paquetes (preferido)
+  - **Razón:** Más rápido, eficiente en espacio, mejor para monorepos
+  - **Caso de Uso:** Gestión de dependencias
+
+- **npm** → Gestor de paquetes (alternativa)
+  - **Razón:** Estándar, viene con Node.js
+  - **Caso de Uso:** Si pnpm no está disponible
+
+---
+
+## Política de Actualización
+
+- Las dependencias se actualizan mensualmente
+- Los parches de seguridad se aplican inmediatamente
+- Las actualizaciones de versión mayor requieren revisión
+- Los cambios breaking se documentan en CHANGELOG
+
+---
+
+## Documentación Relacionada
+
+- **Bibliotecas Prohibidas:** `.cursor/libs/forbidden-libs.md`
+- **Stack Tecnológico:** `.cursor/context/tech-stack.md`

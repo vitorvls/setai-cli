@@ -1,0 +1,66 @@
+# Technology Stack
+
+## Objetivo
+Este arquivo documenta a stack tecnológica completa do projeto, incluindo versões, dependências permitidas e restrições técnicas.
+
+## Escopo
+- Stack tecnológico completo
+- Versões específicas
+- Dependências permitidas
+- Restrições técnicas
+
+---
+
+## Language & Runtime
+
+- **Language:** {{LANGUAGE}}
+- **Runtime:** Node.js (se aplicável)
+- **Version:** {{VERSION}}
+
+---
+
+## Framework
+
+- **Framework:** {{FRAMEWORK}}
+- **Purpose:** Framework principal do projeto
+
+---
+
+## Database
+
+- **Database:** {{DATABASE}}
+- **Purpose:** Banco de dados do projeto
+
+---
+
+## Development Tools
+
+### Code Quality
+- **Linter:** ESLint (recomendado)
+- **Formatter:** Prettier (recomendado)
+- **Type Checker:** TypeScript (se aplicável)
+
+### Testing
+- **Unit Tests:** Vitest ou Jest (recomendado)
+- **E2E Tests:** Playwright ou Cypress (se aplicável)
+
+---
+
+## Dependencies Policy
+
+> Ver `.cursor/libs/allowed-libs.md` e `.cursor/libs/forbidden-libs.md` para lista completa
+
+### Allowed
+- Bibliotecas listadas em `.cursor/libs/allowed-libs.md`
+
+### Forbidden
+- Bibliotecas listadas em `.cursor/libs/forbidden-libs.md`
+
+---
+
+## Related Documentation
+
+- **Allowed Libraries:** `.cursor/libs/allowed-libs.md`
+- **Forbidden Libraries:** `.cursor/libs/forbidden-libs.md`
+- **Code Style:** `.cursor/rules/code-style.md`
+

@@ -1,0 +1,82 @@
+# Configuración .cursor
+
+## Objetivo
+Esta carpeta contiene toda la configuración y contexto para el uso eficiente de IA en el desarrollo del proyecto.
+
+## Estructura
+
+### 📂 `context/`
+Contexto persistente del proyecto - responde "¿Cómo piensa este proyecto?"
+
+- `architecture.md` - Decisiones arquitectónicas y patrones
+- `tech-stack.md` - Stack tecnológico completo
+- `project-goals.md` - Objetivos y contexto de negocio
+- `deployment.md` - Infraestructura y proceso de despliegue
+
+### 📂 `rules/`
+Reglas duras - contrato con la IA
+
+- `code-style.md` - Estándares de código obligatorios
+- `testing-rules.md` - Estrategia y reglas de pruebas
+- `git-rules.md` - Estándares de commit y PR
+- `security-rules.md` - Reglas de seguridad obligatorias
+- `ai-usage-rules.md` - Dónde y cómo usar IA
+- `business-rules.md` - Reglas de negocio
+
+### 📂 `libs/`
+Fuente de verdad sobre dependencias
+
+- `allowed-libs.md` - Bibliotecas permitidas
+- `forbidden-libs.md` - Bibliotecas prohibidas
+- `ai-models.md` - Modelos de IA permitidos y cuándo usarlos
+
+### 📂 `commands/`
+Prompts ejecutables - comandos reutilizables
+
+- `kickoff-project.md` - Alinear entendimiento de negocio
+- `architecture-review.md` - Validar decisiones arquitectónicas
+- `extract-business-rules.md` - Extraer reglas de negocio
+- `test-strategy.md` - Estructurar estrategia de pruebas
+- `generate-boilerplate.md` - Generar código boilerplate
+- `refactor-controlled.md` - Refactorización controlada
+- `generate-docs.md` - Generar documentación técnica
+- `review-pr.md` - Revisión de PR
+- `challenge-solution.md` - Contestar soluciones
+- `pre-deploy-validation.md` - Validación pre-despliegue
+
+## Cómo Usar
+
+### Para Desarrolladores
+1. **Configure lint y formatter ANTES de comenzar** (ver `rules/code-style.md`)
+2. Lea los archivos en `context/` para entender el proyecto
+3. Siga las reglas en `rules/`
+4. Use solo libs en `libs/allowed-libs.md`
+5. Use los prompts en `commands/` cuando sea apropiado
+
+### Para IA
+La IA debe:
+1. **Verificar si lint está configurado antes de generar código**
+2. Leer `rules/` primero (reglas duras)
+3. Consultar `context/` para entender el proyecto
+4. Verificar `libs/` antes de sugerir dependencias
+5. Usar `commands/` como plantillas de prompts
+6. **Siempre generar código que pase el lint configurado**
+
+## Principios
+
+- **Contexto explícito > Prompt bonito**
+- **Reglas duras, no sugerencias**
+- **Documentación viva, no estática**
+- **IA propone, humanos aprueban**
+
+## Mantenimiento
+
+- Actualice archivos cuando haya cambios
+- Mantenga consistencia entre archivos
+- Documente decisiones importantes
+- Revise periódicamente
+
+---
+
+**Basado en las mejores prácticas de desarrollo con IA en 2026**
+

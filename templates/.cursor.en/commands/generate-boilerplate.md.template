@@ -1,0 +1,47 @@
+# Generate Boilerplate
+
+## Objective
+Delegate mechanical work to AI. Generate boilerplate code following project patterns.
+
+## Input
+- Type of boilerplate needed (component, API, service, etc.)
+- Defined architecture
+- Project patterns
+
+## Instructions
+Based on defined architecture and project patterns:
+
+Generate necessary boilerplate for this module following:
+
+1. **Strictly follow existing patterns**
+   - File structure
+   - Naming conventions
+   - Code patterns
+
+2. **Don't introduce new abstractions**
+   - Use only established patterns
+   - Don't create new layers without need
+   - Maintain consistency
+
+3. **Comment only where necessary for clarity**
+   - Avoid obvious comments
+   - Comment important decisions
+   - Document complexity
+
+## Constraints
+- Follow rules in `.cursor/rules/code-style.md`
+- Use allowed libraries (`.cursor/libs/allowed-libs.md`)
+- Don't use forbidden libraries (`.cursor/libs/forbidden-libs.md`)
+- Maintain consistent structure
+
+## Output
+Ready-to-use boilerplate code with:
+- Correct structure
+- Patterns followed
+- Appropriate comments
+- Quick explanation of created structure
+
+## Related Documentation
+- **Code Style:** `.cursor/rules/code-style.md`
+- **Architecture:** `.cursor/context/architecture.md`
+- **Allowed Libraries:** `.cursor/libs/allowed-libs.md`

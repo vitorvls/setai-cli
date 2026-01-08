@@ -1,0 +1,47 @@
+# Extract Business Rules
+
+## Objective
+Make business rules explicit and testable. Extract rules from existing code and documentation.
+
+## Input
+- Project context
+- Related code
+- Existing documentation
+- Business requirements
+
+## Instructions
+Analyze context and related code.
+
+Extract and document:
+
+1. **Explicit business rules**
+   - Rules clearly defined in code
+   - Business validations
+   - Domain logic
+
+2. **Implicit rules inferred from code**
+   - Undocumented rules present in code
+   - Expected behaviors
+   - Code assumptions
+
+3. **Ambiguous points that need product validation**
+   - Unclear behaviors
+   - Untreated edge cases
+   - Conflicting rules
+
+## Constraints
+- Organize in functional documentation format
+- Be specific and clear
+- Identify sources (code, docs, etc.)
+- Highlight ambiguities
+
+## Output
+Structured documentation with:
+- Explicit rules
+- Implicit rules
+- Ambiguous points
+- Validation recommendations
+
+## Related Documentation
+- **Business Rules:** `.cursor/rules/business-rules.md`
+- **Project Goals:** `.cursor/context/project-goals.md`

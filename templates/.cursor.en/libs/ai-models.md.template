@@ -1,0 +1,169 @@
+# AI Models
+
+## Objective
+This file defines which AI models are allowed and when to use each one, based on model comparison.
+
+## Scope
+- Allowed models by phase
+- When to use each model
+- Recommended configurations
+
+---
+
+## Allowed Models
+
+### Claude 4.5 Opus (Anthropic)
+- **Context:** 200k tokens
+- **Status:** ALLOWED
+- **Best for:**
+  - Architecture and complex technical decisions
+  - Trade-offs (performance vs cost vs maintenance)
+  - Before code exists
+- **Strength:** Deep thinking, less over-engineering
+
+---
+
+### Claude 4.5 Sonnet (Anthropic)
+- **Context:** 200k → 1M tokens
+- **Status:** ALLOWED
+- **Best for:**
+  - Legacy code refactoring
+  - Large code reading
+  - Incremental adjustments
+- **Strength:** Conservative, respects existing code, doesn't break production
+
+---
+
+### GPT-5.2 (OpenAI)
+- **Context:** 272k tokens
+- **Status:** ALLOWED
+- **Best for:**
+  - Technical planning
+  - Pattern definition
+  - Structured documentation
+  - Conceptual PR reviews
+- **Strength:** Consistency, standardization, technical governance
+
+---
+
+### GPT-5.1 Codex Max (OpenAI)
+- **Context:** 272k tokens
+- **Status:** ALLOWED
+- **Best for:**
+  - Code writing
+  - APIs
+  - Tests
+  - Integrations
+- **Strength:** Precise execution, less hallucination, ideal for production
+
+---
+
+### Cursor Composer + GPT-5.1 Codex
+- **Context:** 200k tokens
+- **Status:** ALLOWED (preferred for daily work)
+- **Best for:**
+  - Daily development
+  - Working with real code
+  - Incremental evolution
+- **Strength:** Repository context, working on code (not just generating)
+
+---
+
+### Gemini 3 Flash (Google)
+- **Context:** 200k → 1M tokens
+- **Status:** ALLOWED
+- **Best for:**
+  - Boilerplate
+  - Quick scripts
+  - Simple conversions
+- **Strength:** Extreme speed, low cost
+- **Limit:** Not ideal for architectural decisions
+
+---
+
+### Gemini 3 Pro (Google)
+- **Context:** 200k → 1M tokens
+- **Status:** ALLOWED
+- **Best for:**
+  - Large codebase analysis
+  - Complex debugging
+  - Multiple file review
+- **Strength:** Massive context reading, good static analysis
+
+---
+
+### Grok Code (xAI)
+- **Status:** ALLOWED (with caution)
+- **Best for:**
+  - Exploring alternatives
+  - Questioning decisions
+  - Unconventional thinking
+- **Strength:** Less aligned, more provocative
+- **Limit:** Requires more human validation
+
+---
+
+## Usage by Cycle Phase
+
+### Ideation & Architecture
+- **Primary:** {{AI_MODEL_ARCHITECTURE}}
+- **Alternative:** GPT-5.2
+
+### Technical Planning
+- **Primary:** GPT-5.2
+- **Alternative:** Claude 4.5 Opus
+
+### Guided Implementation
+- **Primary:** {{AI_MODEL_IMPLEMENTATION}}
+- **Alternative:** GPT-5.1 Codex Max
+
+### Refactoring & Legacy
+- **Primary:** {{AI_MODEL_REFACTORING}}
+- **Alternative:** Gemini 3 Pro
+
+### Debug & Analysis
+- **Primary:** {{AI_MODEL_DEBUG}}
+- **Alternative:** Claude 4.5 Sonnet
+
+### Quick Code / Boilerplate
+- **Primary:** {{AI_MODEL_BOILERPLATE}}
+- **Alternative:** GPT-5.1 Codex
+
+### Exploration & Alternatives
+- **Primary:** Grok Code
+- **Alternative:** Claude 4.5 Opus
+
+---
+
+## Usage Rules
+
+### Mandatory
+- Always review AI output
+- Validate generated code with tests
+- Don't accept architectural decisions without human review
+
+### Prohibited
+- Use AI for security decisions without review
+- Accept code without understanding
+- Skip tests on generated code
+
+---
+
+## Cursor Configuration
+
+### Model Selection
+- Configure allowed models in settings
+- Use appropriate model for each task
+- Don't use models not listed without approval
+
+### Context Configuration
+- Configure maximum available context
+- Use full context when necessary
+- Don't waste tokens with unnecessary context
+
+---
+
+## Related Documentation
+
+- **AI Usage Rules:** `.cursor/rules/ai-usage-rules.md`
+- **Commands:** `.cursor/commands/` (specific prompts)

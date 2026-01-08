@@ -1,0 +1,16 @@
+{
+  "project.name.required": "El nombre del proyecto es obligatorio",
+  "project.description.required": "La descripción del proyecto es obligatoria",
+  "project.problemImportance.required": "La importancia del problema es obligatoria",
+  "project.targetUsers.required": "Los usuarios principales son obligatorios",
+  "project.businessGoals.required": "Los objetivos de negocio son obligatorios",
+  "project.nonGoals.required": "Los no-objetivos son obligatorios",
+  "project.version.required": "La versión es obligatoria",
+  "project.version.invalid": "La versión debe seguir el formato semántico (ej.: 1.0.0 o 0.1.0)",
+  "ide.customFolder.required": "El nombre de la carpeta de configuración es obligatorio.",
+  "ide.customFolder.invalid": "La carpeta de configuración debe comenzar con un punto (ej.: .ai, .config).",
+  "apiKey.required": "La API Key no puede estar vacía.",
+  "language.required": "El idioma es obligatorio",
+  "tech.language.required": "El lenguaje es obligatorio"
+}
+

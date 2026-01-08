@@ -1,0 +1,47 @@
+# Generar Boilerplate
+
+## Objetivo
+Delegar trabajo mecánico a la IA. Generar código boilerplate siguiendo patrones del proyecto.
+
+## Input
+- Tipo de boilerplate necesario (componente, API, service, etc.)
+- Arquitectura definida
+- Patrones del proyecto
+
+## Instrucciones
+Con base en la arquitectura definida y los patrones del proyecto:
+
+Genera el boilerplate necesario para este módulo siguiendo:
+
+1. **Sigue estrictamente los patrones existentes**
+   - Estructura de archivos
+   - Convenciones de nomenclatura
+   - Patrones de código
+
+2. **No introduzcas nuevas abstracciones**
+   - Usa solo patrones ya establecidos
+   - No crees nuevas capas sin necesidad
+   - Mantén consistencia
+
+3. **Comenta solo donde sea necesario para claridad**
+   - Evita comentarios obvios
+   - Comenta decisiones importantes
+   - Documenta complejidad
+
+## Restricciones
+- Sigue reglas en `.cursor/rules/code-style.md`
+- Usa bibliotecas permitidas (`.cursor/libs/allowed-libs.md`)
+- No uses bibliotecas prohibidas (`.cursor/libs/forbidden-libs.md`)
+- Mantén estructura consistente
+
+## Output
+Código boilerplate listo para usar con:
+- Estructura correcta
+- Patrones seguidos
+- Comentarios apropiados
+- Explicación rápida de la estructura creada
+
+## Documentación Relacionada
+- **Estilo de Código:** `.cursor/rules/code-style.md`
+- **Arquitectura:** `.cursor/context/architecture.md`
+- **Bibliotecas Permitidas:** `.cursor/libs/allowed-libs.md`

@@ -1,0 +1,260 @@
+# AI Usage Rules
+
+## Objective
+This file defines where and how AI can be used in development. Based on Internal Guidelines for AI usage.
+
+## Scope
+- Where AI can act
+- Where AI CANNOT act
+- Review process
+- Responsibilities
+
+---
+
+## Fundamental Principles
+
+1. **AI does not decide alone**
+   - Architectural, domain, and security decisions are always human
+
+2. **Process before tool**
+   - Without standards, AI only generates chaos faster
+
+3. **Explicit context > Beautiful prompt**
+   - Output quality depends on context clarity
+
+4. **Generated code is code to be maintained**
+   - Everything AI writes enters the normal cycle of review, tests, and documentation
+
+---
+
+## Where AI Can Act
+
+### 1. Architecture & Planning
+
+**Allowed:** {{AI_ALLOW_ARCHITECTURE}}
+- Explore architectural alternatives
+- Evaluate technical trade-offs
+- Design flows and boundaries
+- Suggest design patterns
+
+**Rules:**
+- Never accept final architecture without human review
+- Record decisions (ADR - Architecture Decision Records)
+- Use model: {{AI_MODEL_ARCHITECTURE}}
+
+---
+
+### 2. Code Implementation
+
+**Allowed:** {{AI_ALLOW_CODE_GENERATION}}
+- Generate boilerplate
+- Implement CRUD APIs
+- Write tests
+- Create integrations
+- Refactor code
+
+**Rules:**
+- Always follow lint, formatter, and project standards
+- Generated code without tests is considered incomplete
+- Use model: {{AI_MODEL_IMPLEMENTATION}}
+
+---
+
+### 3. Refactoring & Legacy
+
+**Allowed:** {{AI_ALLOW_REFACTORING}}
+- Improve readability
+- Isolate business rules
+- Reduce complexity
+- Modernize legacy code
+
+**Rules:**
+- Refactor behavior without changing business rules
+- Always validate with existing tests
+- Use model: {{AI_MODEL_REFACTORING}}
+
+---
+
+### 4. Debug & Analysis
+
+**Allowed:** {{AI_ALLOW_DEBUG}}
+- Analyze logs and errors
+- Track complex bugs
+- Identify regressions
+- Analyze large codebases
+
+**Rules:**
+- AI suggests causes, not absolute truths
+- Always validate hypotheses
+- Use model: {{AI_MODEL_DEBUG}}
+
+---
+
+### 5. Documentation
+
+**Allowed:** {{AI_ALLOW_DOCUMENTATION}}
+- Generate technical documentation
+- Create explanatory comments
+- Document APIs
+- Update README
+
+**Rules:**
+- Review generated documentation
+- Ensure accuracy and clarity
+
+---
+
+## Where AI CANNOT Act Alone
+
+### Always Prohibited
+
+- **Security decisions**
+  - Authentication configurations
+  - Access policies
+  - Encryption
+
+- **Financial logic**
+  - Monetary calculations
+  - Financial transactions
+  - Financial reports
+
+- **Regulatory rules**
+  - Compliance
+  - LGPD/GDPR
+  - Specific regulations
+
+- **Destructive migrations**
+  - Production changes
+  - Delete data
+  - Schema changes without backup
+
+- **Production deployment**
+  - Deployment approval
+  - Critical infrastructure configuration
+
+{{#if AI_CUSTOM_CONSTRAINTS}}
+### Custom Constraints
+
+{{AI_CUSTOM_CONSTRAINTS}}
+
+---
+{{/if}}
+
+> **Golden rule:** AI proposes. Humans approve.
+
+---
+
+## Review Process
+
+### AI-Generated Code
+
+1. **Mandatory review**
+   - All generated code must be reviewed
+   - Do not accept code without understanding
+
+2. **Mandatory tests**
+   - Generated code → generated tests
+   - Refactoring → existing tests green
+
+3. **Business rules validation**
+   - Verify it follows business rules
+   - Validate implemented logic
+
+---
+
+## Recommended Models by Phase
+
+### Ideation & Architecture
+- **{{AI_MODEL_ARCHITECTURE}}** - Preferred model for architecture and planning
+
+### Technical Planning
+- **GPT-5.2** - Structure, consistency, and standards
+
+### Implementation
+- **{{AI_MODEL_IMPLEMENTATION}}** - Preferred model for code implementation
+
+### Refactoring & Legacy
+- **{{AI_MODEL_REFACTORING}}** - Preferred model for refactoring
+
+### Debug & Analysis
+- **{{AI_MODEL_DEBUG}}** - Preferred model for debug and analysis
+
+### Quick Code / Boilerplate
+- **{{AI_MODEL_BOILERPLATE}}** - Preferred model for quick code
+
+---
+
+## Mandatory Standardization
+
+Every project must contain before using AI:
+
+- [ ] **Lint configuration (ESLint) installed and working**
+- [ ] **Formatter configuration (Prettier) installed and working**
+- [ ] **TypeScript configured (tsconfig.json)**
+- [ ] **Lint/format scripts in package.json**
+- [ ] Lint and formatter rules documented
+- [ ] Prompt templates (Cursor / CLI)
+- [ ] Context structure (`.cursor/context`)
+- [ ] Explicit technical rules (`.cursor/rules`)
+
+**Without this, AI usage is not authorized.**
+
+### Lint Configuration - Details
+
+> For complete details on lint configuration, see `.cursor/rules/code-style.md` section "Lint & Formatting Configuration"
+
+Lint configuration MUST include:
+
+1. **ESLint:** Configured for TypeScript, rules aligned with code-style.md, Prettier integration
+2. **Prettier:** Formatting configuration, ESLint integration
+3. **TypeScript:** tsconfig.json configured, strict mode enabled
+
+**AI must always follow configured lint rules. Code that doesn't pass lint is considered invalid.**
+
+---
+
+## Tests and Quality
+
+### Non-negotiable Rules
+
+- Generated code → generated tests
+- Refactoring → existing tests green
+- PR without tests → incomplete PR
+
+**AI never replaces the CI pipeline.**
+
+---
+
+## Common Risks and Mitigations
+
+| Risk | Mitigation |
+|------|------------|
+| Over engineering | Simple rules and clear objectives |
+| Inconsistent code | Lint + mandatory templates |
+| AI hallucinations | Restricted prompts and closed scope |
+| Loss of pattern | Human technical reviews |
+
+---
+
+## Responsibilities
+
+- **CTO:** {{CTO_RESPONSIBILITY}}
+- **Tech Lead:** {{TECH_LEAD_RESPONSIBILITY}}
+- **Dev:** {{DEV_RESPONSIBILITY}}
+
+---
+
+## Final Rule
+
+> If AI is making decisions you can't explain to the team, the process failed.
+
+**Well-used AI generates speed.**
+**AI without process generates technical debt.**
+
+---
+
+## Related Documentation
+
+- **Code Style:** `.cursor/rules/code-style.md`
+- **Testing Rules:** `.cursor/rules/testing-rules.md`
+- **AI Models:** `.cursor/libs/ai-models.md`

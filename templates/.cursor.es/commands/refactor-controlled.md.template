@@ -1,0 +1,44 @@
+# Refactorización Controlada
+
+## Objetivo
+Mejorar código sin cambiar comportamiento. Refactorización segura y controlada.
+
+## Input
+- Código seleccionado para refactorización
+- Contexto del código
+- Pruebas existentes (si las hay)
+
+## Instrucciones
+Refactoriza el código seleccionado con los siguientes objetivos:
+
+1. **Mejorar legibilidad**
+   - Nombres más claros
+   - Estructura más clara
+   - Reducir complejidad cognitiva
+
+2. **Reducir complejidad**
+   - Simplificar lógica
+   - Extraer funciones cuando sea apropiado
+   - Eliminar código duplicado
+
+3. **Mantener 100% del comportamiento actual**
+   - No alterar funcionalidad
+   - No alterar interfaz pública
+   - Mantener compatibilidad
+
+## Restricciones
+- No alteres comportamiento
+- Mantén pruebas existentes pasando
+- Sigue patrones del proyecto (`.cursor/rules/code-style.md`)
+- Documenta cambios significativos
+
+## Output
+Código refactorizado con:
+- Lista clara de lo que se alteró
+- Explicación del por qué
+- Garantía de comportamiento mantenido
+- Sugerencias de pruebas adicionales (si es necesario)
+
+## Documentación Relacionada
+- **Estilo de Código:** `.cursor/rules/code-style.md`
+- **Reglas de Pruebas:** `.cursor/rules/testing-rules.md`

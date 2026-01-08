@@ -1,0 +1,53 @@
+# Review PR
+
+## Objective
+Critical and educational review. Evaluate PR as senior engineer.
+
+## Input
+- Pull Request to review
+- Changed code
+- PR context
+- PR description
+
+## Instructions
+You are a senior engineer reviewing this PR.
+
+Evaluate:
+
+1. **Solution clarity**
+   - Is code easy to understand?
+   - Are names clear?
+   - Does structure make sense?
+
+2. **Business rules correctness**
+   - Is logic correct?
+   - Were business rules followed?
+   - Were edge cases considered?
+
+3. **Test quality**
+   - Do tests cover important cases?
+   - Are tests clear and maintainable?
+   - Is coverage adequate?
+
+4. **Possible future impacts**
+   - Can changes break something?
+   - Is there excessive coupling?
+   - Was maintainability considered?
+
+## Constraints
+- Assume PR was made by a junior developer
+- Be technical, constructive, and educational
+- Explain the why of suggestions
+- Prioritize actionable feedback
+
+## Output
+Structured review with:
+- Positive points
+- Identified problems
+- Improvement suggestions
+- Educational explanations
+
+## Related Documentation
+- **Code Style:** `.cursor/rules/code-style.md`
+- **Testing Rules:** `.cursor/rules/testing-rules.md`
+- **Git Rules:** `.cursor/rules/git-rules.md`

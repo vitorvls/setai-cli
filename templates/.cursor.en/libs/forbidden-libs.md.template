@@ -1,0 +1,165 @@
+# Forbidden Libraries
+
+## Objective
+This file lists forbidden libraries in the project, with reason for prohibition and alternatives.
+
+## Scope
+- Forbidden libraries
+- Reason for prohibition
+- Recommended alternatives
+
+---
+
+{{#if FORBIDDEN_LIBRARIES_CUSTOM}}
+## Custom Forbidden Libraries
+
+{{FORBIDDEN_LIBRARIES_CUSTOM}}
+
+---
+{{/if}}
+
+## CLI Libraries
+
+### CLI Frameworks
+
+#### Yargs
+- **Status:** NOT ALLOWED (unless Commander.js doesn't meet needs)
+- **Reason:** Commander.js is more popular and sufficient
+- **Alternative:** Commander.js
+
+#### Meow / Gluegun
+- **Status:** NOT ALLOWED
+- **Reason:** Commander.js is industry standard
+- **Alternative:** Commander.js
+
+### Prompt Libraries
+
+#### Enquirer (without Inquirer.js)
+- **Status:** NOT ALLOWED (unless Inquirer.js doesn't meet needs)
+- **Reason:** Inquirer.js is more popular and stable
+- **Alternative:** Inquirer.js
+
+#### prompts (without Inquirer.js)
+- **Status:** NOT ALLOWED
+- **Reason:** Inquirer.js has better support and documentation
+- **Alternative:** Inquirer.js
+
+---
+
+## File System Libraries
+
+### Deprecated/Unsafe
+
+#### fs (native without fs-extra)
+- **Status:** NOT ALLOWED for complex operations
+- **Reason:** fs-extra has better API and is cross-platform
+- **Alternative:** fs-extra (uses native fs internally)
+
+#### rimraf (unnecessary)
+- **Status:** NOT ALLOWED (unless necessary for the project)
+- **Reason:** [To be defined - project-specific reason]
+- **Alternative:** [To be defined - alternative if necessary]
+
+---
+
+## Template Libraries
+
+### Overkill
+
+#### EJS / Pug / Mustache (unnecessary)
+- **Status:** NOT ALLOWED (unless Handlebars doesn't meet needs)
+- **Reason:** Handlebars or native template strings are sufficient
+- **Alternative:** Handlebars or native template strings
+
+#### React/JSX for templates
+- **Status:** NOT ALLOWED
+- **Reason:** Overkill for CLI, we don't need React
+- **Alternative:** Handlebars or template strings
+
+---
+
+## Testing Libraries
+
+### Deprecated/Unnecessary
+
+#### Jest (if Vitest meets needs)
+- **Status:** NOT ALLOWED (prefer Vitest)
+- **Reason:** Vitest is faster and ESM compatible
+- **Alternative:** Vitest
+
+#### Mocha / Ava
+- **Status:** NOT ALLOWED
+- **Reason:** Vitest/Jest are standard
+- **Alternative:** Vitest
+
+---
+
+## Utility Libraries
+
+### Unnecessary for CLI
+
+#### Lodash / Underscore
+- **Status:** NOT ALLOWED (unless really necessary)
+- **Reason:** Large bundle, most functions not necessary
+- **Alternative:** Native JavaScript functions or specific libraries
+
+#### Axios / node-fetch
+- **Status:** NOT ALLOWED (CLI doesn't make HTTP requests)
+- **Reason:** We don't need HTTP client
+- **Alternative:** N/A (not necessary)
+
+---
+
+## Build Tools
+
+### Overkill/Deprecated
+
+#### Webpack
+- **Status:** NOT ALLOWED
+- **Reason:** tsup/esbuild are faster and simpler for CLI
+- **Alternative:** tsup or esbuild
+
+#### Rollup (without specific need)
+- **Status:** NOT ALLOWED (unless tsup doesn't meet needs)
+- **Reason:** tsup is simpler and sufficient
+- **Alternative:** tsup
+
+---
+
+## General Rules
+
+### Prohibited Patterns
+
+1. **Any library with > 1MB bundle size** (unless critical)
+   - **Reason:** Performance impact
+   - **Action:** Evaluate alternatives
+
+2. **Libraries with < 1000 weekly downloads**
+   - **Reason:** Maintenance risk
+   - **Action:** Get approval before using
+
+3. **Libraries with no TypeScript support** (TypeScript projects)
+   - **Reason:** Type safety
+   - **Action:** Find typed alternative or create types
+
+4. **Duplicate functionality**
+   - **Reason:** Bundle bloat, confusion
+   - **Action:** Use existing library
+
+---
+
+## Approval Process
+
+If you need to use a forbidden library:
+
+1. Document why it's necessary
+2. Get approval from Tech Lead
+3. Update this file with exception
+4. Document in architecture decisions
+
+---
+
+## Related Documentation
+
+- **Allowed Libraries:** `.cursor/libs/allowed-libs.md`
+- **Tech Stack:** `.cursor/context/tech-stack.md`

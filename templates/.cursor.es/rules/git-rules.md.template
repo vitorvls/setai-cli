@@ -1,0 +1,162 @@
+# Reglas de Git
+
+## Objetivo
+Este archivo define patrones obligatorios para commits, branches y pull requests.
+
+## Alcance
+- Patrones de commit
+- Estructura de branches
+- Proceso de PR
+- Code review
+
+---
+
+## Mensajes de Commit
+
+### Formato
+Usar formato Conventional Commits:
+
+```
+<type>(<scope>): <subject>
+
+<body>
+
+<footer>
+```
+
+### Tipos
+- **feat:** Nueva funcionalidad
+- **fix:** Corrección de bug
+- **docs:** Cambios en documentación
+- **style:** Formateo, sin cambio de código
+- **refactor:** Refactorización de código
+- **test:** Adición o corrección de pruebas
+- **chore:** Tareas de mantenimiento
+
+### Ejemplos
+```
+feat(auth): add JWT authentication
+
+Implement JWT-based authentication with refresh tokens.
+Add login and logout endpoints.
+
+Closes #123
+```
+
+```
+fix(api): handle null values in user endpoint
+
+Prevent null pointer exception when user data is missing.
+```
+
+---
+
+## Estrategia de Branches
+
+### Nomenclatura de Branches
+- **Feature:** `feature/description`
+- **Bugfix:** `fix/description`
+- **Hotfix:** `hotfix/description`
+- **Release:** `release/version`
+
+### Branches Principales
+- **main/master:** Código listo para producción
+- **develop:** Branch de integración para features
+
+---
+
+## Proceso de Pull Request
+
+### Antes de Crear PR
+- [ ] El código sigue la guía de estilo
+- [ ] Todas las pruebas pasando
+- [ ] Sin console.logs o código de debug
+- [ ] Documentación actualizada si es necesario
+- [ ] Auto-revisión completada
+
+### Título del PR
+- Usar mismo formato que mensajes de commit
+- Ser descriptivo y claro
+
+### Descripción del PR
+Debe incluir:
+- **Qué:** Qué cambios se hicieron
+- **Por qué:** Por qué se hicieron estos cambios
+- **Cómo:** Cómo probar los cambios
+- **Screenshots:** Si hay cambios de UI
+
+### Tamaño del PR
+- **Preferido:** PRs pequeños y enfocados (< 400 líneas)
+- **Máximo:** 1000 líneas (requiere justificación)
+- Dividir features grandes en múltiples PRs
+
+---
+
+## Code Review
+
+### Responsabilidades del Revisor
+- Verificar calidad y estilo del código
+- Verificar que las pruebas son adecuadas
+- Asegurar que la lógica de negocio es correcta
+- Verificar problemas de seguridad
+- Aprobar o solicitar cambios
+
+### Responsabilidades del Autor
+- Abordar todos los comentarios de revisión
+- Actualizar descripción del PR si es necesario
+- Re-solicitar revisión después de cambios
+
+### Reglas de Revisión
+- Se requiere al menos una aprobación
+- No auto-aprobación
+- Abordar todos los comentarios bloqueantes
+- Resolver conversaciones antes de mergear
+
+---
+
+## Reglas de Merge
+
+### Métodos de Merge
+- **Squash and merge:** Preferido para branches de features
+- **Merge commit:** Para branches de release
+- **Rebase and merge:** No permitido
+
+### Antes de Mergear
+- [ ] Todas las verificaciones de CI pasando
+- [ ] Al menos una aprobación
+- [ ] Sin conflictos de merge
+- [ ] Branch está actualizado
+
+---
+
+## Prácticas Prohibidas
+
+### NO HACER
+- Commitear directamente a main/master
+- Force push a branches compartidos
+- Commitear secretos o credenciales
+- Commitear archivos binarios grandes
+- Saltar hooks (--no-verify)
+- Escribir mensajes de commit vagos
+
+---
+
+## Git Hooks
+
+### Pre-commit
+- Ejecutar linter
+- Ejecutar formateador
+- Ejecutar type checker
+- Verificar secretos
+
+### Pre-push
+- Ejecutar suite completa de pruebas
+- Verificar que branch está actualizado
+
+---
+
+## Documentación Relacionada
+
+- **Estilo de Código:** `.cursor/rules/code-style.md` (ver sección sobre lint y git hooks)
+- **Reglas de Pruebas:** `.cursor/rules/testing-rules.md`
+- **Reglas de Uso de IA:** `.cursor/rules/ai-usage-rules.md`

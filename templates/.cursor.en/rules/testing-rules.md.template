@@ -1,0 +1,246 @@
+# Testing Rules
+
+## Objective
+This file defines the testing strategy and mandatory rules to ensure code quality.
+
+## Scope
+- Testing strategy
+- Mandatory test types
+- Minimum coverage
+- Test writing patterns
+
+---
+
+## Testing Strategy
+
+{{#if TEST_STRATEGY}}
+### Custom Testing Strategy
+
+{{TEST_STRATEGY}}
+
+---
+{{/if}}
+### TDD (Test-Driven Development) - MANDATORY
+
+**CRITICAL: Tests BEFORE code**
+
+This project uses **TDD (Test-Driven Development)** as a mandatory methodology. Tests must be written **BEFORE** code implementation.
+
+#### TDD Cycle (Red-Green-Refactor)
+
+1. **🔴 RED (Red):** Write a failing test
+   - Test must describe desired behavior
+   - Test must fail because functionality doesn't exist yet
+
+2. **🟢 GREEN (Green):** Write minimum code to make test pass
+   - Implement only what's necessary for test to pass
+   - Don't optimize or add extra features yet
+
+3. **🔵 REFACTOR (Refactor):** Improve code keeping tests green
+   - Improve structure, readability, performance
+   - Ensure all tests continue passing
+
+#### Mandatory TDD Rules
+
+- **NEVER write code without test first**
+- **NEVER commit code without corresponding test**
+- **ALWAYS write test before implementation**
+- **ALWAYS make test pass before refactoring**
+- **ALWAYS refactor keeping tests green**
+
+#### Development Flow with TDD
+
+```
+1. Write test (must fail) → RED
+2. Implement minimum code → GREEN
+3. Refactor if necessary → REFACTOR
+4. Repeat for next functionality
+```
+
+#### Exceptions (Very Rare)
+
+Only in exceptional cases, with explicit approval:
+- Quick prototyping of concepts (but tests must come soon after)
+- Technical spikes (but must be discarded or tested later)
+
+### Test Pyramid
+- **Unit Tests:** Base of pyramid, largest quantity
+- **Integration Tests:** Middle of pyramid, medium quantity
+- **E2E Tests:** Top of pyramid, smallest quantity
+
+### When to Write Tests
+- **Always:** Business logic, critical paths, edge cases
+- **Recommended:** API endpoints, utility functions
+- **Optional:** Simple UI components, trivial functions
+- **IMPORTANT:** All follow TDD - test BEFORE code
+
+---
+
+## Unit Tests
+
+### Rules
+- Test one thing at a time
+- Tests must be isolated and independent
+- Use descriptive test names
+- Follow AAA pattern (Arrange, Act, Assert)
+
+### Coverage
+- **Minimum:** {{TEST_COVERAGE}}
+- **Critical paths:** 100% coverage required
+- **Business logic:** 100% coverage required
+
+{{#if TEST_TOOLS}}
+### Testing Tools Used
+
+{{TEST_TOOLS}}
+{{/if}}
+
+### Examples
+
+#### Complete TDD Example
+
+**Step 1: RED - Write failing test**
+```typescript
+// calculateTotal.test.ts
+describe('calculateTotal', () => {
+  it('should return sum of all items', () => {
+    // Arrange
+    const items = [10, 20, 30];
+    
+    // Act
+    const result = calculateTotal(items);
+    
+    // Assert
+    expect(result).toBe(60);
+  });
+});
+```
+❌ Test fails because `calculateTotal` doesn't exist yet
+
+**Step 2: GREEN - Implement minimum code**
+```typescript
+// calculateTotal.ts
+export function calculateTotal(items: number[]): number {
+  return items.reduce((sum, item) => sum + item, 0);
+}
+```
+✅ Test passes
+
+**Step 3: REFACTOR - Improve if necessary**
+```typescript
+// calculateTotal.ts (refactored if necessary)
+export function calculateTotal(items: number[]): number {
+  if (items.length === 0) return 0;
+  return items.reduce((sum, item) => sum + item, 0);
+}
+```
+✅ Test continues passing, code improved
+
+---
+
+## Integration Tests
+
+### Rules
+- Test interactions between components
+- Use test database (never production)
+- Clean up after tests
+- Mock external services
+
+### What to Test
+- API endpoints
+- Database operations
+- Service layer interactions
+- Authentication flows
+
+---
+
+## E2E Tests
+
+### Rules
+- Test critical user journeys
+- Use real browser environment
+- Keep tests fast and reliable
+- Use page object pattern
+
+### What to Test
+- Complete user workflows
+- Critical business processes
+- Cross-browser compatibility (if required)
+
+---
+
+## Test Structure
+
+### File Naming
+- Unit tests: `*.test.ts` or `*.spec.ts`
+- Integration tests: `*.integration.test.ts`
+- E2E tests: `*.e2e.test.ts`
+
+### Organization
+- Mirror source structure
+- Group related tests
+- Use describe blocks for organization
+
+---
+
+## Test Data
+
+### Rules
+- Use factories/fixtures for test data
+- Do not use production data
+- Make test data explicit and readable
+- Clean up test data after tests
+
+### Mocking
+- Mock external dependencies
+- Mock network requests
+- Mock time-dependent functions
+- Keep mocks simple and focused
+
+---
+
+## CI/CD Integration
+
+### Rules
+- All tests must pass before merge
+- Tests run on every PR
+- Failed tests block deployment
+- Test results visible in PR
+- **TDD enforcement:** PRs without tests for new code will be rejected
+- **Coverage check:** Coverage must increase or maintain, never decrease
+
+---
+
+## Prohibited Patterns
+
+### Do NOT
+- **Write code before tests (violates TDD)**
+- Skip tests without justification
+- Write tests that depend on execution order
+- Use production data in tests
+- Write flaky tests
+- Commit code without tests for new features
+- Commit code that wasn't developed following TDD
+
+---
+
+## Coverage Requirements
+
+### Minimum Coverage
+- **Overall:** 70%
+- **Business Logic:** 100%
+- **API Endpoints:** 80%
+- **Utilities:** 90%
+
+### How to Measure
+- Use coverage tools (Jest, pytest-cov, etc.)
+- Coverage reports in CI/CD
+- Review coverage in PRs
+
+---
+
+## Related Documentation
+
+- **Code Style:** `.cursor/rules/code-style.md`
+- **Git Rules:** `.cursor/rules/git-rules.md`
+- **AI Usage Rules:** `.cursor/rules/ai-usage-rules.md`

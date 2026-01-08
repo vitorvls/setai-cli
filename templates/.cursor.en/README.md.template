@@ -1,0 +1,82 @@
+# .cursor Configuration
+
+## Objective
+This folder contains all configuration and context for efficient AI usage in project development.
+
+## Structure
+
+### 📂 `context/`
+Persistent project context - answers "How does this project think?"
+
+- `architecture.md` - Architectural decisions and patterns
+- `tech-stack.md` - Complete technology stack
+- `project-goals.md` - Business objectives and context
+- `deployment.md` - Infrastructure and deployment process
+
+### 📂 `rules/`
+Hard rules - contract with AI
+
+- `code-style.md` - Mandatory code standards
+- `testing-rules.md` - Testing strategy and rules
+- `git-rules.md` - Commit and PR standards
+- `security-rules.md` - Mandatory security rules
+- `ai-usage-rules.md` - Where and how to use AI
+- `business-rules.md` - Business rules
+
+### 📂 `libs/`
+Source of truth about dependencies
+
+- `allowed-libs.md` - Allowed libraries
+- `forbidden-libs.md` - Forbidden libraries
+- `ai-models.md` - Allowed AI models and when to use them
+
+### 📂 `commands/`
+Executable prompts - reusable commands
+
+- `kickoff-project.md` - Align business understanding
+- `architecture-review.md` - Validate architectural decisions
+- `extract-business-rules.md` - Extract business rules
+- `test-strategy.md` - Structure testing strategy
+- `generate-boilerplate.md` - Generate boilerplate code
+- `refactor-controlled.md` - Controlled refactoring
+- `generate-docs.md` - Generate technical documentation
+- `review-pr.md` - PR review
+- `challenge-solution.md` - Challenge solutions
+- `pre-deploy-validation.md` - Pre-deployment validation
+
+## How to Use
+
+### For Developers
+1. **Configure lint and formatter BEFORE starting** (see `rules/code-style.md`)
+2. Read files in `context/` to understand the project
+3. Follow rules in `rules/`
+4. Use only libs in `libs/allowed-libs.md`
+5. Use prompts in `commands/` when appropriate
+
+### For AI
+AI should:
+1. **Check if lint is configured before generating code**
+2. Read `rules/` first (hard rules)
+3. Consult `context/` to understand the project
+4. Check `libs/` before suggesting dependencies
+5. Use `commands/` as prompt templates
+6. **Always generate code that passes the configured lint**
+
+## Principles
+
+- **Explicit context > Beautiful prompt**
+- **Hard rules, not suggestions**
+- **Living documentation, not static**
+- **AI proposes, humans approve**
+
+## Maintenance
+
+- Update files when there are changes
+- Maintain consistency between files
+- Document important decisions
+- Review periodically
+
+---
+
+**Based on best practices for AI-assisted development in 2026**
+

@@ -1,0 +1,146 @@
+# Reglas de Estilo de Código
+
+## Objetivo
+Este archivo define reglas duras de estilo de código. Estas son reglas, no sugerencias.
+
+## Alcance
+- Patrones de código obligatorios
+- Convenciones de nomenclatura
+- Formateo
+- Estructura de archivos
+
+---
+
+## Reglas Generales
+
+### Configuración de Lint y Formateo - OBLIGATORIO
+
+**CRÍTICO: Las configuraciones de lint DEBEN hacerse antes de cualquier desarrollo**
+
+Antes de comenzar a escribir código, el proyecto DEBE tener:
+
+1. **ESLint configurado:**
+   - Archivo de configuración: `.eslintrc.js`, `eslint.config.js` o `eslint.config.mjs`
+   - Extensiones TypeScript instaladas y configuradas
+   - Reglas alineadas con las convenciones del proyecto
+   - Integración con Prettier (evitar conflictos)
+
+2. **Prettier configurado:**
+   - Archivo de configuración: `.prettierrc`, `.prettierrc.js` o `prettier.config.js`
+   - Reglas de formateo definidas
+   - Integración con ESLint vía `eslint-config-prettier`
+
+3. **TypeScript configurado:**
+   - Archivo `tsconfig.json` con configuraciones apropiadas
+   - Strict mode habilitado
+   - Target y module apropiados (ESM para este proyecto)
+
+4. **Scripts en package.json:**
+   - `lint`: Ejecutar ESLint
+   - `lint:fix`: Corregir problemas automáticamente
+   - `format`: Formatear código con Prettier
+   - `type-check`: Verificar tipos TypeScript
+
+5. **Git Hooks (opcional pero recomendado):**
+   - Pre-commit hook para ejecutar lint y format (ver `.cursor/rules/git-rules.md`)
+   - Pre-push hook para ejecutar pruebas (ver `.cursor/rules/git-rules.md`)
+
+**Sin estas configuraciones, el desarrollo NO debe comenzar.**
+
+### Formateo de Código
+- Usar formateador automático (Prettier) antes de commit
+- No commitear código no formateado
+- El formateo se verifica en CI/CD
+- **Lint y format deben pasar antes de cualquier commit**
+
+### Reglas de Idioma
+
+**CRÍTICO: Idioma del código vs comentarios**
+
+- **Código (100% en inglés):**
+  - Nombres de variables, funciones, clases, interfaces, tipos: **siempre en inglés**
+  - Strings literales en código (mensajes de error, logs): **siempre en inglés**
+  - Nombres de archivos y directorios: **siempre en inglés**
+  - Mensajes de commit: **siempre en inglés**
+  - Documentación de código (JSDoc, docstrings): **siempre en inglés**
+
+- **Comentarios (pt-BR):**
+  - Comentarios inline (`//`, `/* */`): **siempre en portugués brasileño**
+  - Comentarios explicativos: **siempre en portugués brasileño**
+  - Comentarios de TODO/FIXME: **siempre en portugués brasileño**
+
+**Excepciones:**
+- Strings mostradas al usuario final (CLI output, mensajes de UI): pueden ser en pt-BR si aplica
+- Documentación de usuario (README, docs): pueden ser en pt-BR
+
+### Convenciones de Nomenclatura
+- **Variables:** camelCase (JavaScript/TypeScript) o snake_case (Python)
+- **Funciones:** camelCase o snake_case (seguir estándar del lenguaje)
+- **Clases:** PascalCase
+- **Constantes:** UPPER_SNAKE_CASE
+- **Archivos:** kebab-case o snake_case
+
+### Comentarios
+- Comentar solo cuando sea necesario para claridad
+- Evitar comentarios obvios
+- Usar comentarios para explicar "por qué", no "qué"
+- **IMPORTANTE:** Todos los comentarios deben escribirse en **portugués brasileño (pt-BR)**
+
+---
+
+## Reglas de Pruebas
+
+> Ver `.cursor/rules/testing-rules.md` para detalles completos
+
+- **TDD es OBLIGATORIO:** Las pruebas deben escribirse ANTES del código
+- Escribir pruebas para lógica de negocio
+- Las pruebas deben ser deterministas
+- Usar nombres de prueba descriptivos
+- Una aserción por prueba cuando sea posible
+- **NUNCA commitear código sin prueba correspondiente**
+
+---
+
+## Reglas de Git
+
+> Ver `.cursor/rules/git-rules.md` para detalles completos
+
+- Seguir conventional commits
+- Un cambio lógico por commit
+- Escribir mensajes de commit claros
+
+---
+
+## Patrones Prohibidos
+
+### NO HACER
+- **Comenzar desarrollo sin configuración de lint**
+- Usar tipo `any` (TypeScript) o código sin tipos
+- Commitear código comentado
+- Usar números/strings mágicos
+- Crear dependencias circulares
+- Usar `eval()` o funciones similares peligrosas
+- Hardcodear credenciales o secretos
+- Commitear código que no pasó el lint
+- Deshabilitar reglas de lint sin justificación
+
+---
+
+## Checklist de Configuración de Lint
+
+Antes de comenzar el desarrollo, verificar:
+
+- [ ] ESLint instalado y configurado
+- [ ] Prettier instalado y configurado
+- [ ] TypeScript configurado (tsconfig.json)
+- [ ] Scripts de lint/format en package.json
+- [ ] Integración ESLint + Prettier funcionando
+- [ ] Git hooks configurados (opcional pero recomendado)
+- [ ] CI/CD configurado para verificar lint
+
+## Documentación Relacionada
+
+- **Reglas de Pruebas:** `.cursor/rules/testing-rules.md`
+- **Reglas de Git:** `.cursor/rules/git-rules.md`
+- **Stack Tecnológico:** `.cursor/context/tech-stack.md`
+- **Reglas de Uso de IA:** `.cursor/rules/ai-usage-rules.md`

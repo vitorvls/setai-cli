@@ -1,0 +1,50 @@
+# Desafiar Solución
+
+## Objetivo
+Evitar sesgo de un solo modelo. Cuestionar y validar soluciones propuestas.
+
+## Input
+- Solución propuesta anteriormente
+- Contexto del problema
+- Decisiones tomadas
+- Alternativas consideradas
+
+## Instrucciones
+Analiza la solución propuesta anteriormente.
+
+Desafía las decisiones tomadas:
+
+1. **¿Qué puede salir mal?**
+   - Riesgos técnicos
+   - Riesgos de negocio
+   - Puntos de falla
+   - Casos no considerados
+
+2. **¿Existen alternativas más simples?**
+   - Soluciones más directas
+   - Menos abstracciones
+   - Menos complejidad
+   - Menos dependencias
+
+3. **¿Dónde hay riesgo de overengineering?**
+   - Abstracciones innecesarias
+   - Complejidad prematura
+   - Optimizaciones prematuras
+   - Features no necesarias
+
+## Restricciones
+- Sé crítico y directo
+- Enfócate en problemas reales, no en perfección teórica
+- Considera contexto y restricciones
+- Sugiere alternativas cuando sea apropiado
+
+## Output
+Análisis crítico con:
+- Riesgos identificados
+- Alternativas más simples
+- Puntos de overengineering
+- Recomendaciones
+
+## Documentación Relacionada
+- **Arquitectura:** `.cursor/context/architecture.md`
+- **Reglas de Uso de IA:** `.cursor/rules/ai-usage-rules.md`

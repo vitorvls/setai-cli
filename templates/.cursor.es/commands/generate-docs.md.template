@@ -1,0 +1,50 @@
+# Generar Documentación
+
+## Objetivo
+Generar documentación técnica viva. Documentar módulos, componentes y decisiones.
+
+## Input
+- Módulo/componente a documentar
+- Código relacionado
+- Decisiones tomadas
+- Contexto del proyecto
+
+## Instrucciones
+Genera documentación técnica para este módulo abordando:
+
+1. **Responsabilidad**
+   - Qué hace este módulo
+   - Cuál es su propósito
+   - Qué no hace
+
+2. **Flujo de datos**
+   - Cómo entran los datos
+   - Cómo se procesan
+   - Cómo salen
+
+3. **Dependencias**
+   - De qué depende este módulo
+   - Qué depende de este módulo
+   - Integraciones externas
+
+4. **Decisiones importantes**
+   - Por qué fue implementado así
+   - Trade-offs considerados
+   - Alternativas descartadas
+
+## Restricciones
+- Escribe como documentación interna para el equipo
+- Evita lenguaje genérico
+- Sé específico y técnico
+- Incluye ejemplos cuando sea útil
+
+## Output
+Documentación técnica completa con:
+- Responsabilidad clara
+- Flujo de datos documentado
+- Dependencias mapeadas
+- Decisiones explicadas
+
+## Documentación Relacionada
+- **Arquitectura:** `.cursor/context/architecture.md`
+- **Estilo de Código:** `.cursor/rules/code-style.md`

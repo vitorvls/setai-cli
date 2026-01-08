@@ -1,0 +1,162 @@
+# Allowed Libraries
+
+## Objective
+This file lists all libraries allowed in the project, with reason for choice and use cases.
+
+## Scope
+- Allowed libraries
+- Reason for choice
+- Specific use cases
+
+---
+
+## CLI Libraries
+
+### CLI Framework
+- **Commander.js** → CLI framework
+  - **Reason:** Industry standard, well maintained, subcommand support
+  - **Use Case:** Argument parsing, command definition
+
+- **Inquirer.js** → Interactive prompts
+  - **Reason:** Better UX, support for multiple question types
+  - **Use Case:** Interactive questions (multiple choice, input, confirmation)
+
+### File System
+- **fs-extra** → File system operations
+  - **Reason:** Cross-platform, better API than native fs, async operations
+  - **Use Case:** Create directories, write files, check existence
+
+- **path** → Path utilities (built-in Node.js)
+  - **Reason:** Built-in, cross-platform paths
+  - **Use Case:** File path manipulation
+
+### Template Processing
+- **Handlebars** → Template engine (if necessary)
+  - **Reason:** Simple, popular, supports helpers
+  - **Use Case:** Fill templates with user data
+
+- **Native Template Strings** → Simple alternative
+  - **Reason:** No dependencies, sufficient for simple cases
+  - **Use Case:** Basic templates without complex logic
+
+---
+
+{{#if ALLOWED_LIBRARIES_CUSTOM}}
+## Custom Allowed Libraries
+
+{{ALLOWED_LIBRARIES_CUSTOM}}
+
+---
+{{/if}}
+
+{{#if LIBRARY_NOTES}}
+### Notes on Library Policy
+
+{{LIBRARY_NOTES}}
+
+---
+{{/if}}
+
+## Utility Libraries
+
+### Validation
+- **Zod** → Schema validation (TypeScript)
+  - **Reason:** TypeScript-first, runtime validation, type inference
+  - **Use Case:** Validate user inputs, validate configurations
+
+### Colors & Formatting
+- **chalk** → Terminal string styling
+  - **Reason:** Popular, well maintained, supports cross-platform colors
+  - **Use Case:** Colored output in terminal, highlight messages
+
+- **ora** → Terminal spinners
+  - **Reason:** Simple, well maintained, good UX
+  - **Use Case:** Show progress during long operations
+
+### Package Info
+- **read-pkg** → Read package.json
+  - **Reason:** Simple, type-safe
+  - **Use Case:** Detect project information (name, version, etc.)
+
+### Error Handling
+- **error-stack-parser** → Parse error stacks (if necessary)
+  - **Reason:** Improve error messages
+  - **Use Case:** Debugging and clearer error messages
+
+---
+
+## Testing Libraries
+
+### Unit Testing
+- **Vitest** → Testing framework (preferred)
+  - **Reason:** Fast, ESM compatible, native TypeScript
+  - **Use Case:** Unit and integration tests
+
+- **Jest** → Testing framework (alternative if necessary)
+  - **Reason:** Popular, good ecosystem
+  - **Use Case:** If Vitest doesn't meet specific needs
+
+### Testing Utilities
+- **@vitest/ui** → UI for Vitest (optional)
+  - **Reason:** Better DX for visualizing tests
+  - **Use Case:** Development and test debugging
+
+- **mock-fs** → Mock file system (if necessary)
+  - **Reason:** Test file operations without creating real files
+  - **Use Case:** File generation tests without side effects
+
+---
+
+## Build & Development Tools
+
+### Build Tools
+- **tsup** → TypeScript bundler (preferred)
+  - **Reason:** Fast, simple, supports ESM, zero config
+  - **Use Case:** Compile TypeScript for distribution
+
+- **esbuild** → Fast bundler (alternative)
+  - **Reason:** Extremely fast
+  - **Use Case:** If tsup doesn't meet needs
+
+### Type Checking
+- **TypeScript** → Type checker
+  - **Reason:** Type safety, better DX
+  - **Use Case:** Type checking during development
+
+### Code Quality
+- **ESLint** → Linter
+  - **Reason:** Industry standard, TypeScript plugins
+  - **Use Case:** Code linting
+
+- **Prettier** → Code formatter
+  - **Reason:** Consistent formatting, ESLint integration
+  - **Use Case:** Automatic formatting
+
+---
+
+## Package Management
+
+### Package Manager
+- **pnpm** → Package manager (preferred)
+  - **Reason:** Faster, space efficient, better for monorepos
+  - **Use Case:** Dependency management
+
+- **npm** → Package manager (alternative)
+  - **Reason:** Standard, comes with Node.js
+  - **Use Case:** If pnpm is not available
+
+---
+
+## Update Policy
+
+- Dependencies are updated monthly
+- Security patches applied immediately
+- Major version updates require review
+- Breaking changes documented in CHANGELOG
+
+---
+
+## Related Documentation
+
+- **Forbidden Libraries:** `.cursor/libs/forbidden-libs.md`
+- **Tech Stack:** `.cursor/context/tech-stack.md`

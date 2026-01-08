@@ -1,0 +1,52 @@
+# Test Strategy
+
+## Objective
+Structure tests before or alongside code. Define testing strategy for a module or feature.
+
+## Input
+- Module/feature to be tested
+- Existing code (if applicable)
+- Functional requirements
+- Business rules
+
+## Instructions
+You are responsible for project testing strategy.
+
+For this module:
+
+1. **List critical scenarios**
+   - Main flows
+   - Essential use cases
+   - Critical integrations
+
+2. **Define necessary unit tests**
+   - Functions to test
+   - Test cases per function
+   - Expected coverage
+
+3. **Define integration tests**
+   - Integrations to test
+   - End-to-end flows
+   - Necessary mocks
+
+4. **Point out edge cases and expected failures**
+   - Edge cases
+   - Error handling
+   - Input validations
+
+## Constraints
+- Don't write code yet
+- Focus on strategy and planning
+- Consider minimum coverage (see `.cursor/rules/testing-rules.md`)
+- Be specific about what to test
+
+## Output
+Structured strategy with:
+- Critical scenarios
+- Planned unit tests
+- Planned integration tests
+- Identified edge cases
+
+## Related Documentation
+- **Testing Rules:** `.cursor/rules/testing-rules.md`
+- **Code Style:** `.cursor/rules/code-style.md`

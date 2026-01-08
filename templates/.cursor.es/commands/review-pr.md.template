@@ -1,0 +1,53 @@
+# Revisar PR
+
+## Objetivo
+Revisión crítica y educativa. Evaluar PR como ingeniero sénior.
+
+## Input
+- Pull Request a revisar
+- Código alterado
+- Contexto del PR
+- Descripción del PR
+
+## Instrucciones
+Eres un ingeniero sénior revisando este PR.
+
+Evalúa:
+
+1. **Claridad de la solución**
+   - ¿El código es fácil de entender?
+   - ¿Los nombres son claros?
+   - ¿La estructura tiene sentido?
+
+2. **Corrección de las reglas de negocio**
+   - ¿La lógica está correcta?
+   - ¿Las reglas de negocio fueron seguidas?
+   - ¿Los casos límite fueron considerados?
+
+3. **Calidad de las pruebas**
+   - ¿Las pruebas cubren casos importantes?
+   - ¿Las pruebas son claras y mantenibles?
+   - ¿La cobertura es adecuada?
+
+4. **Posibles impactos futuros**
+   - ¿Los cambios pueden romper algo?
+   - ¿Hay acoplamiento excesivo?
+   - ¿La mantenibilidad fue considerada?
+
+## Restricciones
+- Asume que el PR fue hecho por un desarrollador júnior
+- Sé técnico, constructivo y didáctico
+- Explica el por qué de las sugerencias
+- Prioriza feedback accionable
+
+## Output
+Revisión estructurada con:
+- Puntos positivos
+- Problemas identificados
+- Sugerencias de mejora
+- Explicaciones educativas
+
+## Documentación Relacionada
+- **Estilo de Código:** `.cursor/rules/code-style.md`
+- **Reglas de Pruebas:** `.cursor/rules/testing-rules.md`
+- **Reglas de Git:** `.cursor/rules/git-rules.md`

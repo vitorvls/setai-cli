@@ -1,0 +1,16 @@
+{
+  "project.name.required": "Project name is required",
+  "project.description.required": "Project description is required",
+  "project.problemImportance.required": "Problem importance is required",
+  "project.targetUsers.required": "Main users are required",
+  "project.businessGoals.required": "Business goals are required",
+  "project.nonGoals.required": "Non-goals are required",
+  "project.version.required": "Version is required",
+  "project.version.invalid": "Version must follow semantic format (e.g.: 1.0.0 or 0.1.0)",
+  "ide.customFolder.required": "Configuration folder name is required.",
+  "ide.customFolder.invalid": "Configuration folder must start with a dot (e.g.: .ai, .config).",
+  "apiKey.required": "API Key cannot be empty.",
+  "language.required": "Language is required",
+  "tech.language.required": "Language is required"
+}
+

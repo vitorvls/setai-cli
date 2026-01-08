@@ -1,0 +1,44 @@
+# Refactor Controlled
+
+## Objective
+Improve code without changing behavior. Safe and controlled refactoring.
+
+## Input
+- Code selected for refactoring
+- Code context
+- Existing tests (if any)
+
+## Instructions
+Refactor selected code with the following objectives:
+
+1. **Improve readability**
+   - Clearer names
+   - Clearer structure
+   - Reduce cognitive complexity
+
+2. **Reduce complexity**
+   - Simplify logic
+   - Extract functions when appropriate
+   - Remove duplicate code
+
+3. **Maintain 100% of current behavior**
+   - Don't alter functionality
+   - Don't alter public interface
+   - Maintain compatibility
+
+## Constraints
+- Don't alter behavior
+- Keep existing tests passing
+- Follow project patterns (`.cursor/rules/code-style.md`)
+- Document significant changes
+
+## Output
+Refactored code with:
+- Clear list of what was changed
+- Explanation of why
+- Guarantee of maintained behavior
+- Suggestions for additional tests (if necessary)
+
+## Related Documentation
+- **Code Style:** `.cursor/rules/code-style.md`
+- **Testing Rules:** `.cursor/rules/testing-rules.md`

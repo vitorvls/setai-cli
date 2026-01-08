@@ -1,0 +1,66 @@
+# Project Goals
+
+## Objetivo
+Este arquivo documenta o contexto de negócio, objetivos e restrições do projeto. Serve para alinhar entendimento antes de qualquer implementação.
+
+## Escopo
+- Problema que estamos resolvendo
+- Usuário final
+- Objetivo de negócio
+- Restrições técnicas ou legais
+
+---
+
+## 1. Problem Statement
+
+**Problema que estamos resolvendo:**
+
+{{PROJECT_DESCRIPTION}}
+
+**Por que este problema importa:**
+
+{{PROBLEM_IMPORTANCE}}
+
+---
+
+## 2. Target Users
+
+### Primary Users
+
+{{TARGET_USERS}}
+
+---
+
+## 3. Business Objectives
+
+### Primary Goals
+
+{{BUSINESS_GOALS}}
+
+---
+
+## 4. Constraints
+
+### Technical Constraints
+
+{{TECHNICAL_CONSTRAINTS}}
+
+### Business Constraints
+
+{{BUSINESS_CONSTRAINTS}}
+
+---
+
+## 5. Non-Goals
+
+**O que este projeto NÃO faz:**
+
+{{NON_GOALS}}
+
+---
+
+## Related Documentation
+
+- **Architecture:** `.cursor/context/architecture.md`
+- **Business Rules:** `.cursor/rules/business-rules.md`
+

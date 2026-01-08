@@ -1,0 +1,246 @@
+# Reglas de Pruebas
+
+## Objetivo
+Este archivo define la estrategia de pruebas y reglas obligatorias para garantizar calidad del código.
+
+## Alcance
+- Estrategia de pruebas
+- Tipos de pruebas obligatorios
+- Cobertura mínima
+- Patrones de escritura de pruebas
+
+---
+
+## Estrategia de Pruebas
+
+{{#if TEST_STRATEGY}}
+### Estrategia de Pruebas Personalizada
+
+{{TEST_STRATEGY}}
+
+---
+{{/if}}
+### TDD (Test-Driven Development) - OBLIGATORIO
+
+**CRÍTICO: Pruebas ANTES del código**
+
+Este proyecto utiliza **TDD (Test-Driven Development)** como metodología obligatoria. Las pruebas deben escribirse **ANTES** de la implementación del código.
+
+#### Ciclo TDD (Red-Green-Refactor)
+
+1. **🔴 RED (Rojo):** Escribir una prueba que falla
+   - La prueba debe describir el comportamiento deseado
+   - La prueba debe fallar porque la funcionalidad aún no existe
+
+2. **🟢 GREEN (Verde):** Escribir código mínimo para hacer pasar la prueba
+   - Implementar solo lo necesario para que la prueba pase
+   - No optimizar o agregar features extras aún
+
+3. **🔵 REFACTOR (Refactorizar):** Mejorar el código manteniendo las pruebas verdes
+   - Mejorar estructura, legibilidad, rendimiento
+   - Garantizar que todas las pruebas continúan pasando
+
+#### Reglas TDD Obligatorias
+
+- **NUNCA escribir código sin prueba primero**
+- **NUNCA commitear código sin prueba correspondiente**
+- **SIEMPRE escribir la prueba antes de la implementación**
+- **SIEMPRE hacer pasar la prueba antes de refactorizar**
+- **SIEMPRE refactorizar manteniendo las pruebas verdes**
+
+#### Flujo de Desarrollo con TDD
+
+```
+1. Escribir prueba (debe fallar) → RED
+2. Implementar código mínimo → GREEN
+3. Refactorizar si es necesario → REFACTOR
+4. Repetir para próxima funcionalidad
+```
+
+#### Excepciones (Muy Raras)
+
+Solo en casos excepcionales, con aprobación explícita:
+- Prototipado rápido de conceptos (pero las pruebas deben venir pronto después)
+- Spikes técnicos (pero deben descartarse o probarse después)
+
+### Pirámide de Pruebas
+- **Pruebas Unitarias:** Base de la pirámide, mayor cantidad
+- **Pruebas de Integración:** Medio de la pirámide, cantidad media
+- **Pruebas E2E:** Parte superior de la pirámide, menor cantidad
+
+### Cuándo Escribir Pruebas
+- **Siempre:** Lógica de negocio, rutas críticas, casos límite
+- **Recomendado:** Endpoints de API, funciones de utilidad
+- **Opcional:** Componentes de UI simples, funciones triviales
+- **IMPORTANTE:** Todos siguen TDD - prueba ANTES del código
+
+---
+
+## Pruebas Unitarias
+
+### Reglas
+- Probar una cosa a la vez
+- Las pruebas deben estar aisladas e independientes
+- Usar nombres de prueba descriptivos
+- Seguir patrón AAA (Arrange, Act, Assert)
+
+### Cobertura
+- **Mínimo:** {{TEST_COVERAGE}}
+- **Rutas críticas:** 100% de cobertura requerida
+- **Lógica de negocio:** 100% de cobertura requerida
+
+{{#if TEST_TOOLS}}
+### Herramientas de Prueba Utilizadas
+
+{{TEST_TOOLS}}
+{{/if}}
+
+### Ejemplos
+
+#### Ejemplo TDD Completo
+
+**Paso 1: RED - Escribir prueba que falla**
+```typescript
+// calculateTotal.test.ts
+describe('calculateTotal', () => {
+  it('should return sum of all items', () => {
+    // Arrange
+    const items = [10, 20, 30];
+    
+    // Act
+    const result = calculateTotal(items);
+    
+    // Assert
+    expect(result).toBe(60);
+  });
+});
+```
+❌ La prueba falla porque `calculateTotal` aún no existe
+
+**Paso 2: GREEN - Implementar código mínimo**
+```typescript
+// calculateTotal.ts
+export function calculateTotal(items: number[]): number {
+  return items.reduce((sum, item) => sum + item, 0);
+}
+```
+✅ La prueba pasa
+
+**Paso 3: REFACTOR - Mejorar si es necesario**
+```typescript
+// calculateTotal.ts (refactorizado si es necesario)
+export function calculateTotal(items: number[]): number {
+  if (items.length === 0) return 0;
+  return items.reduce((sum, item) => sum + item, 0);
+}
+```
+✅ La prueba continúa pasando, código mejorado
+
+---
+
+## Pruebas de Integración
+
+### Reglas
+- Probar interacciones entre componentes
+- Usar base de datos de prueba (nunca producción)
+- Limpiar después de las pruebas
+- Mockear servicios externos
+
+### Qué Probar
+- Endpoints de API
+- Operaciones de base de datos
+- Interacciones de capa de servicio
+- Flujos de autenticación
+
+---
+
+## Pruebas E2E
+
+### Reglas
+- Probar viajes críticos del usuario
+- Usar entorno de navegador real
+- Mantener pruebas rápidas y confiables
+- Usar patrón page object
+
+### Qué Probar
+- Flujos de trabajo completos del usuario
+- Procesos de negocio críticos
+- Compatibilidad entre navegadores (si se requiere)
+
+---
+
+## Estructura de Pruebas
+
+### Nomenclatura de Archivos
+- Pruebas unitarias: `*.test.ts` o `*.spec.ts`
+- Pruebas de integración: `*.integration.test.ts`
+- Pruebas E2E: `*.e2e.test.ts`
+
+### Organización
+- Reflejar estructura de fuente
+- Agrupar pruebas relacionadas
+- Usar bloques describe para organización
+
+---
+
+## Datos de Prueba
+
+### Reglas
+- Usar factories/fixtures para datos de prueba
+- No usar datos de producción
+- Hacer datos de prueba explícitos y legibles
+- Limpiar datos de prueba después de las pruebas
+
+### Mocking
+- Mockear dependencias externas
+- Mockear solicitudes de red
+- Mockear funciones dependientes del tiempo
+- Mantener mocks simples y enfocados
+
+---
+
+## Integración CI/CD
+
+### Reglas
+- Todas las pruebas deben pasar antes del merge
+- Las pruebas se ejecutan en cada PR
+- Las pruebas fallidas bloquean el despliegue
+- Resultados de pruebas visibles en PR
+- **Aplicación de TDD:** Los PRs sin pruebas para código nuevo serán rechazados
+- **Verificación de cobertura:** La cobertura debe aumentar o mantener, nunca disminuir
+
+---
+
+## Patrones Prohibidos
+
+### NO HACER
+- **Escribir código antes de las pruebas (viola TDD)**
+- Saltar pruebas sin justificación
+- Escribir pruebas que dependen del orden de ejecución
+- Usar datos de producción en pruebas
+- Escribir pruebas inestables
+- Commitear código sin pruebas para nuevas features
+- Commitear código que no fue desarrollado siguiendo TDD
+
+---
+
+## Requisitos de Cobertura
+
+### Cobertura Mínima
+- **General:** 70%
+- **Lógica de Negocio:** 100%
+- **Endpoints de API:** 80%
+- **Utilidades:** 90%
+
+### Cómo Medir
+- Usar herramientas de cobertura (Jest, pytest-cov, etc.)
+- Informes de cobertura en CI/CD
+- Revisar cobertura en PRs
+
+---
+
+## Documentación Relacionada
+
+- **Estilo de Código:** `.cursor/rules/code-style.md`
+- **Reglas de Git:** `.cursor/rules/git-rules.md`
+- **Reglas de Uso de IA:** `.cursor/rules/ai-usage-rules.md`

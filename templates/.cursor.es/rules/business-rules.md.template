@@ -1,0 +1,205 @@
+# Reglas de Negocio
+
+## Objetivo
+Este archivo documenta las reglas de negocio del sistema. Estas reglas deben seguirse en todas las implementaciones.
+
+## Alcance
+- Reglas de negocio explícitas
+- Validaciones obligatorias
+- Comportamientos esperados
+- Casos límite
+
+---
+
+## Reglas Generales
+
+### Validación de Datos
+- Todos los inputs del usuario deben validarse antes de procesar
+- La validación debe ser clara y proporcionar feedback inmediato
+- Los inputs inválidos deben rechazarse con mensaje explicativo
+
+### Manejo de Errores
+- Los errores deben manejarse graciosamente
+- Los mensajes de error deben ser claros y accionables para el usuario
+- Nunca exponer stack traces o detalles técnicos internos
+- Siempre ofrecer próximos pasos cuando sea posible
+
+---
+
+## Reglas Específicas
+
+### Generación de Estructura
+
+- **Regla 1: Detección de estructura existente**
+  - **Cuándo:** Antes de generar cualquier archivo
+  - **Validación:** Verificar si `.cursor/` ya existe
+  - **Comportamiento:** Preguntar si desea sobrescribir, fusionar o cancelar
+  - **Excepciones:** Ninguna - siempre preguntar antes de sobrescribir
+
+- **Regla 2: Validación de directorio del proyecto**
+  - **Cuándo:** Al inicio de la ejecución
+  - **Validación:** Verificar si está en directorio válido (puede tener package.json o ser directorio vacío)
+  - **Comportamiento:** Advertir si no encuentra contexto, pero permitir continuar
+
+- **Regla 3: Completitud de la estructura**
+  - **Cuándo:** Después de recopilar toda la información
+  - **Validación:** Garantizar que todos los archivos esenciales serán generados
+  - **Comportamiento:** Generar estructura completa o fallar claramente
+
+### Flujo de Preguntas
+
+- **Regla 4: Orden de las preguntas**
+  - **Cuándo:** Durante recopilación de información
+  - **Validación:** Las preguntas deben seguir orden lógico (proyecto → stack → reglas)
+  - **Comportamiento:** 
+    1. Información básica del proyecto
+    2. Stack tecnológica
+    3. Reglas y preferencias
+    4. Confirmación final
+
+- **Regla 5: Preguntas opcionales vs obligatorias**
+  - **Cuándo:** Durante recopilación de información
+  - **Validación:** Identificar qué información es esencial
+  - **Comportamiento:** 
+    - Obligatorias: Nombre del proyecto, stack básica
+    - Opcionales: Detalles específicos, reglas personalizadas
+
+- **Regla 6: Valores por defecto**
+  - **Cuándo:** Para preguntas con opciones
+  - **Validación:** Tener valores por defecto sensatos
+  - **Comportamiento:** Usar valores por defecto basados en mejores prácticas cuando sea posible
+
+### Generación de Archivos
+
+- **Regla 7: Preservación de archivos existentes**
+  - **Cuándo:** Al generar archivos
+  - **Validación:** Verificar si el archivo ya existe
+  - **Comportamiento:** Nunca sobrescribir sin confirmación explícita
+
+- **Regla 8: Estructura de directorios**
+  - **Cuándo:** Al crear estructura
+  - **Validación:** Crear todos los directorios necesarios antes de archivos
+  - **Comportamiento:** Crear `.cursor/` y subdirectorios recursivamente
+
+- **Regla 9: Codificación de archivos**
+  - **Cuándo:** Al escribir archivos
+  - **Validación:** Usar UTF-8 para todos los archivos
+  - **Comportamiento:** Garantizar compatibilidad multiplataforma
+
+---
+
+## Casos Límite
+
+### Caso 1: Directorio no vacío sin .cursor
+- **Situación:** Usuario ejecuta CLI en proyecto existente sin `.cursor/`
+- **Comportamiento esperado:** CLI debe funcionar normalmente, crear `.cursor/` en la raíz
+- **Tratamiento:** No requiere acción especial, solo crear estructura
+
+### Caso 2: .cursor parcialmente existente
+- **Situación:** Algunos archivos `.cursor/` ya existen, otros no
+- **Comportamiento esperado:** Preguntar si desea completar estructura o sobrescribir todo
+- **Tratamiento:** Ofrecer opciones: completar, sobrescribir, o cancelar
+
+### Caso 3: Sin permiso de escritura
+- **Situación:** Usuario no tiene permiso para crear archivos en el directorio
+- **Comportamiento esperado:** Fallar con mensaje claro sobre permisos
+- **Tratamiento:** Validar permisos antes de comenzar, fallar temprano si no tiene
+
+### Caso 4: Directorio no existe
+- **Situación:** Usuario especifica directorio que no existe
+- **Comportamiento esperado:** Preguntar si desea crear o usar directorio actual
+- **Tratamiento:** Validar existencia, ofrecer crear o usar alternativo
+
+### Caso 5: Cancelación por el usuario
+- **Situación:** Usuario cancela durante el flujo (Ctrl+C o "cancel")
+- **Comportamiento esperado:** No crear ningún archivo, salir graciosamente
+- **Tratamiento:** Capturar señales de cancelación, limpiar estado, no dejar archivos parciales
+
+---
+
+## Reglas de Negocio por Módulo
+
+### Módulo: Question Engine
+- Todas las preguntas deben tener mensaje claro y descriptivo
+- Las opciones de múltiple elección deben ser exhaustivas cuando sea posible
+- La validación debe ocurrir inmediatamente después del input
+- Feedback visual (spinner, progreso) durante el procesamiento
+
+### Módulo: Template Engine
+- Las plantillas deben usar placeholders claros y consistentes
+- Todos los placeholders deben ser reemplazados (no dejar `[Placeholder]` en el output)
+- Las plantillas deben validarse antes de usar
+- Codificación UTF-8 obligatoria
+
+### Módulo: File Generator
+- Crear directorios antes de archivos
+- Las operaciones deben ser atómicas cuando sea posible
+- Validar estructura creada después de la generación
+- Mostrar resumen de lo que se creó
+
+---
+
+## Validaciones Obligatorias
+
+### Antes de Generar Archivos
+- [ ] Verificar que el directorio del proyecto es válido
+- [ ] Verificar permisos de escritura
+- [ ] Validar todos los inputs del usuario
+- [ ] Confirmar acción si los archivos existen
+
+### Antes de Procesar Plantillas
+- [ ] Validar que todas las plantillas existen
+- [ ] Validar que todos los placeholders tienen valores
+- [ ] Validar codificación de las plantillas (UTF-8)
+
+### Después de Generar Estructura
+- [ ] Verificar que todos los archivos fueron creados
+- [ ] Validar estructura de directorios
+- [ ] Mostrar resumen al usuario
+
+---
+
+## Excepciones y Casos Especiales
+
+### Excepción 1: Proyecto sin package.json
+- **Cuándo:** Usuario ejecuta en directorio sin package.json
+- **Comportamiento:** Advertir pero permitir continuar, usar valores por defecto
+- **Aprobación necesaria:** No (es comportamiento esperado)
+
+### Excepción 2: Stack tecnológica desconocida
+- **Cuándo:** Usuario selecciona stack no soportada
+- **Comportamiento:** Advertir que las plantillas pueden no estar completas, pero generar estructura básica
+- **Aprobación necesaria:** No (permitir flexibilidad)
+
+---
+
+## Reglas de Negocio Implícitas
+
+Estas reglas no están explícitas en el código, pero deben seguirse:
+
+- CLI debe ser rápida (< 5 segundos para ejecución completa)
+- Mensajes al usuario (CLI output) deben ser en portugués brasileño (pt-BR)
+- Output debe ser limpio y profesional (sin logs innecesarios)
+- CLI debe funcionar incluso sin conexión a internet
+- No debe modificar archivos fuera de `.cursor/`
+
+> **Nota sobre idioma:** Para reglas detalladas sobre idioma del código vs comentarios vs mensajes, ver `.cursor/rules/code-style.md`
+
+---
+
+## Puntos que Necesitan Validación
+
+Estos puntos son ambiguos y necesitan validarse durante el desarrollo:
+
+- **Detección automática de stack:** ¿Hasta qué punto detectar automáticamente vs preguntar?
+- **Plantillas personalizables:** ¿Permitir usuario proporcionar plantillas propias en MVP?
+- **Modo no interactivo:** ¿Agregar flags para automatización en MVP o después?
+- **Validación post-generación:** ¿Validar estructura generada contra reglas o solo crear?
+
+---
+
+## Documentación Relacionada
+
+- **Objetivos del Proyecto:** `.cursor/context/project-goals.md`
+- **Arquitectura:** `.cursor/context/architecture.md`
+- **Extraer Reglas de Negocio:** `.cursor/commands/extract-business-rules.md`

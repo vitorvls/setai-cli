@@ -1,0 +1,196 @@
+# Architecture Overview
+
+## Objective
+This file documents architectural decisions, patterns, and constraints of the project. Serves as the source of truth for understanding how the system is structured.
+
+## Scope
+- Architectural decisions made
+- Patterns and conventions
+- Technical constraints
+- Boundaries and responsibilities
+
+---
+
+## 1. System Overview
+
+**Project Name:** {{PROJECT_NAME}}
+
+**Description:**  
+{{PROJECT_DESCRIPTION}}
+
+**Primary Users:**  
+{{TARGET_USERS}}
+
+**Architectural Style:**  
+{{AI_ARCHITECTURAL_STYLE}}
+
+---
+
+## 2. High-Level Architecture
+
+{{#if ARCHITECTURAL_DECISIONS}}
+### Main Architectural Decisions
+
+{{ARCHITECTURAL_DECISIONS}}
+
+---
+{{/if}}
+
+{{#if DESIGN_PATTERNS}}
+### Design Patterns Used
+
+{{DESIGN_PATTERNS}}
+
+---
+{{/if}}
+
+### Main Components
+
+- **Main system components** (to be defined as the project evolves)
+
+### Communication
+
+{{COMMUNICATION_PATTERN}}
+
+### Interaction Model
+
+{{INTERACTION_MODEL}}
+
+---
+
+## 3. Technology Stack
+
+> Complete stack details are in `.cursor/context/tech-stack.md`
+
+### Runtime
+- **Language:** {{LANGUAGE}}
+- **Runtime:** [To be defined based on language]
+- **Module System:** [To be defined]
+
+### Framework
+- **Framework:** {{FRAMEWORK}}
+- **Purpose:** Main project framework
+
+### Database
+- **Database:** {{DATABASE}}
+- **Purpose:** Project database
+
+### Build & Distribution
+- **Build Tool:** [To be defined]
+- **Package Registry:** [To be defined]
+- **Distribution:** [To be defined]
+
+### Infrastructure
+- **CI/CD:** [To be defined]
+- **Hosting:** [To be defined]
+
+---
+
+## 4. Data & State Management
+
+### Source of Truth
+
+{{SOURCE_OF_TRUTH}}
+
+### Caching Strategy
+
+{{CACHING_STRATEGY}}
+
+### State Management
+
+{{STATE_MANAGEMENT}}
+
+---
+
+## 5. Security & Access
+
+> Complete details are in `.cursor/rules/security-rules.md`
+
+### Authentication
+
+{{AUTHENTICATION}}
+
+### Authorization
+
+{{AUTHORIZATION}}
+
+### Security Constraints
+
+{{SECURITY_CONSTRAINTS}}
+
+---
+
+## 6. Scalability & Reliability
+
+### Expected Scale
+
+{{EXPECTED_SCALE}}
+
+### Scaling Strategy
+
+{{SCALING_STRATEGY}}
+
+### Failure Handling
+
+{{FAILURE_HANDLING}}
+
+---
+
+## 7. Observability & Operations
+
+### Logging
+
+{{LOGGING_STRATEGY}}
+
+### Monitoring & Metrics
+
+{{MONITORING_METRICS}}
+
+### Alerts & Incident Handling
+
+{{ALERTS_INCIDENT_HANDLING}}
+
+---
+
+## 8. Architecture Diagrams
+
+### High-Level System Flow
+
+{{ARCHITECTURE_DIAGRAM_HIGH_LEVEL}}
+
+```
+[Add here a diagram showing the main system flow based on the description above]
+```
+
+### Component Interaction
+
+{{ARCHITECTURE_DIAGRAM_COMPONENT}}
+
+```
+[Add here a diagram showing how components interact based on the description above]
+```
+
+---
+
+## 9. Architectural Decisions & Trade-offs
+
+### Key Decisions
+
+{{ARCHITECTURAL_DECISIONS}}
+
+### Trade-offs & Limitations
+
+{{ARCHITECTURE_TRADE_OFFS}}
+
+- **Known limitations:**
+{{ARCHITECTURE_LIMITATIONS}}
+
+---
+
+## 10. Related Documentation
+
+- **Tech Stack:** `.cursor/context/tech-stack.md`
+- **Project Goals:** `.cursor/context/project-goals.md`
+- **Deployment:** `.cursor/context/deployment.md`
+- **Security:** `.cursor/rules/security-rules.md`
+- **Business Rules:** `.cursor/rules/business-rules.md`

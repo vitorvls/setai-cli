@@ -1,0 +1,54 @@
+# Validación Pre-Despliegue
+
+## Objetivo
+Última verificación antes de producción. Validación final antes del despliegue.
+
+## Input
+- Código a desplegar
+- Cambios desde último despliegue
+- Contexto del proyecto
+- Checklist de despliegue
+
+## Instrucciones
+Antes del despliegue, haz una validación final considerando:
+
+1. **Reglas de negocio**
+   - ¿Todas las reglas fueron seguidas?
+   - ¿La lógica de negocio está correcta?
+   - ¿Las validaciones están implementadas?
+
+2. **Seguridad**
+   - ¿Los inputs están validados?
+   - ¿Los secretos no están expuestos?
+   - ¿La autenticación/autorización funcionan?
+   - ¿Las dependencias están actualizadas?
+
+3. **Observabilidad**
+   - ¿Los logs están configurados?
+   - ¿Los errores son capturados?
+   - ¿Las métricas están disponibles?
+   - ¿El monitoreo está activo?
+
+4. **Mantenibilidad**
+   - ¿El código está documentado?
+   - ¿Las pruebas están presentes?
+   - ¿Los patrones fueron seguidos?
+   - ¿El código está limpio?
+
+## Restricciones
+- No alteres código
+- Enfócate en validación y checklist
+- Sé específico sobre problemas
+- Prioriza críticos sobre advertencias
+
+## Output
+Validación estructurada con:
+- Checklist completo
+- Puntos de atención
+- Problemas críticos (si los hay)
+- Sugerencias finales
+
+## Documentación Relacionada
+- **Reglas de Seguridad:** `.cursor/rules/security-rules.md`
+- **Reglas de Pruebas:** `.cursor/rules/testing-rules.md`
+- **Despliegue:** `.cursor/context/deployment.md`

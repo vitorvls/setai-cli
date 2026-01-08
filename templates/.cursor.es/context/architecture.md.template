@@ -1,0 +1,196 @@
+# Visión General de la Arquitectura
+
+## Objetivo
+Este archivo documenta las decisiones arquitectónicas, patrones y restricciones del proyecto. Sirve como fuente de verdad para entender cómo está estructurado el sistema.
+
+## Alcance
+- Decisiones arquitectónicas tomadas
+- Patrones y convenciones
+- Restricciones técnicas
+- Límites y responsabilidades
+
+---
+
+## 1. Visión General del Sistema
+
+**Nombre del Proyecto:** {{PROJECT_NAME}}
+
+**Descripción:**  
+{{PROJECT_DESCRIPTION}}
+
+**Usuarios Principales:**  
+{{TARGET_USERS}}
+
+**Estilo Arquitectónico:**  
+{{AI_ARCHITECTURAL_STYLE}}
+
+---
+
+## 2. Arquitectura de Alto Nivel
+
+{{#if ARCHITECTURAL_DECISIONS}}
+### Decisiones Arquitectónicas Principales
+
+{{ARCHITECTURAL_DECISIONS}}
+
+---
+{{/if}}
+
+{{#if DESIGN_PATTERNS}}
+### Patrones de Diseño Utilizados
+
+{{DESIGN_PATTERNS}}
+
+---
+{{/if}}
+
+### Componentes Principales
+
+- **Componentes principales del sistema** (a definir conforme el proyecto evoluciona)
+
+### Comunicación
+
+{{COMMUNICATION_PATTERN}}
+
+### Modelo de Interacción
+
+{{INTERACTION_MODEL}}
+
+---
+
+## 3. Stack Tecnológico
+
+> Detalles completos de la stack están en `.cursor/context/tech-stack.md`
+
+### Runtime
+- **Lenguaje:** {{LANGUAGE}}
+- **Runtime:** [A definir basado en el lenguaje]
+- **Sistema de Módulos:** [A definir]
+
+### Framework
+- **Framework:** {{FRAMEWORK}}
+- **Propósito:** Framework principal del proyecto
+
+### Base de Datos
+- **Base de Datos:** {{DATABASE}}
+- **Propósito:** Base de datos del proyecto
+
+### Build y Distribución
+- **Herramienta de Build:** [A definir]
+- **Registro de Paquetes:** [A definir]
+- **Distribución:** [A definir]
+
+### Infraestructura
+- **CI/CD:** [A definir]
+- **Hospedaje:** [A definir]
+
+---
+
+## 4. Gestión de Datos y Estado
+
+### Fuente de Verdad
+
+{{SOURCE_OF_TRUTH}}
+
+### Estrategia de Caché
+
+{{CACHING_STRATEGY}}
+
+### Gestión de Estado
+
+{{STATE_MANAGEMENT}}
+
+---
+
+## 5. Seguridad y Acceso
+
+> Detalles completos están en `.cursor/rules/security-rules.md`
+
+### Autenticación
+
+{{AUTHENTICATION}}
+
+### Autorización
+
+{{AUTHORIZATION}}
+
+### Restricciones de Seguridad
+
+{{SECURITY_CONSTRAINTS}}
+
+---
+
+## 6. Escalabilidad y Confiabilidad
+
+### Escala Esperada
+
+{{EXPECTED_SCALE}}
+
+### Estrategia de Escalamiento
+
+{{SCALING_STRATEGY}}
+
+### Manejo de Fallos
+
+{{FAILURE_HANDLING}}
+
+---
+
+## 7. Observabilidad y Operaciones
+
+### Logging
+
+{{LOGGING_STRATEGY}}
+
+### Monitoreo y Métricas
+
+{{MONITORING_METRICS}}
+
+### Alertas y Manejo de Incidentes
+
+{{ALERTS_INCIDENT_HANDLING}}
+
+---
+
+## 8. Diagramas de Arquitectura
+
+### Flujo del Sistema de Alto Nivel
+
+{{ARCHITECTURE_DIAGRAM_HIGH_LEVEL}}
+
+```
+[Agregue aquí un diagrama mostrando el flujo principal del sistema basado en la descripción anterior]
+```
+
+### Interacción de Componentes
+
+{{ARCHITECTURE_DIAGRAM_COMPONENT}}
+
+```
+[Agregue aquí un diagrama mostrando cómo interactúan los componentes basado en la descripción anterior]
+```
+
+---
+
+## 9. Decisiones Arquitectónicas y Trade-offs
+
+### Decisiones Clave
+
+{{ARCHITECTURAL_DECISIONS}}
+
+### Trade-offs y Limitaciones
+
+{{ARCHITECTURE_TRADE_OFFS}}
+
+- **Limitaciones conocidas:**
+{{ARCHITECTURE_LIMITATIONS}}
+
+---
+
+## 10. Documentación Relacionada
+
+- **Stack Tecnológico:** `.cursor/context/tech-stack.md`
+- **Objetivos del Proyecto:** `.cursor/context/project-goals.md`
+- **Despliegue:** `.cursor/context/deployment.md`
+- **Seguridad:** `.cursor/rules/security-rules.md`
+- **Reglas de Negocio:** `.cursor/rules/business-rules.md`

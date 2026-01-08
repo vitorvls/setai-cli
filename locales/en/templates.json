@@ -1,0 +1,21 @@
+{
+  "default": "Default",
+  "none": "None",
+  "other": "Other",
+  "notSpecified": "Not specified",
+  "constraints.none": "None",
+  "choices.language": "TypeScript,JavaScript,Python,Go,Rust,Other",
+  "choices.framework": "Next.js,React,Vue,Angular,Express,FastAPI,Django,None,Other",
+  "choices.database": "PostgreSQL,MySQL,MongoDB,SQLite,Supabase,None,Other",
+  "choices.ide": "Cursor,VS Code,JetBrains (IntelliJ, WebStorm, etc.),Other IDE / Generic (.ai)",
+  "choices.aiModels.architecture": "Claude 4.5 Opus,GPT-5.2,Claude 4.5 Sonnet,Gemini 3 Pro,Not specified",
+  "choices.aiModels.implementation": "Cursor Composer + GPT-5.1 Codex,GPT-5.1 Codex Max,Gemini 3 Flash,Claude 4.5 Sonnet,Not specified",
+  "choices.aiModels.refactoring": "Claude 4.5 Sonnet,Gemini 3 Pro,GPT-5.1 Codex,Not specified",
+  "choices.aiModels.debug": "Gemini 3 Pro,Claude 4.5 Sonnet,GPT-5.2,Not specified",
+  "choices.aiModels.boilerplate": "Gemini 3 Flash,GPT-5.1 Codex,Claude 4.5 Sonnet,Not specified",
+  "choices.language": "Português (pt-BR),English (en),Español (es)",
+  "choices.openaiModels": "gpt-4o (Recommended - Most capable),gpt-4o-mini (Fast and economical),gpt-4-turbo,gpt-4,gpt-3.5-turbo (Cheapest)",
+  "choices.anthropicModels": "claude-3-5-sonnet-20241022 (Recommended),claude-3-5-haiku-20241022 (Fast),claude-3-opus-20240229",
+  "choices.googleModels": "gemini-1.5-pro (Recommended),gemini-1.5-flash (Fast),gemini-pro"
+}
+

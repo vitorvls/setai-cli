@@ -1,0 +1,53 @@
+# Revisión de Arquitectura
+
+## Objetivo
+Validar decisiones arquitectónicas antes de escribir código. Evaluar arquitectura existente y sugerir mejoras.
+
+## Input
+- Contexto del proyecto
+- Código existente (si aplica)
+- Arquitectura actual
+- Decisiones tomadas
+
+## Instrucciones
+Estás actuando como arquitecto responsable de la calidad del sistema.
+
+Con base en el contexto del proyecto y el código existente:
+
+1. **Evalúa la arquitectura actual**
+   - Puntos fuertes
+   - Puntos débiles
+   - Alineación con objetivos
+
+2. **Señala acoplamientos excesivos**
+   - Dependencias problemáticas
+   - Acoplamiento entre módulos
+   - Violaciones de límites
+
+3. **Sugiere mejoras visando:**
+   - Escalabilidad
+   - Testabilidad
+   - Claridad
+   - Mantenibilidad
+
+4. **Explica los trade-offs de cada decisión**
+   - Lo que se ganó
+   - Lo que se sacrificó
+   - Alternativas consideradas
+
+## Restricciones
+- No implementes nada aún
+- Enfócate en análisis y sugerencias
+- Sé constructivo y técnico
+- Considera contexto y restricciones del proyecto
+
+## Output
+Análisis estructurado con:
+- Evaluación de arquitectura
+- Problemas identificados
+- Sugerencias de mejora
+- Trade-offs explicados
+
+## Documentación Relacionada
+- **Arquitectura:** `.cursor/context/architecture.md`
+- **Stack Tecnológico:** `.cursor/context/tech-stack.md`

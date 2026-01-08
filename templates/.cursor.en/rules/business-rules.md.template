@@ -1,0 +1,205 @@
+# Business Rules
+
+## Objective
+This file documents the business rules of the system. These rules must be followed in all implementations.
+
+## Scope
+- Explicit business rules
+- Mandatory validations
+- Expected behaviors
+- Edge cases
+
+---
+
+## General Rules
+
+### Data Validation
+- All user inputs must be validated before processing
+- Validation must be clear and provide immediate feedback
+- Invalid inputs must be rejected with explanatory message
+
+### Error Handling
+- Errors must be handled gracefully
+- Error messages must be clear and actionable for the user
+- Never expose stack traces or internal technical details
+- Always offer next steps when possible
+
+---
+
+## Specific Rules
+
+### Structure Generation
+
+- **Rule 1: Existing structure detection**
+  - **When:** Before generating any file
+  - **Validation:** Check if `.cursor/` already exists
+  - **Behavior:** Ask if user wants to overwrite, merge, or cancel
+  - **Exceptions:** None - always ask before overwriting
+
+- **Rule 2: Project directory validation**
+  - **When:** At the start of execution
+  - **Validation:** Check if in valid directory (can have package.json or be empty directory)
+  - **Behavior:** Warn if context not found, but allow continuing
+
+- **Rule 3: Structure completeness**
+  - **When:** After collecting all information
+  - **Validation:** Ensure all essential files will be generated
+  - **Behavior:** Generate complete structure or fail clearly
+
+### Question Flow
+
+- **Rule 4: Question order**
+  - **When:** During information collection
+  - **Validation:** Questions must follow logical order (project → stack → rules)
+  - **Behavior:** 
+    1. Basic project information
+    2. Technology stack
+    3. Rules and preferences
+    4. Final confirmation
+
+- **Rule 5: Optional vs mandatory questions**
+  - **When:** During information collection
+  - **Validation:** Identify which information is essential
+  - **Behavior:** 
+    - Mandatory: Project name, basic stack
+    - Optional: Specific details, custom rules
+
+- **Rule 6: Default values**
+  - **When:** For questions with options
+  - **Validation:** Have sensible default values
+  - **Behavior:** Use default values based on best practices when possible
+
+### File Generation
+
+- **Rule 7: Existing file preservation**
+  - **When:** When generating files
+  - **Validation:** Check if file already exists
+  - **Behavior:** Never overwrite without explicit confirmation
+
+- **Rule 8: Directory structure**
+  - **When:** When creating structure
+  - **Validation:** Create all necessary directories before files
+  - **Behavior:** Create `.cursor/` and subdirectories recursively
+
+- **Rule 9: File encoding**
+  - **When:** When writing files
+  - **Validation:** Use UTF-8 for all files
+  - **Behavior:** Ensure cross-platform compatibility
+
+---
+
+## Edge Cases
+
+### Case 1: Non-empty directory without .cursor
+- **Situation:** User runs CLI in existing project without `.cursor/`
+- **Expected behavior:** CLI should work normally, create `.cursor/` at root
+- **Treatment:** No special action required, just create structure
+
+### Case 2: Partially existing .cursor
+- **Situation:** Some `.cursor/` files already exist, others don't
+- **Expected behavior:** Ask if user wants to complete structure or overwrite everything
+- **Treatment:** Offer options: complete, overwrite, or cancel
+
+### Case 3: No write permission
+- **Situation:** User doesn't have permission to create files in directory
+- **Expected behavior:** Fail with clear message about permissions
+- **Treatment:** Validate permissions before starting, fail early if not available
+
+### Case 4: Directory doesn't exist
+- **Situation:** User specifies directory that doesn't exist
+- **Expected behavior:** Ask if user wants to create or use current directory
+- **Treatment:** Validate existence, offer to create or use alternative
+
+### Case 5: User cancellation
+- **Situation:** User cancels during flow (Ctrl+C or "cancel")
+- **Expected behavior:** Don't create any files, exit gracefully
+- **Treatment:** Capture cancellation signals, clean state, don't leave partial files
+
+---
+
+## Business Rules by Module
+
+### Module: Question Engine
+- All questions must have clear and descriptive message
+- Multiple choice options must be exhaustive when possible
+- Validation must happen immediately after input
+- Visual feedback (spinner, progress) during processing
+
+### Module: Template Engine
+- Templates must use clear and consistent placeholders
+- All placeholders must be replaced (don't leave `[Placeholder]` in output)
+- Templates must be validated before use
+- UTF-8 encoding mandatory
+
+### Module: File Generator
+- Create directories before files
+- Operations must be atomic when possible
+- Validate created structure after generation
+- Show summary of what was created
+
+---
+
+## Mandatory Validations
+
+### Before Generating Files
+- [ ] Verify project directory is valid
+- [ ] Verify write permissions
+- [ ] Validate all user inputs
+- [ ] Confirm action if files exist
+
+### Before Processing Templates
+- [ ] Validate that all templates exist
+- [ ] Validate that all placeholders have values
+- [ ] Validate template encoding (UTF-8)
+
+### After Generating Structure
+- [ ] Verify that all files were created
+- [ ] Validate directory structure
+- [ ] Show summary to user
+
+---
+
+## Exceptions and Special Cases
+
+### Exception 1: Project without package.json
+- **When:** User runs in directory without package.json
+- **Behavior:** Warn but allow continuing, use default values
+- **Approval needed:** No (expected behavior)
+
+### Exception 2: Unknown technology stack
+- **When:** User selects unsupported stack
+- **Behavior:** Warn that templates may not be complete, but generate basic structure
+- **Approval needed:** No (allow flexibility)
+
+---
+
+## Implicit Business Rules
+
+These rules are not explicit in code, but must be followed:
+
+- CLI must be fast (< 5 seconds for complete execution)
+- Messages to user (CLI output) must be in Brazilian Portuguese (pt-BR)
+- Output must be clean and professional (no unnecessary logs)
+- CLI must work even without internet connection
+- Must not modify files outside `.cursor/`
+
+> **Note on language:** For detailed rules on code language vs comments vs messages, see `.cursor/rules/code-style.md`
+
+---
+
+## Points That Need Validation
+
+These points are ambiguous and need to be validated during development:
+
+- **Automatic stack detection:** To what extent detect automatically vs ask?
+- **Customizable templates:** Allow user to provide own templates in MVP?
+- **Non-interactive mode:** Add flags for automation in MVP or later?
+- **Post-generation validation:** Validate generated structure against rules or just create?
+
+---
+
+## Related Documentation
+
+- **Project Goals:** `.cursor/context/project-goals.md`
+- **Architecture:** `.cursor/context/architecture.md`
+- **Extract Business Rules:** `.cursor/commands/extract-business-rules.md`

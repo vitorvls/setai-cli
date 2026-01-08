@@ -1,0 +1,240 @@
+# Despliegue
+
+## Objetivo
+Este archivo documenta la infraestructura, proceso de despliegue y configuración de ambientes.
+
+## Alcance
+- Infraestructura y hospedaje
+- Proceso de despliegue
+- Configuración de ambientes
+- Variables de ambiente
+
+---
+
+## 1. Visión General de la Infraestructura
+
+### Distribución
+
+**Método de Despliegue:**
+{{DEPLOYMENT_METHOD}}
+
+**Infraestructura:**
+{{INFRASTRUCTURE}}
+
+**CI/CD:**
+{{CI_CD}}
+
+**Ambientes:**
+{{ENVIRONMENTS}}
+
+### Distribución Binaria (Futuro)
+
+**Binarios Opcionales:**
+- **Windows:** `.exe` vía pkg o nexe
+- **macOS:** Binario universal
+- **Linux:** Binario estático
+
+**Propósito:** Instalación sin Node.js (futuro, no en MVP)
+
+---
+
+## 2. Ambientes
+
+### Desarrollo
+- **Ubicación:** Repositorio local
+- **Propósito:** Desarrollo y pruebas locales
+- **Acceso:** Desarrolladores del proyecto
+- **Instalación:** `npm link` para desarrollo local
+
+### Staging / Beta
+- **Ubicación:** npm con tag `beta` o `next`
+- **Propósito:** Pruebas con usuarios beta antes del release
+- **Acceso:** Público (cualquiera puede instalar con `npm install -g @setai/cli@beta`)
+- **Versionamiento:** Versiones beta (ej: `1.0.0-beta.1`)
+
+### Producción
+- **Ubicación:** npm con tag `latest`
+- **Propósito:** Versión estable para todos los usuarios
+- **Acceso:** Público (instalación por defecto)
+- **Versionamiento:** Versiones semánticas estables (ej: `1.0.0`)
+
+---
+
+## 3. Proceso de Despliegue
+
+### Checklist Pre-Despliegue
+
+- [ ] Todos los tests pasando (unit + integration)
+- [ ] Code review aprobado
+- [ ] CHANGELOG actualizado
+- [ ] Versión actualizada en package.json
+- [ ] Build local funcionando
+- [ ] Probado localmente con `npm link`
+- [ ] README actualizado si es necesario
+
+### Pasos de Despliegue
+
+1. **Actualizar versión:**
+   ```bash
+   npm version patch|minor|major
+   ```
+
+2. **Build del proyecto:**
+   ```bash
+   npm run build
+   ```
+
+3. **Tests finales:**
+   ```bash
+   npm test
+   ```
+
+4. **Publicar en npm:**
+   ```bash
+   npm publish
+   ```
+   (o `npm publish --tag beta` para versión beta)
+
+5. **Crear release en GitHub:**
+   - Tag de versión
+   - Release notes del CHANGELOG
+
+### Procedimiento de Rollback
+
+- **Cómo hacer rollback:**
+  1. Publicar versión anterior con `npm publish`
+  2. O deprecar versión problemática: `npm deprecate @setai/cli@x.x.x "reason"`
+  
+- **Cuándo hacer rollback:**
+  - Bug crítico que rompe funcionalidad core
+  - Problema de seguridad
+  - Regresión que afecta a muchos usuarios
+
+---
+
+## 4. Variables de Ambiente
+
+### Variables Requeridas
+
+**Desarrollo:**
+```env
+NODE_ENV=development
+```
+
+**Build/Producción:**
+- No hay variables de ambiente necesarias (CLI local)
+- Todas las configuraciones son del usuario final
+
+### Gestión de Variables
+
+- **No aplicable:** CLI no usa variables de ambiente sensibles
+- **Configuración del usuario:** Hecha vía prompts interactivos
+- **Plantillas:** Incluidas en el paquete npm (no configurables vía env)
+
+---
+
+## 5. Pipeline CI/CD
+
+### Etapas del Pipeline
+
+1. **Lint & Type Check:**
+   - ESLint
+   - TypeScript type checking
+   - Prettier check
+
+2. **Test:**
+   - Unit tests (Vitest)
+   - Integration tests
+   - Coverage report
+
+3. **Build:**
+   - Compilar TypeScript
+   - Bundle con tsup/esbuild
+   - Validar estructura del paquete
+
+4. **Publish (solo en tags):**
+   - Publicar en npm
+   - Crear GitHub release
+
+### Despliegues Automatizados
+
+- **Triggers:** Push de tag (ej: `v1.0.0`)
+- **Branches:** `main` solamente
+- **Condición:** Todos los tests pasando, build exitoso
+
+### Despliegues Manuales
+
+- **Cuándo:** 
+  - Versiones beta
+  - Hotfixes urgentes
+  - Primera versión
+- **Proceso:** 
+  ```bash
+  npm version patch|minor|major
+  git push --tags
+  # CI/CD publica automáticamente
+  ```
+
+---
+
+## 6. Monitoreo y Alertas
+
+### Monitoreo
+
+- **Herramientas:** 
+  - Estadísticas de descargas de npm (vía npmjs.com)
+  - Estrellas/forks de GitHub
+  - Issues/PRs de GitHub
+- **Métricas:** 
+  - Descargas por versión
+  - Issues abiertos
+  - Tasa de bugs reportados
+
+### Alertas
+
+- **Alertas Críticas:** 
+  - Issues críticos en GitHub (seguridad, breaking changes)
+  - Fallas en CI/CD
+- **Alertas de Advertencia:** 
+  - Aumento de issues
+  - Feedback negativo de usuarios
+
+---
+
+## 7. Backup y Recuperación
+
+### Estrategia de Backup
+
+- **Frecuencia:** N/A (código versionado en Git)
+- **Retención:** Indefinido (Git mantiene historial)
+- **Ubicación:** GitHub (repositorio principal)
+
+### Procedimiento de Recuperación
+
+- **Código:** Siempre disponible en Git, puede restaurar cualquier versión
+- **Paquete npm:** Versiones antiguas permanecen en npm, pueden ser reinstaladas
+- **RTO/RPO:** N/A (no hay datos a recuperar, solo código)
+
+---
+
+## 8. Seguridad
+
+### Seguridad del Paquete
+
+- **npm audit:** Ejecutar regularmente
+- **Dependencias:** Mantener actualizadas
+- **Vulnerabilidades:** Corregir inmediatamente
+- **2FA:** Obligatorio para publicación en npm
+
+### Control de Acceso
+
+- **Publicación npm:** Solo mantenedores autorizados
+- **Repositorio GitHub:** Público (open-source)
+- **Secrets CI/CD:** Tokens npm protegidos en GitHub Secrets
+
+---
+
+## Documentación Relacionada
+
+- **Arquitectura:** `.cursor/context/architecture.md`
+- **Reglas de Seguridad:** `.cursor/rules/security-rules.md`

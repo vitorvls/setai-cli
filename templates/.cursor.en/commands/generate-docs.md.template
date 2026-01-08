@@ -1,0 +1,50 @@
+# Generate Documentation
+
+## Objective
+Generate living technical documentation. Document modules, components, and decisions.
+
+## Input
+- Module/component to document
+- Related code
+- Decisions made
+- Project context
+
+## Instructions
+Generate technical documentation for this module covering:
+
+1. **Responsibility**
+   - What this module does
+   - Its purpose
+   - What it doesn't do
+
+2. **Data flow**
+   - How data enters
+   - How it's processed
+   - How it exits
+
+3. **Dependencies**
+   - What this module depends on
+   - What depends on this module
+   - External integrations
+
+4. **Important decisions**
+   - Why it was implemented this way
+   - Trade-offs considered
+   - Alternatives discarded
+
+## Constraints
+- Write as internal documentation for the team
+- Avoid generic language
+- Be specific and technical
+- Include examples when useful
+
+## Output
+Complete technical documentation with:
+- Clear responsibility
+- Documented data flow
+- Mapped dependencies
+- Explained decisions
+
+## Related Documentation
+- **Architecture:** `.cursor/context/architecture.md`
+- **Code Style:** `.cursor/rules/code-style.md`

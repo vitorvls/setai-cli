@@ -1,0 +1,260 @@
+# Reglas de Uso de IA
+
+## Objetivo
+Este archivo define dónde y cómo se puede usar la IA en el desarrollo. Basado en las Directrices Internas para uso de IA.
+
+## Alcance
+- Dónde la IA puede actuar
+- Dónde la IA NO puede actuar
+- Proceso de revisión
+- Responsabilidades
+
+---
+
+## Principios Fundamentales
+
+1. **La IA no decide sola**
+   - Las decisiones arquitectónicas, de dominio y de seguridad siempre son humanas
+
+2. **Proceso antes de herramienta**
+   - Sin estándares, la IA solo genera caos más rápido
+
+3. **Contexto explícito > Prompt bonito**
+   - La calidad del output depende de la claridad del contexto
+
+4. **El código generado es código a mantener**
+   - Todo lo que la IA escribe entra en el ciclo normal de revisión, pruebas y documentación
+
+---
+
+## Dónde la IA Puede Actuar
+
+### 1. Arquitectura y Planificación
+
+**Permitido:** {{AI_ALLOW_ARCHITECTURE}}
+- Explorar alternativas arquitectónicas
+- Evaluar trade-offs técnicos
+- Diseñar flujos y límites
+- Sugerir patrones de diseño
+
+**Reglas:**
+- Nunca aceptar arquitectura final sin revisión humana
+- Registrar decisiones (ADR - Architecture Decision Records)
+- Usar modelo: {{AI_MODEL_ARCHITECTURE}}
+
+---
+
+### 2. Implementación de Código
+
+**Permitido:** {{AI_ALLOW_CODE_GENERATION}}
+- Generar boilerplate
+- Implementar APIs CRUD
+- Escribir pruebas
+- Crear integraciones
+- Refactorizar código
+
+**Reglas:**
+- Siempre seguir lint, formatter y estándares del proyecto
+- Código generado sin pruebas se considera incompleto
+- Usar modelo: {{AI_MODEL_IMPLEMENTATION}}
+
+---
+
+### 3. Refactorización y Legado
+
+**Permitido:** {{AI_ALLOW_REFACTORING}}
+- Mejorar legibilidad
+- Aislar reglas de negocio
+- Reducir complejidad
+- Modernizar código legado
+
+**Reglas:**
+- Refactorizar comportamiento sin alterar reglas de negocio
+- Siempre validar con pruebas existentes
+- Usar modelo: {{AI_MODEL_REFACTORING}}
+
+---
+
+### 4. Debug y Análisis
+
+**Permitido:** {{AI_ALLOW_DEBUG}}
+- Analizar logs y errores
+- Rastrear bugs complejos
+- Identificar regresiones
+- Analizar grandes bases de código
+
+**Reglas:**
+- La IA sugiere causas, no verdades absolutas
+- Siempre validar hipótesis
+- Usar modelo: {{AI_MODEL_DEBUG}}
+
+---
+
+### 5. Documentación
+
+**Permitido:** {{AI_ALLOW_DOCUMENTATION}}
+- Generar documentación técnica
+- Crear comentarios explicativos
+- Documentar APIs
+- Actualizar README
+
+**Reglas:**
+- Revisar documentación generada
+- Garantizar precisión y claridad
+
+---
+
+## Dónde la IA NO Puede Actuar Sola
+
+### Siempre Prohibido
+
+- **Decisiones de seguridad**
+  - Configuraciones de autenticación
+  - Políticas de acceso
+  - Criptografía
+
+- **Lógicas financieras**
+  - Cálculos monetarios
+  - Transacciones financieras
+  - Informes financieros
+
+- **Reglas regulatorias**
+  - Cumplimiento
+  - LGPD/GDPR
+  - Regulaciones específicas
+
+- **Migraciones destructivas**
+  - Cambios en producción
+  - Eliminar datos
+  - Cambios de schema sin backup
+
+- **Despliegue en producción**
+  - Aprobación de despliegue
+  - Configuración de infraestructura crítica
+
+{{#if AI_CUSTOM_CONSTRAINTS}}
+### Restricciones Personalizadas
+
+{{AI_CUSTOM_CONSTRAINTS}}
+
+---
+{{/if}}
+
+> **Regla de oro:** La IA propone. Los humanos aprueban.
+
+---
+
+## Proceso de Revisión
+
+### Código Generado por IA
+
+1. **Revisión obligatoria**
+   - Todo código generado debe ser revisado
+   - No aceptar código sin entender
+
+2. **Pruebas obligatorias**
+   - Código generado → pruebas generadas
+   - Refactorización → pruebas existentes verdes
+
+3. **Validación de reglas de negocio**
+   - Verificar que sigue reglas de negocio
+   - Validar lógica implementada
+
+---
+
+## Modelos Recomendados por Fase
+
+### Ideación y Arquitectura
+- **{{AI_MODEL_ARCHITECTURE}}** - Modelo preferido para arquitectura y planificación
+
+### Planificación Técnica
+- **GPT-5.2** - Estructura, consistencia y estándares
+
+### Implementación
+- **{{AI_MODEL_IMPLEMENTATION}}** - Modelo preferido para implementación de código
+
+### Refactorización y Legado
+- **{{AI_MODEL_REFACTORING}}** - Modelo preferido para refactorización
+
+### Debug y Análisis
+- **{{AI_MODEL_DEBUG}}** - Modelo preferido para debug y análisis
+
+### Código Rápido / Boilerplate
+- **{{AI_MODEL_BOILERPLATE}}** - Modelo preferido para código rápido
+
+---
+
+## Estandarización Obligatoria
+
+Todo proyecto debe contener antes de usar IA:
+
+- [ ] **Configuración de lint (ESLint) instalada y funcionando**
+- [ ] **Configuración de formatter (Prettier) instalada y funcionando**
+- [ ] **TypeScript configurado (tsconfig.json)**
+- [ ] **Scripts de lint/format en package.json**
+- [ ] Reglas de lint y formatter documentadas
+- [ ] Plantillas de prompts (Cursor / CLI)
+- [ ] Estructura de contexto (`.cursor/context`)
+- [ ] Reglas técnicas explícitas (`.cursor/rules`)
+
+**Sin esto, el uso de IA no está autorizado.**
+
+### Configuración de Lint - Detalles
+
+> Para detalles completos sobre configuración de lint, ver `.cursor/rules/code-style.md` sección "Lint & Formatting Configuration"
+
+La configuración de lint DEBE incluir:
+
+1. **ESLint:** Configurado para TypeScript, reglas alineadas con code-style.md, integración con Prettier
+2. **Prettier:** Configuración de formateo, integración con ESLint
+3. **TypeScript:** tsconfig.json configurado, strict mode habilitado
+
+**La IA debe siempre seguir las reglas de lint configuradas. Código que no pasa el lint se considera inválido.**
+
+---
+
+## Pruebas y Calidad
+
+### Reglas Innegociables
+
+- Código generado → pruebas generadas
+- Refactorización → pruebas existentes verdes
+- PR sin pruebas → PR incompleto
+
+**La IA nunca reemplaza la pipeline de CI.**
+
+---
+
+## Riesgos Comunes y Mitigaciones
+
+| Riesgo | Mitigación |
+|--------|------------|
+| Over engineering | Reglas simples y objetivos claros |
+| Código inconsistente | Lint + plantillas obligatorias |
+| Alucinaciones de la IA | Prompts restringidos y alcance cerrado |
+| Pérdida de patrón | Revisiones técnicas humanas |
+
+---
+
+## Responsabilidades
+
+- **CTO:** {{CTO_RESPONSIBILITY}}
+- **Tech Lead:** {{TECH_LEAD_RESPONSIBILITY}}
+- **Dev:** {{DEV_RESPONSIBILITY}}
+
+---
+
+## Regla Final
+
+> Si la IA está tomando decisiones que no puedes explicar al equipo, el proceso falló.
+
+**IA bien usada genera velocidad.**
+**IA sin proceso genera deuda técnica.**
+
+---
+
+## Documentación Relacionada
+
+- **Estilo de Código:** `.cursor/rules/code-style.md`
+- **Reglas de Pruebas:** `.cursor/rules/testing-rules.md`
+- **Modelos de IA:** `.cursor/libs/ai-models.md`

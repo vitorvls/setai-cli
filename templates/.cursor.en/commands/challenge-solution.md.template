@@ -1,0 +1,50 @@
+# Challenge Solution
+
+## Objective
+Avoid single model bias. Challenge and validate proposed solutions.
+
+## Input
+- Previously proposed solution
+- Problem context
+- Decisions made
+- Alternatives considered
+
+## Instructions
+Analyze the previously proposed solution.
+
+Challenge the decisions made:
+
+1. **What can go wrong?**
+   - Technical risks
+   - Business risks
+   - Failure points
+   - Cases not considered
+
+2. **Are there simpler alternatives?**
+   - More direct solutions
+   - Fewer abstractions
+   - Less complexity
+   - Fewer dependencies
+
+3. **Where is there risk of overengineering?**
+   - Unnecessary abstractions
+   - Premature complexity
+   - Premature optimizations
+   - Unnecessary features
+
+## Constraints
+- Be critical and direct
+- Focus on real problems, not theoretical perfection
+- Consider context and constraints
+- Suggest alternatives when appropriate
+
+## Output
+Critical analysis with:
+- Identified risks
+- Simpler alternatives
+- Overengineering points
+- Recommendations
+
+## Related Documentation
+- **Architecture:** `.cursor/context/architecture.md`
+- **AI Usage Rules:** `.cursor/rules/ai-usage-rules.md`

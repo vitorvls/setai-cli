@@ -1,0 +1,146 @@
+# Code Style Rules
+
+## Objective
+This file defines hard code style rules. These are rules, not suggestions.
+
+## Scope
+- Mandatory code patterns
+- Naming conventions
+- Formatting
+- File structure
+
+---
+
+## General Rules
+
+### Lint & Formatting Configuration - MANDATORY
+
+**CRITICAL: Lint configurations MUST be done before any development**
+
+Before starting to write code, the project MUST have:
+
+1. **ESLint configured:**
+   - Configuration file: `.eslintrc.js`, `eslint.config.js` or `eslint.config.mjs`
+   - TypeScript extensions installed and configured
+   - Rules aligned with project conventions
+   - Prettier integration (avoid conflicts)
+
+2. **Prettier configured:**
+   - Configuration file: `.prettierrc`, `.prettierrc.js` or `prettier.config.js`
+   - Formatting rules defined
+   - ESLint integration via `eslint-config-prettier`
+
+3. **TypeScript configured:**
+   - `tsconfig.json` file with appropriate configurations
+   - Strict mode enabled
+   - Appropriate target and module (ESM for this project)
+
+4. **Scripts in package.json:**
+   - `lint`: Run ESLint
+   - `lint:fix`: Fix problems automatically
+   - `format`: Format code with Prettier
+   - `type-check`: Check TypeScript types
+
+5. **Git Hooks (optional but recommended):**
+   - Pre-commit hook to run lint and format (see `.cursor/rules/git-rules.md`)
+   - Pre-push hook to run tests (see `.cursor/rules/git-rules.md`)
+
+**Without these configurations, development MUST NOT start.**
+
+### Code Formatting
+- Use automatic formatter (Prettier) before commit
+- Do not commit unformatted code
+- Formatting is verified in CI/CD
+- **Lint and format must pass before any commit**
+
+### Language Rules
+
+**CRITICAL: Code language vs comments**
+
+- **Code (100% in English):**
+  - Variable, function, class, interface, type names: **always in English**
+  - Literal strings in code (error messages, logs): **always in English**
+  - File and directory names: **always in English**
+  - Commit messages: **always in English**
+  - Code documentation (JSDoc, docstrings): **always in English**
+
+- **Comments (pt-BR):**
+  - Inline comments (`//`, `/* */`): **always in Brazilian Portuguese**
+  - Explanatory comments: **always in Brazilian Portuguese**
+  - TODO/FIXME comments: **always in Brazilian Portuguese**
+
+**Exceptions:**
+- Strings displayed to end user (CLI output, UI messages): can be in pt-BR if applicable
+- User documentation (README, docs): can be in pt-BR
+
+### Naming Conventions
+- **Variables:** camelCase (JavaScript/TypeScript) or snake_case (Python)
+- **Functions:** camelCase or snake_case (follow language standard)
+- **Classes:** PascalCase
+- **Constants:** UPPER_SNAKE_CASE
+- **Files:** kebab-case or snake_case
+
+### Comments
+- Comment only when necessary for clarity
+- Avoid obvious comments
+- Use comments to explain "why", not "what"
+- **IMPORTANT:** All comments must be written in **Brazilian Portuguese (pt-BR)**
+
+---
+
+## Testing Rules
+
+> See `.cursor/rules/testing-rules.md` for complete details
+
+- **TDD is MANDATORY:** Tests must be written BEFORE code
+- Write tests for business logic
+- Tests must be deterministic
+- Use descriptive test names
+- One assertion per test when possible
+- **NEVER commit code without corresponding test**
+
+---
+
+## Git Rules
+
+> See `.cursor/rules/git-rules.md` for complete details
+
+- Follow conventional commits
+- One logical change per commit
+- Write clear commit messages
+
+---
+
+## Prohibited Patterns
+
+### Do NOT
+- **Start development without lint configuration**
+- Use `any` type (TypeScript) or untyped code
+- Commit commented-out code
+- Use magic numbers/strings
+- Create circular dependencies
+- Use `eval()` or similar dangerous functions
+- Hardcode credentials or secrets
+- Commit code that didn't pass lint
+- Disable lint rules without justification
+
+---
+
+## Lint Configuration Checklist
+
+Before starting development, verify:
+
+- [ ] ESLint installed and configured
+- [ ] Prettier installed and configured
+- [ ] TypeScript configured (tsconfig.json)
+- [ ] Lint/format scripts in package.json
+- [ ] ESLint + Prettier integration working
+- [ ] Git hooks configured (optional but recommended)
+- [ ] CI/CD configured to verify lint
+
+## Related Documentation
+
+- **Testing Rules:** `.cursor/rules/testing-rules.md`
+- **Git Rules:** `.cursor/rules/git-rules.md`
+- **Tech Stack:** `.cursor/context/tech-stack.md`
+- **AI Usage Rules:** `.cursor/rules/ai-usage-rules.md`

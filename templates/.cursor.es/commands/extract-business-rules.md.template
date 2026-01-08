@@ -1,0 +1,47 @@
+# Extraer Reglas de Negocio
+
+## Objetivo
+Hacer reglas de negocio explícitas y probables. Extraer reglas del código y documentación existente.
+
+## Input
+- Contexto del proyecto
+- Código relacionado
+- Documentación existente
+- Requisitos de negocio
+
+## Instrucciones
+Analiza el contexto y el código relacionado.
+
+Extrae y documenta:
+
+1. **Reglas de negocio explícitas**
+   - Reglas claramente definidas en el código
+   - Validaciones de negocio
+   - Lógica de dominio
+
+2. **Reglas implícitas inferidas del código**
+   - Reglas no documentadas pero presentes en el código
+   - Comportamientos esperados
+   - Suposiciones del código
+
+3. **Puntos ambiguos que necesitan validación con producto**
+   - Comportamientos no claros
+   - Casos límite no tratados
+   - Reglas conflictivas
+
+## Restricciones
+- Organiza en formato de documentación funcional
+- Sé específico y claro
+- Identifica fuentes (código, docs, etc.)
+- Destaca ambigüedades
+
+## Output
+Documentación estructurada con:
+- Reglas explícitas
+- Reglas implícitas
+- Puntos ambiguos
+- Recomendaciones de validación
+
+## Documentación Relacionada
+- **Reglas de Negocio:** `.cursor/rules/business-rules.md`
+- **Objetivos del Proyecto:** `.cursor/context/project-goals.md`

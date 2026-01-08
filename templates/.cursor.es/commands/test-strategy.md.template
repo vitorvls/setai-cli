@@ -1,0 +1,52 @@
+# Estrategia de Pruebas
+
+## Objetivo
+Estructurar pruebas antes o junto del código. Definir estrategia de pruebas para un módulo o feature.
+
+## Input
+- Módulo/feature a ser probado
+- Código existente (si aplica)
+- Requisitos funcionales
+- Reglas de negocio
+
+## Instrucciones
+Eres responsable de la estrategia de pruebas del proyecto.
+
+Para este módulo:
+
+1. **Lista escenarios críticos**
+   - Flujos principales
+   - Casos de uso esenciales
+   - Integraciones críticas
+
+2. **Define pruebas unitarias necesarias**
+   - Funciones a probar
+   - Casos de prueba por función
+   - Cobertura esperada
+
+3. **Define pruebas de integración**
+   - Integraciones a probar
+   - Flujos end-to-end
+   - Mocks necesarios
+
+4. **Señala casos límite y fallas esperadas**
+   - Edge cases
+   - Tratamiento de errores
+   - Validaciones de input
+
+## Restricciones
+- No escribas código aún
+- Enfócate en estrategia y planificación
+- Considera cobertura mínima (ver `.cursor/rules/testing-rules.md`)
+- Sé específico sobre qué probar
+
+## Output
+Estrategia estructurada con:
+- Escenarios críticos
+- Pruebas unitarias planeadas
+- Pruebas de integración planeadas
+- Casos límite identificados
+
+## Documentación Relacionada
+- **Reglas de Pruebas:** `.cursor/rules/testing-rules.md`
+- **Estilo de Código:** `.cursor/rules/code-style.md`

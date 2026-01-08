@@ -1,0 +1,206 @@
+# Security Rules
+
+## Objetivo
+Este arquivo define regras obrigatórias de segurança. Violações são consideradas críticas.
+
+## Escopo
+- Regras de segurança obrigatórias
+- O que nunca fazer
+- Validações obrigatórias
+- Tratamento de dados sensíveis
+
+---
+
+## Authentication & Authorization
+
+### Método de Autenticação
+{{AUTHENTICATION_METHOD}}
+
+### Rules
+- Always validate user authentication
+- Never trust client-side validation alone
+- Use proper session management
+- Implement proper logout
+
+### Prohibited
+- Do NOT store passwords in plain text
+- Do NOT expose authentication tokens in URLs
+- Do NOT skip authorization checks
+
+---
+
+## Input Validation
+
+### Rules
+- Validate all user inputs
+- Sanitize inputs before processing
+- Use parameterized queries (SQL injection prevention)
+- Validate file uploads (type, size, content)
+
+### Prohibited
+- Do NOT trust user input
+- Do NOT use eval() or similar
+- Do NOT concatenate user input in queries
+
+---
+
+## Data Protection
+
+### Medidas de Proteção de Dados
+{{DATA_PROTECTION}}
+
+### Sensitive Data
+- Never log sensitive data (passwords, tokens, PII)
+- Encrypt sensitive data at rest
+- Use HTTPS for all communications
+- Hash passwords with proper algorithms (bcrypt, argon2)
+
+### Prohibited
+- Do NOT commit secrets to repository
+- Do NOT expose API keys in frontend code
+- Do NOT store sensitive data in localStorage
+
+---
+
+{{#if SECURITY_RULES_CUSTOM}}
+## Regras de Segurança Customizadas
+
+{{SECURITY_RULES_CUSTOM}}
+
+---
+{{/if}}
+## Secrets Management
+
+### Rules
+- Use environment variables for secrets
+- Never hardcode secrets
+- Use secret management tools in production
+- Rotate secrets regularly
+
+### Prohibited
+- Do NOT commit .env files
+- Do NOT share secrets in chat/email
+- Do NOT use default credentials
+
+---
+
+## API Security
+
+### Rules
+- Implement rate limiting
+- Use proper CORS configuration
+- Validate request origins
+- Implement request size limits
+
+### Prohibited
+- Do NOT allow unlimited API calls
+- Do NOT expose internal endpoints publicly
+- Do NOT skip CORS validation
+
+---
+
+## Error Handling
+
+### Rules
+- Never expose internal errors to clients
+- Log errors securely
+- Use generic error messages for users
+- Include error tracking (Sentry, etc.)
+
+### Prohibited
+- Do NOT expose stack traces to users
+- Do NOT log sensitive data in errors
+- Do NOT reveal system internals in errors
+
+---
+
+## Dependencies
+
+### Rules
+- Keep dependencies updated
+- Scan for vulnerabilities regularly
+- Use only trusted packages
+- Review dependency changes
+
+### Prohibited
+- Do NOT use packages with known vulnerabilities
+- Do NOT ignore security warnings
+- Do NOT use unmaintained packages
+
+---
+
+## File Uploads
+
+### Rules
+- Validate file types
+- Limit file sizes
+- Scan files for malware
+- Store uploads outside web root
+
+### Prohibited
+- Do NOT allow executable file uploads
+- Do NOT trust file extensions
+- Do NOT serve uploads directly
+
+---
+
+## XSS Prevention
+
+### Rules
+- Sanitize user-generated content
+- Use Content Security Policy (CSP)
+- Escape output properly
+- Use framework's built-in protections
+
+### Prohibited
+- Do NOT use innerHTML with user input
+- Do NOT disable CSP
+- Do NOT trust third-party scripts blindly
+
+---
+
+## SQL Injection Prevention
+
+### Rules
+- Always use parameterized queries
+- Use ORM/query builder
+- Validate input types
+- Limit database permissions
+
+### Prohibited
+- Do NOT concatenate user input in SQL
+- Do NOT use raw SQL with user input
+- Do NOT use database admin account for app
+
+---
+
+## Security Checklist
+
+Before deploying:
+- [ ] All inputs validated
+- [ ] Secrets properly managed
+- [ ] Dependencies scanned
+- [ ] HTTPS configured
+- [ ] Error handling secure
+- [ ] Authentication/authorization tested
+- [ ] Rate limiting configured
+
+---
+
+## Incident Response
+
+### If Security Issue Found
+1. Assess severity immediately
+2. Fix or mitigate quickly
+3. Document the issue
+4. Review similar code
+5. Update security rules if needed
+
+---
+
+## Related Documentation
+
+- **Architecture:** `.cursor/context/architecture.md`
+- **Deployment:** `.cursor/context/deployment.md`
+- **Code Style:** `.cursor/rules/code-style.md`
+

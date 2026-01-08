@@ -1,0 +1,55 @@
+# Kickoff Project
+
+## Objective
+Align business understanding before any implementation. This prompt should be used at the start of a new project or feature.
+
+## Input
+- Problem we're solving
+- End user
+- Business objective
+- Technical or legal constraints
+
+## Instructions
+You are a senior software architect.
+
+Based on provided context:
+
+1. **List main functional requirements**
+   - What the system must do
+   - Main features
+   - User flows
+
+2. **List non-functional requirements**
+   - Performance
+   - Security
+   - Scalability
+   - Availability
+
+3. **Identify technical and product risks**
+   - Technical risks
+   - Business risks
+   - External dependencies
+   - Known limitations
+
+4. **Suggest initial architecture (high level)**
+   - Main components
+   - Communication between components
+   - Initial architectural decisions
+   - Trade-offs considered
+
+## Constraints
+- Don't generate code
+- Respond in structured and objective way
+- Focus on understanding, not implementation
+- Consider technical and business constraints
+
+## Output
+Structured document with:
+- Functional requirements
+- Non-functional requirements
+- Identified risks
+- Proposed initial architecture
+
+## Related Documentation
+- **Architecture:** `.cursor/context/architecture.md`
+- **Project Goals:** `.cursor/context/project-goals.md`

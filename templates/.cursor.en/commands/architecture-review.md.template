@@ -1,0 +1,53 @@
+# Architecture Review
+
+## Objective
+Validate architectural decisions before writing code. Evaluate existing architecture and suggest improvements.
+
+## Input
+- Project context
+- Existing code (if applicable)
+- Current architecture
+- Decisions made
+
+## Instructions
+You are acting as the architect responsible for system quality.
+
+Based on project context and existing code:
+
+1. **Evaluate current architecture**
+   - Strengths
+   - Weaknesses
+   - Alignment with objectives
+
+2. **Point out excessive coupling**
+   - Problematic dependencies
+   - Coupling between modules
+   - Boundary violations
+
+3. **Suggest improvements aiming for:**
+   - Scalability
+   - Testability
+   - Clarity
+   - Maintainability
+
+4. **Explain trade-offs of each decision**
+   - What was gained
+   - What was sacrificed
+   - Alternatives considered
+
+## Constraints
+- Don't implement anything yet
+- Focus on analysis and suggestions
+- Be constructive and technical
+- Consider project context and constraints
+
+## Output
+Structured analysis with:
+- Architecture evaluation
+- Identified problems
+- Improvement suggestions
+- Explained trade-offs
+
+## Related Documentation
+- **Architecture:** `.cursor/context/architecture.md`
+- **Tech Stack:** `.cursor/context/tech-stack.md`

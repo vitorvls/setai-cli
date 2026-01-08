@@ -1,0 +1,165 @@
+# Bibliotecas Prohibidas
+
+## Objetivo
+Este archivo lista bibliotecas prohibidas en el proyecto, con motivo de la prohibición y alternativas.
+
+## Alcance
+- Bibliotecas prohibidas
+- Motivo de la prohibición
+- Alternativas recomendadas
+
+---
+
+{{#if FORBIDDEN_LIBRARIES_CUSTOM}}
+## Bibliotecas Personalizadas Prohibidas
+
+{{FORBIDDEN_LIBRARIES_CUSTOM}}
+
+---
+{{/if}}
+
+## Bibliotecas CLI
+
+### Frameworks CLI
+
+#### Yargs
+- **Estado:** NO PERMITIDO (a menos que Commander.js no atienda)
+- **Razón:** Commander.js es más popular y suficiente
+- **Alternativa:** Commander.js
+
+#### Meow / Gluegun
+- **Estado:** NO PERMITIDO
+- **Razón:** Commander.js es estándar de la industria
+- **Alternativa:** Commander.js
+
+### Bibliotecas de Prompts
+
+#### Enquirer (sin Inquirer.js)
+- **Estado:** NO PERMITIDO (a menos que Inquirer.js no atienda)
+- **Razón:** Inquirer.js es más popular y estable
+- **Alternativa:** Inquirer.js
+
+#### prompts (sin Inquirer.js)
+- **Estado:** NO PERMITIDO
+- **Razón:** Inquirer.js tiene mejor soporte y documentación
+- **Alternativa:** Inquirer.js
+
+---
+
+## Bibliotecas de Sistema de Archivos
+
+### Deprecadas/Inseguras
+
+#### fs (nativo sin fs-extra)
+- **Estado:** NO PERMITIDO para operaciones complejas
+- **Razón:** fs-extra tiene API mejor y es multiplataforma
+- **Alternativa:** fs-extra (usa fs nativo internamente)
+
+#### rimraf (innecesario)
+- **Estado:** NO PERMITIDO (a menos que sea necesario para el proyecto)
+- **Razón:** [A definir - razón específica del proyecto]
+- **Alternativa:** [A definir - alternativa si es necesario]
+
+---
+
+## Bibliotecas de Plantillas
+
+### Excesivo
+
+#### EJS / Pug / Mustache (innecesario)
+- **Estado:** NO PERMITIDO (a menos que Handlebars no atienda)
+- **Razón:** Handlebars o template strings nativas son suficientes
+- **Alternativa:** Handlebars o template strings nativas
+
+#### React/JSX para plantillas
+- **Estado:** NO PERMITIDO
+- **Razón:** Excesivo para CLI, no necesitamos React
+- **Alternativa:** Handlebars o template strings
+
+---
+
+## Bibliotecas de Pruebas
+
+### Deprecadas/Innecesarias
+
+#### Jest (si Vitest atiende)
+- **Estado:** NO PERMITIDO (preferir Vitest)
+- **Razón:** Vitest es más rápido y compatible con ESM
+- **Alternativa:** Vitest
+
+#### Mocha / Ava
+- **Estado:** NO PERMITIDO
+- **Razón:** Vitest/Jest son estándar
+- **Alternativa:** Vitest
+
+---
+
+## Bibliotecas de Utilidad
+
+### Innecesarias para CLI
+
+#### Lodash / Underscore
+- **Estado:** NO PERMITIDO (a menos que realmente necesario)
+- **Razón:** Bundle grande, mayoría de funciones no son necesarias
+- **Alternativa:** Funciones nativas de JavaScript o bibliotecas específicas
+
+#### Axios / node-fetch
+- **Estado:** NO PERMITIDO (CLI no hace solicitudes HTTP)
+- **Razón:** No necesitamos cliente HTTP
+- **Alternativa:** N/A (no necesario)
+
+---
+
+## Herramientas de Build
+
+### Excesivo/Deprecado
+
+#### Webpack
+- **Estado:** NO PERMITIDO
+- **Razón:** tsup/esbuild son más rápidos y simples para CLI
+- **Alternativa:** tsup o esbuild
+
+#### Rollup (sin necesidad específica)
+- **Estado:** NO PERMITIDO (a menos que tsup no atienda)
+- **Razón:** tsup es más simple y suficiente
+- **Alternativa:** tsup
+
+---
+
+## Reglas Generales
+
+### Patrones Prohibidos
+
+1. **Cualquier biblioteca con bundle > 1MB** (a menos que sea crítica)
+   - **Razón:** Impacto en rendimiento
+   - **Acción:** Evaluar alternativas
+
+2. **Bibliotecas con < 1000 descargas semanales**
+   - **Razón:** Riesgo de mantenimiento
+   - **Acción:** Obtener aprobación antes de usar
+
+3. **Bibliotecas sin soporte TypeScript** (proyectos TypeScript)
+   - **Razón:** Type safety
+   - **Acción:** Encontrar alternativa tipada o crear tipos
+
+4. **Funcionalidad duplicada**
+   - **Razón:** Bundle bloat, confusión
+   - **Acción:** Usar biblioteca existente
+
+---
+
+## Proceso de Aprobación
+
+Si necesitas usar una biblioteca prohibida:
+
+1. Documentar por qué es necesaria
+2. Obtener aprobación del Tech Lead
+3. Actualizar este archivo con excepción
+4. Documentar en decisiones arquitectónicas
+
+---
+
+## Documentación Relacionada
+
+- **Bibliotecas Permitidas:** `.cursor/libs/allowed-libs.md`
+- **Stack Tecnológico:** `.cursor/context/tech-stack.md`

@@ -1,0 +1,54 @@
+# Pre-Deploy Validation
+
+## Objective
+Final check before production. Final validation before deployment.
+
+## Input
+- Code to be deployed
+- Changes since last deploy
+- Project context
+- Deployment checklist
+
+## Instructions
+Before deployment, perform final validation considering:
+
+1. **Business rules**
+   - Were all rules followed?
+   - Is business logic correct?
+   - Are validations implemented?
+
+2. **Security**
+   - Are inputs validated?
+   - Are secrets not exposed?
+   - Does authentication/authorization work?
+   - Are dependencies updated?
+
+3. **Observability**
+   - Are logs configured?
+   - Are errors captured?
+   - Are metrics available?
+   - Is monitoring active?
+
+4. **Maintainability**
+   - Is code documented?
+   - Are tests present?
+   - Were patterns followed?
+   - Is code clean?
+
+## Constraints
+- Don't alter code
+- Focus on validation and checklist
+- Be specific about problems
+- Prioritize critical over warnings
+
+## Output
+Structured validation with:
+- Complete checklist
+- Attention points
+- Critical problems (if any)
+- Final suggestions
+
+## Related Documentation
+- **Security Rules:** `.cursor/rules/security-rules.md`
+- **Testing Rules:** `.cursor/rules/testing-rules.md`
+- **Deployment:** `.cursor/context/deployment.md`
