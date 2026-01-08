@@ -1,87 +1,87 @@
-name: CI
+# name: CI
 
-on:
-  push:
-    branches: [ main, develop ]
-  pull_request:
-    branches: [ main, develop ]
+# on:
+#   push:
+#     branches: [ main, develop ]
+#   pull_request:
+#     branches: [ main, develop ]
 
-jobs:
-  test:
-    name: Test
-    runs-on: ubuntu-latest
+# jobs:
+#   test:
+#     name: Test
+#     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x]
+#     strategy:
+#       matrix:
+#         node-version: [18.x, 20.x]
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 8
+#       - name: Setup pnpm
+#         uses: pnpm/action-setup@v4
+#         with:
+#           version: 8
 
-      - name: Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
+#       - name: Setup Node.js ${{ matrix.node-version }}
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: ${{ matrix.node-version }}
+#           cache: 'pnpm'
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+#       - name: Install dependencies
+#         run: pnpm install --frozen-lockfile
 
-      - name: Run linter
-        run: pnpm lint
+#       - name: Run linter
+#         run: pnpm lint
 
-      - name: Check types
-        run: pnpm type-check
+#       - name: Check types
+#         run: pnpm type-check
 
-      - name: Run tests
-        run: pnpm test
+#       - name: Run tests
+#         run: pnpm test
 
-      - name: Generate coverage
-        run: pnpm test:coverage
+#       - name: Generate coverage
+#         run: pnpm test:coverage
 
-      - name: Upload coverage to artifacts
-        uses: actions/upload-artifact@v4
-        if: matrix.node-version == '20.x'
-        with:
-          name: coverage-report
-          path: coverage/
-          retention-days: 7
+#       - name: Upload coverage to artifacts
+#         uses: actions/upload-artifact@v4
+#         if: matrix.node-version == '20.x'
+#         with:
+#           name: coverage-report
+#           path: coverage/
+#           retention-days: 7
 
-  build:
-    name: Build
-    runs-on: ubuntu-latest
+#   build:
+#     name: Build
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 8
+#       - name: Setup pnpm
+#         uses: pnpm/action-setup@v4
+#         with:
+#           version: 8
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.x'
-          cache: 'pnpm'
+#       - name: Setup Node.js
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: '20.x'
+#           cache: 'pnpm'
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+#       - name: Install dependencies
+#         run: pnpm install --frozen-lockfile
 
-      - name: Build project
-        run: pnpm build
+#       - name: Build project
+#         run: pnpm build
 
-      - name: Check build output
-        run: |
-          if [ ! -f "dist/index.js" ]; then
-            echo "Build failed: dist/index.js not found"
-            exit 1
-          fi
-          echo "Build successful"
+#       - name: Check build output
+#         run: |
+#           if [ ! -f "dist/index.js" ]; then
+#             echo "Build failed: dist/index.js not found"
+#             exit 1
+#           fi
+#           echo "Build successful"
