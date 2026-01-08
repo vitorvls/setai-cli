@@ -17,6 +17,7 @@ coverage/
 coverage-final.txt
 coverage-report.txt
 test-manual/
+docs/local/
 
 # Environment
 .env
