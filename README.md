@@ -1,53 +1,35 @@
 # SetAI CLI
 
-CLI Tool para gerar automaticamente a estrutura de configuração `.cursor` através de perguntas interativas, aplicando boas práticas de desenvolvimento com IA em novos projetos.
+<div align="center">
 
-## 🌐 Idioma / Language
+**🚀 CLI Tool para gerar automaticamente estruturas de configuração para desenvolvimento assistido por IA**
 
-**🇧🇷 Português (Brasil) - Versão Atual**
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Node.js Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)](https://nodejs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](https://www.typescriptlang.org/)
 
-Esta versão do SetAI CLI está **totalmente em Português (pt-BR)**:
-- ✅ Todas as perguntas interativas são em português
-- ✅ Todos os arquivos gerados são em português
-- ✅ Documentação principal em português
-- ✅ Mensagens e feedback em português
+[English](#english) | [Português](#português)
 
-**📋 Roadmap de Internacionalização:**
+</div>
 
-- [ ] Suporte a Inglês (EN) - Perguntas e arquivos
-- [ ] Suporte a Espanhol (ES) - Perguntas e arquivos
-- [ ] Configuração de idioma das perguntas
-- [ ] Configuração de idioma dos arquivos gerados
-- [ ] Documentação completa em múltiplos idiomas
+---
 
-**🇺🇸 English**
+## Português
 
-**Current Version: Portuguese (pt-BR) Only**
+### 📖 Sobre
 
-This version of SetAI CLI is **fully in Portuguese (pt-BR)**:
-- ✅ All interactive questions are in Portuguese
-- ✅ All generated files are in Portuguese
-- ✅ Main documentation is in Portuguese
-- ✅ Messages and feedback are in Portuguese
+**SetAI CLI** é uma ferramenta de linha de comando que automatiza a criação de estruturas de configuração para desenvolvimento assistido por IA. Gera uma estrutura completa e personalizada baseada nas respostas do usuário, aplicando melhores práticas de desenvolvimento.
 
-**📋 Internationalization Roadmap:**
+### ✨ Funcionalidades
 
-- [ ] English (EN) support - Questions and files
-- [ ] Spanish (ES) support - Questions and files
-- [ ] Language configuration for questions
-- [ ] Language configuration for generated files
-- [ ] Complete documentation in multiple languages
+- ✅ **Geração Automática de Estrutura** - Cria estrutura completa de configuração para IA
+- ✅ **Suporte a Múltiplas IDEs** - Cursor, VS Code, JetBrains, e outras
+- ✅ **Configuração Avançada** - Grupos modulares de configuração avançada
+- ✅ **Integração com IA (Beta)** - Enriquecimento automático de respostas via OpenAI, Anthropic, Google
+- ✅ **Internacionalização** - Suporte a Português, Inglês e Espanhol
+- ✅ **Gerenciamento de API Keys** - Armazenamento seguro local
 
-**📖 Documentation:**
-
-- 🇧🇷 [Documentação em Português](./docs/Documentation/README.md)
-- 🇺🇸 [Documentation in English](./docs/Documentation/en/README.md) (Coming Soon)
-
-## 🎯 Objetivo
-
-Facilitar a configuração inicial de projetos que usam IA para desenvolvimento (especialmente Cursor), gerando automaticamente a estrutura completa `.cursor` com todas as regras, contexto e configurações necessárias.
-
-## 🚀 Instalação
+### 🚀 Instalação
 
 ```bash
 npm install -g @setai/cli
@@ -59,159 +41,208 @@ Ou use com `npx`:
 npx @setai/cli init
 ```
 
-## 📖 Uso
-
-### Uso Básico
+### 📖 Uso Rápido
 
 ```bash
+# Uso básico
 setai init
-```
 
-### Uso Avançado
-
-```bash
+# Com opções avançadas
 setai init --advanced
+
+# Com integração de IA (Beta)
+setai init --beta
+
+# Com idioma específico
+setai init --lang en
+setai init --lang es
+
+# Configurar API keys e idioma
+setai config
 ```
 
-O comando `--advanced` inclui perguntas opcionais sobre:
-- Modelos de IA preferidos por fase (Arquitetura, Implementação, Refatoração, etc.)
-- Regras de uso de IA (permitir/proibir por categoria)
-- Responsabilidades (CTO, Tech Lead, Dev)
-- Restrições customizadas
-
-### O que o comando faz
-
-O comando irá:
-
-1. Fazer perguntas interativas sobre seu projeto
-2. Coletar informações sobre stack tecnológica
-3. Validar as informações coletadas
-4. Processar templates com os dados do projeto
-5. Gerar a estrutura completa `.cursor/` com todos os arquivos necessários
-
-### Exemplo de Uso
+### 🎯 Exemplo
 
 ```bash
 $ setai init
 🚀 Iniciando geração da estrutura .cursor...
 
+? Qual IDE você está usando? Cursor
 ? Qual o nome do projeto? my-awesome-project
 ? Qual a linguagem principal do projeto? TypeScript
 ? Qual framework você está usando? Next.js
-? Qual banco de dados você está usando? PostgreSQL
-? Você usa TDD (Test-Driven Development)? Yes
-? Você prefere modo strict no TypeScript? Yes
 
-✅ Informações coletadas:
-   Projeto: my-awesome-project
-   Linguagem: TypeScript
-
+✅ Informações coletadas
 📝 Processando templates...
 📁 Gerando arquivos...
 
 ✅ Estrutura .cursor criada com sucesso!
-
-Arquivos criados:
-  ✓ .cursor/README.md
-  ✓ .cursor/context/project-goals.md
-  ✓ .cursor/context/tech-stack.md
-  ... (e mais arquivos)
-
-🎉 Estrutura .cursor gerada com sucesso!
 ```
 
-## 🧪 Como Testar Manualmente
+### 📚 Documentação
 
-### Teste Rápido
+- 📖 [Documentação Completa](./docs/Documentation/README.md)
+- 🚀 [Getting Started](./docs/Documentation/GETTING_STARTED.md)
+- ⚙️ [Configuração](./docs/Documentation/CONFIGURATION.md)
+- 🤖 [Modo Beta (IA)](./docs/Documentation/USAGE_BETA.md)
+- 🌐 [Internacionalização](./docs/Documentation/en/README.md)
 
-1. **Build do projeto:**
-   ```bash
-   pnpm build
-   ```
-
-2. **Criar diretório de teste:**
-   ```bash
-   mkdir test-manual
-   cd test-manual
-   ```
-
-3. **Executar o CLI:**
-   ```bash
-   node ../dist/index.js init
-   ```
-
-4. **Responder as perguntas interativamente:**
-   - Nome do projeto
-   - Linguagem (TypeScript, JavaScript, etc.)
-   - Framework (se aplicável)
-   - Banco de dados
-   - Preferências (TDD, strict mode)
-
-5. **Verificar resultado:**
-   ```bash
-   # Ver estrutura criada
-   ls .cursor/
-   # ou no Windows:
-   dir .cursor
-   ```
-
-6. **Limpar teste:**
-   ```bash
-   cd ..
-   rm -rf test-manual
-   # ou no Windows:
-   Remove-Item -Path test-manual -Recurse -Force
-   ```
-
-> **Nota:** Para mais detalhes, veja `TESTE_MANUAL.md`
-
-## 🛠️ Desenvolvimento
-
-### Pré-requisitos
-
-- Node.js 18+ (LTS recomendado)
-- pnpm (preferido) ou npm
-
-### Setup
+### 🛠️ Desenvolvimento
 
 ```bash
 # Instalar dependências
 pnpm install
 
-# Executar lint
-pnpm lint
-
-# Executar formatação
-pnpm format
-
-# Verificar tipos
-pnpm type-check
-
 # Executar testes
 pnpm test
+
+# Executar testes com cobertura
+pnpm test:coverage
+
+# Build
+pnpm build
+
+# Lint
+pnpm lint
 ```
 
-### Scripts Disponíveis
+### 📋 Requisitos
 
-- `pnpm build` - Compilar TypeScript
-- `pnpm dev` - Modo desenvolvimento (watch)
-- `pnpm lint` - Executar ESLint
-- `pnpm lint:fix` - Corrigir problemas de lint automaticamente
-- `pnpm format` - Formatar código com Prettier
-- `pnpm type-check` - Verificar tipos TypeScript
-- `pnpm test` - Executar testes
-- `pnpm test:watch` - Executar testes em modo watch
-- `pnpm test:coverage` - Gerar relatório de cobertura
+- Node.js >= 18.0.0
+- npm, pnpm ou yarn
 
-## 📋 Tecnologias
+### 🤝 Contribuindo
 
-- **TypeScript** - Linguagem principal
-- **Commander.js** - Framework CLI
-- **Inquirer.js** - Prompts interativos
-- **Vitest** - Framework de testes
-- **tsup** - Build tool
-- **ESLint + Prettier** - Qualidade de código
+Contribuições são bem-vindas! Por favor:
 
-## 📝 Licença
+1. Faça um fork do projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
 
-MIT
+### 📝 Licença
+
+Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
+
+---
+
+## English
+
+### 📖 About
+
+**SetAI CLI** is a command-line tool that automates the creation of configuration structures for AI-assisted development. It generates a complete and personalized structure based on user responses, applying development best practices.
+
+### ✨ Features
+
+- ✅ **Automatic Structure Generation** - Creates complete AI configuration structure
+- ✅ **Multiple IDE Support** - Cursor, VS Code, JetBrains, and others
+- ✅ **Advanced Configuration** - Modular advanced configuration groups
+- ✅ **AI Integration (Beta)** - Automatic response enrichment via OpenAI, Anthropic, Google
+- ✅ **Internationalization** - Support for Portuguese, English, and Spanish
+- ✅ **API Key Management** - Secure local storage
+
+### 🚀 Installation
+
+```bash
+npm install -g @setai/cli
+```
+
+Or use with `npx`:
+
+```bash
+npx @setai/cli init
+```
+
+### 📖 Quick Usage
+
+```bash
+# Basic usage
+setai init
+
+# With advanced options
+setai init --advanced
+
+# With AI integration (Beta)
+setai init --beta
+
+# With specific language
+setai init --lang en
+setai init --lang es
+
+# Configure API keys and language
+setai config
+```
+
+### 🎯 Example
+
+```bash
+$ setai init
+🚀 Starting .cursor structure generation...
+
+? Which IDE are you using? Cursor
+? What is the project name? my-awesome-project
+? What is the main language? TypeScript
+? Which framework are you using? Next.js
+
+✅ Information collected
+📝 Processing templates...
+📁 Generating files...
+
+✅ .cursor structure created successfully!
+```
+
+### 📚 Documentation
+
+- 📖 [Complete Documentation](./docs/Documentation/en/README.md)
+- 🚀 [Getting Started](./docs/Documentation/en/GETTING_STARTED.md)
+- ⚙️ [Configuration](./docs/Documentation/en/CONFIGURATION.md)
+- 🤖 [Beta Mode (AI)](./docs/Documentation/en/USAGE_BETA.md)
+
+### 🛠️ Development
+
+```bash
+# Install dependencies
+pnpm install
+
+# Run tests
+pnpm test
+
+# Run tests with coverage
+pnpm test:coverage
+
+# Build
+pnpm build
+
+# Lint
+pnpm lint
+```
+
+### 📋 Requirements
+
+- Node.js >= 18.0.0
+- npm, pnpm or yarn
+
+### 🤝 Contributing
+
+Contributions are welcome! Please:
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+### 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+<div align="center">
+
+**Feito com ❤️ para a comunidade de desenvolvedores**
+
+[Report Bug](https://github.com/vitorvls/setai-cli/issues) · [Request Feature](https://github.com/vitorvls/setai-cli/issues) · [Documentation](./docs/Documentation/README.md)
+
+</div>

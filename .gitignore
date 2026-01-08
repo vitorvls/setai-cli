@@ -11,6 +11,9 @@ build/
 # Testing
 coverage/
 .nyc_output/
+coverage-final.txt
+coverage-report.txt
+test-manual/
 
 # Environment
 .env
