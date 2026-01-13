@@ -31,7 +31,7 @@ export async function initCommand(
     const langConfig = getLanguageConfig();
     const questionLocale = (langOverride as 'pt-BR' | 'en' | 'es') || langConfig.questions || 'pt-BR';
     // Arquivos gerados sempre em inglês
-    const filesLocale: 'en' = 'en';
+    const filesLocale = 'en' as const;
     
     // Salva idioma se foi passado via flag
     if (langOverride) {

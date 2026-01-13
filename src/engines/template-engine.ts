@@ -158,6 +158,7 @@ interface ProcessAllTemplatesParams {
   nonGoals: string;
   version: string;
   techStack: { language: string; framework?: string | undefined; database?: string | undefined };
+  preferences?: { useTDD?: boolean; strictMode?: boolean };
   advanced?: {
     selectedGroups?: string[];
     preferredAIModels?: {

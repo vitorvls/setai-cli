@@ -80,10 +80,13 @@ export async function generateSetaiConfig(baseDir: string, configFolder: string)
     // Prepara configuração para salvar (inclui credenciais reais)
     // Nota: As credenciais são salvas aqui para referência do projeto,
     // mas o .gitignore protege contra commit acidental
-    const configToSave: CLIConfig = {
-      ai: cliConfig.ai,
-      language: cliConfig.language,
-    };
+    const configToSave: CLIConfig = {};
+    if (cliConfig.ai) {
+      configToSave.ai = cliConfig.ai;
+    }
+    if (cliConfig.language) {
+      configToSave.language = cliConfig.language;
+    }
     
     // Salva configuração no arquivo .setai/config.json
     const configPath = join(setaiDir, 'config.json');
