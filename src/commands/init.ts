@@ -9,6 +9,7 @@ import {
   generateFiles,
   checkConfigFolderExists,
   checkWritePermissions,
+  generateSetaiConfig,
 } from '../engines/file-generator.js';
 import { collectIDESelection } from '../engines/ide-selector.js';
 import { enhanceWithAI } from '../services/ai-service.js';
@@ -29,7 +30,8 @@ export async function initCommand(
     // Carrega configuração de idioma (ou usa override)
     const langConfig = getLanguageConfig();
     const questionLocale = (langOverride as 'pt-BR' | 'en' | 'es') || langConfig.questions || 'pt-BR';
-    const filesLocale = (langOverride as 'pt-BR' | 'en' | 'es') || langConfig.files || 'pt-BR';
+    // Arquivos gerados sempre em inglês
+    const filesLocale: 'en' = 'en';
     
     // Salva idioma se foi passado via flag
     if (langOverride) {
@@ -124,6 +126,9 @@ export async function initCommand(
     // 4. File Generator - criar arquivos
     info(tMessage('init.generating'), true);
     await generateFiles(baseDir, processedTemplates);
+
+    // 5. Criar pasta .setai com configurações do CLI
+    await generateSetaiConfig(baseDir, configFolder);
 
     success(tMessage('init.success', { folder: configFolder }), true);
     gray(tMessage('init.nextSteps'), true);

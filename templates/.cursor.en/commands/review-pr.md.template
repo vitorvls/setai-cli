@@ -3,6 +3,16 @@
 ## Objective
 Critical and educational review. Evaluate PR as senior engineer.
 
+## Project Context
+
+**Project:** {{PROJECT_NAME}}  
+**Type:** {{PROJECT_TYPE}}  
+**Stack:** {{LANGUAGE}} + {{FRAMEWORK}}{{#if DATABASE}} + {{DATABASE}}{{/if}}
+
+{{#if USE_TDD}}
+**TDD:** This project uses Test-Driven Development. Ensure tests are present and adequate.
+{{/if}}
+
 ## Input
 - Pull Request to review
 - Changed code

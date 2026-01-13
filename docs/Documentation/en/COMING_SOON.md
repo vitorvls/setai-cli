@@ -20,7 +20,7 @@ For now, please refer to the [Portuguese documentation](../README.md) or use tra
 
 ## 📝 Roadmap
 
-See [Internationalization TODO](../../TODO_INTERNACIONALIZACAO.md) for the complete roadmap.
+See [Internationalization TODO](../../local/TODO_INTERNACIONALIZACAO.md) for the complete roadmap.
 
 ---
 

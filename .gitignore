@@ -18,6 +18,7 @@ coverage-final.txt
 coverage-report.txt
 test-manual/
 docs/local/
+test-manual-old-version/
 
 # Build artifacts
 *.tgz

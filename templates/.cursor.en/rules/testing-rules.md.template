@@ -89,10 +89,35 @@ Only in exceptional cases, with explicit approval:
 - **Critical paths:** 100% coverage required
 - **Business logic:** 100% coverage required
 
-{{#if TEST_TOOLS}}
-### Testing Tools Used
+### Testing Tools
 
 {{TEST_TOOLS}}
+
+{{#if FRAMEWORK_EXPRESS}}
+### For Express Projects
+
+- **API Testing:** Supertest for Express endpoints
+- **Database Testing:** Use test database with migrations
+- **Mocking:** Use {{TEST_FRAMEWORK}} mocks for external services
+
+#### Example: Testing Express API Endpoint
+
+```typescript
+import { describe, it, expect } from 'vitest';
+import request from 'supertest';
+import app from '../src/app';
+
+describe('GET /api/tasks', () => {
+  it('should return list of tasks', async () => {
+    const response = await request(app)
+      .get('/api/tasks')
+      .expect(200);
+      
+    expect(response.body).toHaveProperty('tasks');
+    expect(Array.isArray(response.body.tasks)).toBe(true);
+  });
+});
+```
 {{/if}}
 
 ### Examples

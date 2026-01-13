@@ -1,7 +1,16 @@
 # Code Style Rules
 
 ## Objective
-This file defines hard code style rules. These are rules, not suggestions.
+This file defines hard code style rules for {{PROJECT_NAME}}. These are rules, not suggestions.
+
+## Project Context
+
+**Project:** {{PROJECT_NAME}}  
+**Language:** {{LANGUAGE}}  
+**Framework:** {{FRAMEWORK}}  
+**Strict Mode:** {{STRICT_MODE}}
+
+This file defines code style rules specific to this project.
 
 ## Scope
 - Mandatory code patterns
@@ -21,19 +30,33 @@ Before starting to write code, the project MUST have:
 
 1. **ESLint configured:**
    - Configuration file: `.eslintrc.js`, `eslint.config.js` or `eslint.config.mjs`
+   {{#if LANGUAGE_TYPESCRIPT}}
    - TypeScript extensions installed and configured
+   {{/if}}
    - Rules aligned with project conventions
    - Prettier integration (avoid conflicts)
+
+### Recommended ESLint Configuration
+
+{{ESLINT_CONFIG}}
 
 2. **Prettier configured:**
    - Configuration file: `.prettierrc`, `.prettierrc.js` or `prettier.config.js`
    - Formatting rules defined
    - ESLint integration via `eslint-config-prettier`
 
+{{#if LANGUAGE_TYPESCRIPT}}
 3. **TypeScript configured:**
    - `tsconfig.json` file with appropriate configurations
-   - Strict mode enabled
+   - Strict mode: {{STRICT_MODE}}
    - Appropriate target and module (ESM for this project)
+
+### Recommended tsconfig.json
+
+```json
+{{TYPESCRIPT_CONFIG}}
+```
+{{/if}}
 
 4. **Scripts in package.json:**
    - `lint`: Run ESLint

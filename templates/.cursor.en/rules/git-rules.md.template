@@ -1,7 +1,14 @@
 # Git Rules
 
 ## Objective
-This file defines mandatory patterns for commits, branches, and pull requests.
+This file defines mandatory patterns for commits, branches, and pull requests for {{PROJECT_NAME}}.
+
+## Project Context
+
+**Project:** {{PROJECT_NAME}}  
+**Type:** {{PROJECT_TYPE}}
+
+These Git rules apply to all contributions to this project.
 
 ## Scope
 - Commit patterns
@@ -70,6 +77,10 @@ Prevent null pointer exception when user data is missing.
 ### Before Creating PR
 - [ ] Code follows style guide
 - [ ] All tests passing
+{{#if USE_TDD}}
+- [ ] Tests written before code (TDD followed)
+- [ ] Test coverage meets requirements
+{{/if}}
 - [ ] No console.logs or debug code
 - [ ] Documentation updated if needed
 - [ ] Self-review completed

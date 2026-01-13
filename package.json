@@ -28,7 +28,6 @@
     "test:watch": "vitest --watch",
     "test:coverage": "vitest run --coverage",
     "test:docs": "vitest run docs/.vitepress/__tests__",
-    "test:manual": "node scripts/test-manual.js",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:serve": "vitepress serve docs",

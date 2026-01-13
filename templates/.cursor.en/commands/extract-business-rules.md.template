@@ -3,6 +3,14 @@
 ## Objective
 Make business rules explicit and testable. Extract rules from existing code and documentation.
 
+## Project Context
+
+**Project:** {{PROJECT_NAME}}  
+**Type:** {{PROJECT_TYPE}}  
+**Description:** {{PROJECT_DESCRIPTION}}
+
+**Business Goals:** {{BUSINESS_GOALS}}
+
 ## Input
 - Project context
 - Related code

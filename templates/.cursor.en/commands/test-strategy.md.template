@@ -3,6 +3,16 @@
 ## Objective
 Structure tests before or alongside code. Define testing strategy for a module or feature.
 
+## Project Context
+
+**Project:** {{PROJECT_NAME}}  
+**Type:** {{PROJECT_TYPE}}  
+**Stack:** {{LANGUAGE}} + {{FRAMEWORK}}{{#if DATABASE}} + {{DATABASE}}{{/if}}
+
+{{#if USE_TDD}}
+**TDD:** This project uses Test-Driven Development (TDD). Tests must be written BEFORE code.
+{{/if}}
+
 ## Input
 - Module/feature to be tested
 - Existing code (if applicable)
@@ -47,6 +57,22 @@ Structured strategy with:
 - Planned integration tests
 - Identified edge cases
 
+## Project-Specific Notes
+
+{{#if FRAMEWORK_EXPRESS}}
+- This is an Express API project
+- Use Supertest for API endpoint testing
+- Test database interactions with test database
+- Mock external services
+{{/if}}
+
+{{#if USE_TDD}}
+- **TDD is mandatory:** Write tests first, then implement
+- Follow Red-Green-Refactor cycle
+- All new code must have tests
+{{/if}}
+
 ## Related Documentation
 - **Testing Rules:** `.cursor/rules/testing-rules.md`
 - **Code Style:** `.cursor/rules/code-style.md`
+- **Architecture:** `.cursor/context/architecture.md`

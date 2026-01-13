@@ -3,6 +3,16 @@
 ## Objective
 Final check before production. Final validation before deployment.
 
+## Project Context
+
+**Project:** {{PROJECT_NAME}}  
+**Type:** {{PROJECT_TYPE}}  
+**Stack:** {{LANGUAGE}} + {{FRAMEWORK}}{{#if DATABASE}} + {{DATABASE}}{{/if}}
+
+{{#if FRAMEWORK_EXPRESS}}
+**Deployment Platform:** {{DEPLOYMENT_PLATFORM}}
+{{/if}}
+
 ## Input
 - Code to be deployed
 - Changes since last deploy

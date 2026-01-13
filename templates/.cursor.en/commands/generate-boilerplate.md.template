@@ -3,6 +3,12 @@
 ## Objective
 Delegate mechanical work to AI. Generate boilerplate code following project patterns.
 
+## Project Context
+
+**Project:** {{PROJECT_NAME}}  
+**Type:** {{PROJECT_TYPE}}  
+**Stack:** {{LANGUAGE}} + {{FRAMEWORK}}{{#if DATABASE}} + {{DATABASE}}{{/if}}
+
 ## Input
 - Type of boilerplate needed (component, API, service, etc.)
 - Defined architecture
@@ -41,7 +47,22 @@ Ready-to-use boilerplate code with:
 - Appropriate comments
 - Quick explanation of created structure
 
+## Project-Specific Notes
+
+{{#if FRAMEWORK_EXPRESS}}
+- Use Express.js patterns and conventions
+- Follow Express middleware structure
+- Use Express router for route organization
+{{/if}}
+
+{{#if LANGUAGE_TYPESCRIPT}}
+- Use TypeScript strict mode: {{STRICT_MODE}}
+- Follow TypeScript best practices
+- Use proper type definitions
+{{/if}}
+
 ## Related Documentation
 - **Code Style:** `.cursor/rules/code-style.md`
 - **Architecture:** `.cursor/context/architecture.md`
 - **Allowed Libraries:** `.cursor/libs/allowed-libs.md`
+- **Tech Stack:** `.cursor/context/tech-stack.md`

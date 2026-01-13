@@ -13,19 +13,43 @@ This file documents infrastructure, deployment process, and environment configur
 
 ## 1. Infrastructure Overview
 
-### Distribution
+### Deployment Platform
 
-**Deployment Method:**
-{{DEPLOYMENT_METHOD}}
+**Recommended:** {{DEPLOYMENT_PLATFORM}}
 
-**Infrastructure:**
-{{INFRASTRUCTURE}}
+{{#if FRAMEWORK_EXPRESS}}
+### For Express Applications
 
-**CI/CD:**
-{{CI_CD}}
+- **Platform Options:**
+  - Railway (recommended for Express APIs)
+  - Render
+  - AWS Elastic Beanstalk
+  - DigitalOcean App Platform
+  - Heroku
+  
+- **Requirements:**
+  - {{RUNTIME}} runtime
+  - Environment variables for configuration
+  - Database connection string for {{DATABASE}}
+{{/if}}
 
-**Environments:**
-{{ENVIRONMENTS}}
+{{#if FRAMEWORK_NEXTJS}}
+### For Next.js Applications
+
+- **Platform Options:**
+  - Vercel (recommended for Next.js)
+  - Netlify
+  - AWS Amplify
+  
+- **Requirements:**
+  - Node.js runtime
+  - Environment variables for configuration
+  - Database connection string for {{DATABASE}} (if applicable)
+{{/if}}
+
+### CI/CD
+
+**Tool:** {{CI_CD_TOOL}}
 
 ### Binary Distribution (Future)
 
@@ -135,26 +159,52 @@ NODE_ENV=development
 
 ## 5. CI/CD Pipeline
 
+**Tool:** {{CI_CD_TOOL}}
+
+### Basic Pipeline Steps
+
+1. **Install Dependencies**
+   ```bash
+   npm install
+   ```
+
+2. **Run Tests**
+   ```bash
+   npm test
+   ```
+
+3. **Build**
+   ```bash
+   npm run build
+   ```
+
+4. **Deploy**
+   - Automatic deployment on main branch
+   - Manual deployment for other branches
+
 ### Pipeline Stages
 
 1. **Lint & Type Check:**
    - ESLint
+   {{#if LANGUAGE_TYPESCRIPT}}
    - TypeScript type checking
+   {{/if}}
    - Prettier check
 
 2. **Test:**
-   - Unit tests (Vitest)
+   - Unit tests ({{TEST_FRAMEWORK}})
    - Integration tests
    - Coverage report
 
 3. **Build:**
+   {{#if LANGUAGE_TYPESCRIPT}}
    - Compile TypeScript
-   - Bundle with tsup/esbuild
+   - Bundle with {{BUILD_TOOL}}
+   {{/if}}
    - Validate package structure
 
-4. **Publish (only on tags):**
-   - Publish to npm
-   - Create GitHub release
+4. **Deploy:**
+   - Deploy to {{DEPLOYMENT_PLATFORM}}
 
 ### Automated Deployments
 

@@ -3,11 +3,24 @@
 ## Objective
 Align business understanding before any implementation. This prompt should be used at the start of a new project or feature.
 
+## Project Context
+
+**Project:** {{PROJECT_NAME}}  
+**Type:** {{PROJECT_TYPE}}  
+**Stack:** {{LANGUAGE}} + {{FRAMEWORK}}{{#if DATABASE}} + {{DATABASE}}{{/if}}
+
+**Description:** {{PROJECT_DESCRIPTION}}
+
+**Main Users:** {{TARGET_USERS}}
+
+**Business Goals:** {{BUSINESS_GOALS}}
+
 ## Input
-- Problem we're solving
-- End user
-- Business objective
-- Technical or legal constraints
+- Problem we're solving: {{PROJECT_DESCRIPTION}}
+- End user: {{TARGET_USERS}}
+- Business objective: {{BUSINESS_GOALS}}
+- Technical constraints: {{TECHNICAL_CONSTRAINTS}}
+- Business constraints: {{BUSINESS_CONSTRAINTS}}
 
 ## Instructions
 You are a senior software architect.
@@ -50,6 +63,23 @@ Structured document with:
 - Identified risks
 - Proposed initial architecture
 
+## Project-Specific Notes
+
+{{#if PROJECT_TYPE_REST_API}}
+- This is a REST API project using {{FRAMEWORK}}
+- Focus on API endpoints, request/response patterns, and database operations
+- Consider authentication and authorization in all suggestions
+- Architecture should follow RESTful principles
+{{/if}}
+
+{{#if FRAMEWORK_EXPRESS}}
+- Express.js is the main framework
+- Use Express middleware patterns
+- Follow Express best practices for routing and error handling
+- Consider Express ecosystem (middleware, routers, etc.)
+{{/if}}
+
 ## Related Documentation
 - **Architecture:** `.cursor/context/architecture.md`
 - **Project Goals:** `.cursor/context/project-goals.md`
+- **Tech Stack:** `.cursor/context/tech-stack.md`

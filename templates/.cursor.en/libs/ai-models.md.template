@@ -1,12 +1,49 @@
 # AI Models
 
 ## Objective
-This file defines which AI models are allowed and when to use each one, based on model comparison.
+This file defines which AI models are allowed and when to use each one for {{PROJECT_NAME}}, based on model comparison.
+
+## Project Context
+
+**Project:** {{PROJECT_NAME}}  
+**Type:** {{PROJECT_TYPE}}  
+**Stack:** {{LANGUAGE}} + {{FRAMEWORK}}{{#if DATABASE}} + {{DATABASE}}{{/if}}
 
 ## Scope
 - Allowed models by phase
 - When to use each model
 - Recommended configurations
+
+---
+
+## Recommended Models for {{PROJECT_NAME}}
+
+### For Architecture & Planning
+- **Recommended:** Claude 4.5 Opus or GPT-4
+- **Why:** Better at understanding complex systems and making architectural decisions for {{PROJECT_TYPE}} projects
+- **Use when:** Planning new features, reviewing architecture, making technical decisions
+
+### For Code Generation
+- **Recommended:** Claude 4.5 Sonnet or GPT-4
+- **Why:** Good balance of quality and speed for {{LANGUAGE}} + {{FRAMEWORK}} development
+- **Use when:** Implementing features, generating boilerplate code
+
+{{#if FRAMEWORK_EXPRESS}}
+### For Express API Development
+- **Recommended:** Claude 4.5 Sonnet or GPT-4
+- **Why:** Good understanding of Express patterns, middleware, and REST API best practices
+- **Use when:** Creating API endpoints, implementing middleware, handling requests/responses
+{{/if}}
+
+### For Refactoring
+- **Recommended:** Claude 4.5 Sonnet
+- **Why:** Better at understanding existing code patterns and suggesting improvements
+- **Use when:** Refactoring existing code, improving code quality
+
+### For Debugging
+- **Recommended:** Gemini 3 Pro or Claude 4.5 Sonnet
+- **Why:** Good at analyzing error messages and stack traces
+- **Use when:** Debugging issues, analyzing errors
 
 ---
 

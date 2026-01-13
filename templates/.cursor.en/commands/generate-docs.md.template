@@ -3,6 +3,12 @@
 ## Objective
 Generate living technical documentation. Document modules, components, and decisions.
 
+## Project Context
+
+**Project:** {{PROJECT_NAME}}  
+**Type:** {{PROJECT_TYPE}}  
+**Stack:** {{LANGUAGE}} + {{FRAMEWORK}}{{#if DATABASE}} + {{DATABASE}}{{/if}}
+
 ## Input
 - Module/component to document
 - Related code

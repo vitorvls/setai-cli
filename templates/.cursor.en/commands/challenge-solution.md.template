@@ -3,6 +3,14 @@
 ## Objective
 Avoid single model bias. Challenge and validate proposed solutions.
 
+## Project Context
+
+**Project:** {{PROJECT_NAME}}  
+**Type:** {{PROJECT_TYPE}}  
+**Stack:** {{LANGUAGE}} + {{FRAMEWORK}}{{#if DATABASE}} + {{DATABASE}}{{/if}}
+
+**Constraints:** {{TECHNICAL_CONSTRAINTS}}
+
 ## Input
 - Previously proposed solution
 - Problem context

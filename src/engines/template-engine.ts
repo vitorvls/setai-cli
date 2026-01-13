@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import { getLocale, type SupportedLocale } from '../utils/i18n.js';
 import type { AIGeneratedContent } from '../services/ai-service.js';
+import * as templateHelpers from './template-helpers.js';
 
 /**
  * Template Engine - Processa templates e preenche com dados coletados
@@ -21,18 +22,63 @@ export function processTemplate(
 ): string {
   let result = template;
 
-  // Remove blocos condicionais vazios ({{#if KEY}}...{{/if}})
-  // Se o valor estiver vazio ou não existir, remove o bloco inteiro
-  const conditionalPattern = /\{\{#if\s+(\w+)\}\}([\s\S]*?)\{\{\/if\}\}/g;
-  result = result.replace(conditionalPattern, (_match, key, content) => {
+  // Processa blocos {{#if KEY}}...{{else}}...{{/if}}
+  // Usa uma abordagem mais robusta para lidar com blocos aninhados
+  // Processa de dentro para fora, removendo blocos aninhados primeiro
+  let changed = true;
+  while (changed) {
+    changed = false;
+    const ifElsePattern = /\{\{#if\s+(\w+)\}\}((?:[^{]|\{(?!\{)|(?:\{\{[^#])|(?:\{\{#if[^}]*\}\}[^}]*\{\{\/if\}\}))*?)\{\{else\}\}((?:[^{]|\{(?!\{)|(?:\{\{[^#])|(?:\{\{#if[^}]*\}\}[^}]*\{\{\/if\}\}))*?)\{\{\/if\}\}/g;
+    result = result.replace(ifElsePattern, (_match, key, ifContent, elseContent) => {
+      const value = data[key];
+      // Verifica se o valor é "true" (string) ou se existe e não está vazio (e não é placeholder genérico)
+      const isEmpty = !value || value.trim().length === 0 || value === '[A definir]' || value === '[To be defined]';
+      const isTrue = !isEmpty && (value === 'true' || value !== 'false');
+      changed = true;
+      if (isTrue) {
+        // Remove marcadores e retorna conteúdo do if
+        return ifContent;
+      } else {
+        // Remove marcadores e retorna conteúdo do else
+        return elseContent;
+      }
+    });
+  }
+
+  // Processa blocos {{#unless KEY}}...{{/unless}} (inverso do if)
+  const unlessPattern = /\{\{#unless\s+(\w+)\}\}([\s\S]*?)\{\{\/unless\}\}/g;
+  result = result.replace(unlessPattern, (_match, key, content) => {
     const value = data[key];
-    if (value && value.trim().length > 0) {
-      // Remove os marcadores {{#if}} e {{/if}}, mantém o conteúdo
+    // Verifica se o valor é "true" (string) ou se existe e não está vazio
+    const isTrue = value === 'true' || (value && value.trim().length > 0 && value !== 'false');
+    if (!isTrue) {
+      // Remove marcadores e retorna conteúdo
       return content;
     }
-    // Remove o bloco inteiro se vazio
+    // Remove o bloco inteiro se a condição for verdadeira
     return '';
   });
+
+  // Processa blocos {{#if KEY}}...{{/if}} simples (sem else)
+  // Processa múltiplas vezes para lidar com blocos aninhados
+  changed = true;
+  while (changed) {
+    changed = false;
+    const conditionalPattern = /\{\{#if\s+(\w+)\}\}((?:[^{]|\{(?!\{)|(?:\{\{[^#])|(?:\{\{#if[^}]*\}\}[^}]*\{\{\/if\}\}))*?)\{\{\/if\}\}/g;
+    result = result.replace(conditionalPattern, (_match, key, content) => {
+      const value = data[key];
+      // Verifica se o valor é "true" (string) ou se existe e não está vazio (e não é placeholder genérico)
+      const isEmpty = !value || value.trim().length === 0 || value === '[A definir]' || value === '[To be defined]';
+      const isTrue = !isEmpty && (value === 'true' || value !== 'false');
+      changed = true;
+      if (isTrue) {
+        // Remove os marcadores {{#if}} e {{/if}}, mantém o conteúdo
+        return content;
+      }
+      // Remove o bloco inteiro se vazio
+      return '';
+    });
+  }
 
   // Substitui todos os placeholders {{KEY}} pelos valores
   for (const [key, value] of Object.entries(data)) {
@@ -235,11 +281,21 @@ export async function processAllTemplates(
 
   // Prepara dados básicos para substituição
   // Usa dados da IA se disponíveis, senão usa dados do usuário
+  // Infere valores inteligentes quando dados não estão disponíveis
+  
+  // Inferências básicas do stack
+  const language = projectInfo.techStack.language;
+  const framework = projectInfo.techStack.framework ?? '';
+  const database = projectInfo.techStack.database ?? '';
+  const projectType = templateHelpers.inferProjectType(framework, projectInfo.projectDescription);
+  const useTDD = projectInfo.preferences?.useTDD ?? false;
+  const strictMode = projectInfo.preferences?.strictMode ?? false;
+  
   const templateData: Record<string, string> = {
     PROJECT_NAME: projectInfo.projectName,
-    LANGUAGE: projectInfo.techStack.language,
-    FRAMEWORK: projectInfo.techStack.framework ?? 'Nenhum',
-    DATABASE: projectInfo.techStack.database ?? 'Nenhum',
+    LANGUAGE: language,
+    FRAMEWORK: framework || 'Nenhum',
+    DATABASE: database || 'Nenhum',
     VERSION: projectInfo.version,
     PROJECT_DESCRIPTION: projectInfo.aiGenerated?.enhancedDescription ?? projectInfo.projectDescription,
     PROBLEM_IMPORTANCE: projectInfo.aiGenerated?.problemImportance ?? projectInfo.problemImportance,
@@ -250,36 +306,63 @@ export async function processAllTemplates(
     TECHNICAL_CONSTRAINTS: projectInfo.technicalConstraints,
     BUSINESS_CONSTRAINTS: projectInfo.businessConstraints,
     NON_GOALS: projectInfo.nonGoals,
+    
+    // Inferências inteligentes do stack
+    RUNTIME: templateHelpers.inferRuntime(language),
+    MODULE_SYSTEM: templateHelpers.inferModuleSystem(language),
+    BUILD_TOOL: templateHelpers.inferBuildTool(language, framework),
+    TEST_FRAMEWORK: templateHelpers.inferTestFramework(language, useTDD),
+    PROJECT_TYPE: projectType,
+    ARCHITECTURAL_STYLE: projectInfo.advanced?.architecturalStyle ?? templateHelpers.inferArchitecturalStyle(framework) ?? 'Layered Architecture (recommended for REST APIs)',
+    
     // Campos da IA para preencher "[A definir]" no architecture.md
-    COMMUNICATION_PATTERN: projectInfo.aiGenerated?.communicationPattern ?? '[A definir - Como os componentes do sistema se comunicam? APIs REST, GraphQL, mensageria, eventos, etc.]',
-    INTERACTION_MODEL: projectInfo.aiGenerated?.interactionModel ?? '[A definir - Modelo de interação do sistema: síncrono, assíncrono, eventos, polling, etc.]',
-    SOURCE_OF_TRUTH: projectInfo.aiGenerated?.sourceOfTruth ?? '[A definir - Onde está a fonte de verdade dos dados? Banco de dados, APIs externas, arquivos, etc.]',
-    CACHING_STRATEGY: projectInfo.aiGenerated?.cachingStrategy ?? '[A definir - Estratégia de cache: quando usar, onde armazenar, TTL, invalidação, etc.]',
-    STATE_MANAGEMENT: projectInfo.aiGenerated?.stateManagement ?? '[A definir - Como o estado é gerenciado? Redux, Context API, Zustand, estado local, etc.]',
-    AUTHENTICATION: projectInfo.aiGenerated?.authentication ?? '[A definir - Como a autenticação é feita? JWT, OAuth, sessões, etc.]',
-    AUTHORIZATION: projectInfo.aiGenerated?.authorization ?? '[A definir - Como a autorização é gerenciada? RBAC, permissões, roles, etc.]',
-    SECURITY_CONSTRAINTS: projectInfo.aiGenerated?.securityConstraints ?? '[A definir - Restrições de segurança específicas do projeto: validação de inputs, sanitização, HTTPS, etc.]',
-    EXPECTED_SCALE: projectInfo.aiGenerated?.expectedScale ?? '[A definir - Escala esperada: número de usuários, requisições por segundo, volume de dados, etc.]',
-    SCALING_STRATEGY: projectInfo.aiGenerated?.scalingStrategy ?? '[A definir - Estratégia de escalamento: horizontal, vertical, auto-scaling, CDN, etc.]',
-    FAILURE_HANDLING: projectInfo.aiGenerated?.failureHandling ?? '[A definir - Como falhas são tratadas? Retry, circuit breaker, fallback, rollback, etc.]',
-    LOGGING_STRATEGY: projectInfo.aiGenerated?.loggingStrategy ?? '[A definir - Estratégia de logging: onde, formato, níveis, retenção, etc.]',
-    MONITORING_METRICS: projectInfo.aiGenerated?.monitoringMetrics ?? '[A definir - Monitoramento: ferramentas, métricas importantes, dashboards, etc.]',
-    ALERTS_INCIDENT_HANDLING: projectInfo.aiGenerated?.alertsIncidentHandling ?? '[A definir - Alertas: quando disparar, canais, runbooks, etc.]',
-    AI_ARCHITECTURAL_STYLE: projectInfo.aiGenerated?.architecturalStyle ?? projectInfo.advanced?.architecturalStyle ?? '[A definir]',
+    // Usa inferências inteligentes como fallback
+    COMMUNICATION_PATTERN: projectInfo.aiGenerated?.communicationPattern ?? templateHelpers.inferCommunicationPattern(projectType),
+    INTERACTION_MODEL: projectInfo.aiGenerated?.interactionModel ?? templateHelpers.inferInteractionModel(projectType),
+    SOURCE_OF_TRUTH: projectInfo.aiGenerated?.sourceOfTruth ?? templateHelpers.inferSourceOfTruth(projectType, database),
+    CACHING_STRATEGY: projectInfo.aiGenerated?.cachingStrategy ?? templateHelpers.inferCachingStrategy(projectType, database),
+    STATE_MANAGEMENT: projectInfo.aiGenerated?.stateManagement ?? templateHelpers.inferStateManagement(projectType),
+    AUTHENTICATION: projectInfo.aiGenerated?.authentication ?? projectInfo.advanced?.authenticationMethod ?? templateHelpers.inferAuthMethod(projectType),
+    AUTHORIZATION: projectInfo.aiGenerated?.authorization ?? templateHelpers.inferAuthorization(projectType),
+    SECURITY_CONSTRAINTS: projectInfo.aiGenerated?.securityConstraints ?? projectInfo.advanced?.securityRules?.join('\n') ?? templateHelpers.generateSecurityPatterns(projectType),
+    EXPECTED_SCALE: projectInfo.aiGenerated?.expectedScale ?? templateHelpers.inferExpectedScale(projectType),
+    SCALING_STRATEGY: projectInfo.aiGenerated?.scalingStrategy ?? templateHelpers.inferScalingStrategy(projectType, framework),
+    FAILURE_HANDLING: projectInfo.aiGenerated?.failureHandling ?? templateHelpers.inferFailureHandling(projectType),
+    LOGGING_STRATEGY: projectInfo.aiGenerated?.loggingStrategy ?? templateHelpers.inferLoggingStrategy(projectType, framework),
+    MONITORING_METRICS: projectInfo.aiGenerated?.monitoringMetrics ?? templateHelpers.inferMonitoringMetrics(projectType),
+    ALERTS_INCIDENT_HANDLING: projectInfo.aiGenerated?.alertsIncidentHandling ?? templateHelpers.inferAlertsIncidentHandling(projectType),
+    AI_ARCHITECTURAL_STYLE: projectInfo.aiGenerated?.architecturalStyle ?? projectInfo.advanced?.architecturalStyle ?? templateHelpers.inferArchitecturalStyle(framework),
+    
+    // Novas variáveis de inferência
+    DATABASE_CLIENT: templateHelpers.inferDatabaseClient(database),
+    DEPLOYMENT_PLATFORM: templateHelpers.inferDeploymentPlatform(framework),
+    CI_CD_TOOL: templateHelpers.inferCICDTool(),
+    TEST_TOOLS: templateHelpers.generateTestToolsList(language, framework, database),
+    COVERAGE_TOOL: templateHelpers.inferCoverageTool(templateHelpers.inferTestFramework(language, useTDD)),
+    TYPESCRIPT_CONFIG: language === 'TypeScript' ? templateHelpers.generateTypeScriptConfig(strictMode) : '[Not applicable]',
+    ESLINT_CONFIG: templateHelpers.generateESLintConfig(language, framework),
+    
+    // Flags condicionais para templates
+    LANGUAGE_TYPESCRIPT: language === 'TypeScript' ? 'true' : 'false',
+    FRAMEWORK_EXPRESS: framework === 'Express' ? 'true' : 'false',
+    FRAMEWORK_NEXTJS: framework === 'Next.js' ? 'true' : 'false',
+    PROJECT_TYPE_REST_API: projectType === 'REST API' ? 'true' : 'false',
+    STRICT_MODE: strictMode ? 'true' : 'false',
+    USE_TDD: useTDD ? 'true' : 'false',
     // Diagramas e trade-offs da IA
-    ARCHITECTURE_DIAGRAM_HIGH_LEVEL: projectInfo.aiGenerated?.architectureDiagrams?.highLevelFlow ?? '[A definir - Diagrama de fluxo de alto nível do sistema]',
-    ARCHITECTURE_DIAGRAM_COMPONENT: projectInfo.aiGenerated?.architectureDiagrams?.componentInteraction ?? '[A definir - Diagrama de interação entre componentes]',
+    ARCHITECTURE_DIAGRAM_HIGH_LEVEL: projectInfo.aiGenerated?.architectureDiagrams?.highLevelFlow ?? '', // Vazio para usar bloco {{else}} no template
+    ARCHITECTURE_DIAGRAM_COMPONENT: projectInfo.aiGenerated?.architectureDiagrams?.componentInteraction ?? '', // Vazio para usar bloco {{else}} no template
     ARCHITECTURE_TRADE_OFFS: projectInfo.aiGenerated?.tradeOffs && projectInfo.aiGenerated.tradeOffs.length > 0
       ? projectInfo.aiGenerated.tradeOffs.map((to) => {
           if (to.decision && to.alternative && to.chosen && to.sacrificed) {
-            return `- **${to.decision} sobre ${to.alternative}:**\n  - **Escolhido:** ${to.chosen}\n  - **Sacrificado:** ${to.sacrificed}`;
+            return `- **${to.decision} over ${to.alternative}:**\n  - **Chosen:** ${to.chosen}\n  - **Sacrificed:** ${to.sacrificed}`;
           }
           return '';
         }).filter(Boolean).join('\n\n')
-      : '[A definir - Documente os trade-offs feitos e limitações conhecidas]',
+      : '', // Vazio para usar bloco {{else}} no template
     ARCHITECTURE_LIMITATIONS: projectInfo.aiGenerated?.limitations && projectInfo.aiGenerated.limitations.length > 0
       ? projectInfo.aiGenerated.limitations.map((lim) => `- ${lim}`).join('\n')
-      : '[A definir - Limitações conhecidas do projeto]',
+      : '', // Vazio para usar bloco {{else}} no template
   };
 
   // Adiciona dados avançados se disponíveis
@@ -356,7 +439,7 @@ export async function processAllTemplates(
         .map((dec) => `- ${dec}`)
         .join('\n');
     } else {
-      templateData.ARCHITECTURAL_DECISIONS = '[A definir]';
+      templateData.ARCHITECTURAL_DECISIONS = ''; // Vazio para usar bloco {{else}} no template
     }
 
     if (projectInfo.advanced.designPatterns && projectInfo.advanced.designPatterns.length > 0) {
@@ -367,7 +450,7 @@ export async function processAllTemplates(
       // Usa bestPractices da IA como design patterns se não houver design patterns específicos
       templateData.DESIGN_PATTERNS = projectInfo.aiGenerated.bestPractices.map((practice) => `- ${practice}`).join('\n');
     } else {
-      templateData.DESIGN_PATTERNS = '[A definir]';
+      templateData.DESIGN_PATTERNS = ''; // Vazio para usar bloco {{else}} no template
     }
 
     // Grupo 5: Segurança
@@ -421,14 +504,14 @@ export async function processAllTemplates(
     templateData.ALLOWED_LIBRARIES_CUSTOM = '';
     templateData.FORBIDDEN_LIBRARIES_CUSTOM = '';
     templateData.LIBRARY_NOTES = '';
-    templateData.ARCHITECTURAL_STYLE = projectInfo.aiGenerated?.architecturalStyle ?? '[A definir]';
+    templateData.ARCHITECTURAL_STYLE = projectInfo.aiGenerated?.architecturalStyle ?? templateHelpers.inferArchitecturalStyle(framework) ?? 'Layered Architecture (recommended for REST APIs)';
     // Usa dados da IA se disponíveis para preencher campos "[A definir]"
     if (projectInfo.aiGenerated?.architectureDecisions && projectInfo.aiGenerated.architectureDecisions.length > 0) {
       templateData.ARCHITECTURAL_DECISIONS = projectInfo.aiGenerated.architectureDecisions
         .map((dec) => `- ${dec}`)
         .join('\n');
     } else {
-      templateData.ARCHITECTURAL_DECISIONS = '[A definir]';
+      templateData.ARCHITECTURAL_DECISIONS = ''; // Vazio para usar bloco {{else}} no template
     }
     
     if (projectInfo.aiGenerated?.designPatterns && projectInfo.aiGenerated.designPatterns.length > 0) {
@@ -436,7 +519,7 @@ export async function processAllTemplates(
     } else if (projectInfo.aiGenerated?.bestPractices && projectInfo.aiGenerated.bestPractices.length > 0) {
       templateData.DESIGN_PATTERNS = projectInfo.aiGenerated.bestPractices.map((practice) => `- ${practice}`).join('\n');
     } else {
-      templateData.DESIGN_PATTERNS = '[A definir]';
+      templateData.DESIGN_PATTERNS = ''; // Vazio para usar bloco {{else}} no template
     }
     templateData.AUTHENTICATION_METHOD = projectInfo.aiGenerated?.authentication ?? '[A definir]';
     templateData.DATA_PROTECTION = '[A definir]';
@@ -477,7 +560,8 @@ export async function processAllTemplates(
   for (const command of commandTemplates) {
     const templatePath = `.cursor/commands/${command}.template`;
     const templateContent = await loadTemplate(templatePath, templateLocale);
-    processedTemplates.set(`${folder}/commands/${command}`, templateContent);
+    const processed = processTemplate(templateContent, templateData);
+    processedTemplates.set(`${folder}/commands/${command}`, processed);
   }
 
   return processedTemplates;

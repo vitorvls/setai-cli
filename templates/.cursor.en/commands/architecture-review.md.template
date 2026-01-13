@@ -3,6 +3,18 @@
 ## Objective
 Validate architectural decisions before writing code. Evaluate existing architecture and suggest improvements.
 
+## Project Context
+
+**Project:** {{PROJECT_NAME}}  
+**Type:** {{PROJECT_TYPE}}  
+**Stack:** {{LANGUAGE}} + {{FRAMEWORK}}{{#if DATABASE}} + {{DATABASE}}{{/if}}
+
+**Description:** {{PROJECT_DESCRIPTION}}
+
+**Main Users:** {{TARGET_USERS}}
+
+**Business Goals:** {{BUSINESS_GOALS}}
+
 ## Input
 - Project context
 - Existing code (if applicable)
@@ -48,6 +60,21 @@ Structured analysis with:
 - Improvement suggestions
 - Explained trade-offs
 
+## Project-Specific Notes
+
+{{#if PROJECT_TYPE_REST_API}}
+- This is a REST API project using {{FRAMEWORK}}
+- Focus on API architecture, endpoints design, and database interactions
+- Consider scalability and performance for API endpoints
+{{/if}}
+
+{{#if FRAMEWORK_EXPRESS}}
+- Express.js is the main framework
+- Consider Express middleware architecture
+- Evaluate routing and error handling patterns
+{{/if}}
+
 ## Related Documentation
 - **Architecture:** `.cursor/context/architecture.md`
 - **Tech Stack:** `.cursor/context/tech-stack.md`
+- **Project Goals:** `.cursor/context/project-goals.md`

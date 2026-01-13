@@ -3,6 +3,12 @@
 ## Objective
 Improve code without changing behavior. Safe and controlled refactoring.
 
+## Project Context
+
+**Project:** {{PROJECT_NAME}}  
+**Type:** {{PROJECT_TYPE}}  
+**Stack:** {{LANGUAGE}} + {{FRAMEWORK}}{{#if DATABASE}} + {{DATABASE}}{{/if}}
+
 ## Input
 - Code selected for refactoring
 - Code context

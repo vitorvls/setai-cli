@@ -14,13 +14,22 @@ This file defines mandatory security rules. Violations are considered critical.
 ## Authentication & Authorization
 
 ### Authentication Method
-{{AUTHENTICATION_METHOD}}
+{{AUTHENTICATION}}
 
 ### Rules
 - Always validate user authentication
 - Never trust client-side validation alone
 - Use proper session management
 - Implement proper logout
+
+{{#if PROJECT_TYPE_REST_API}}
+### For REST API Projects
+
+- **Token Management:** Secure JWT token storage and validation
+- **Token Expiration:** Implement token expiration and refresh mechanism
+- **Rate Limiting:** Implement rate limiting to prevent abuse
+- **CORS:** Configure CORS properly for production (allow only trusted origins)
+{{/if}}
 
 ### Prohibited
 - Do NOT store passwords in plain text
@@ -37,6 +46,14 @@ This file defines mandatory security rules. Violations are considered critical.
 - Use parameterized queries (SQL injection prevention)
 - Validate file uploads (type, size, content)
 
+{{#if FRAMEWORK_EXPRESS}}
+### For Express Projects
+
+- **Validation Libraries:** Use express-validator, zod, or joi
+- **Middleware:** Validate requests before reaching route handlers
+- **Error Handling:** Return proper error responses for invalid inputs
+{{/if}}
+
 ### Prohibited
 - Do NOT trust user input
 - Do NOT use eval() or similar
@@ -46,8 +63,19 @@ This file defines mandatory security rules. Violations are considered critical.
 
 ## Data Protection
 
-### Data Protection Measures
-{{DATA_PROTECTION}}
+### Security Patterns for {{PROJECT_TYPE}}
+
+{{SECURITY_CONSTRAINTS}}
+
+### Database Security
+
+{{#if DATABASE}}
+**Database:** {{DATABASE}}
+
+- **Connection Security:** Use connection strings with SSL
+- **SQL Injection Prevention:** {{DATABASE_CLIENT}} handles parameterized queries
+- **Migration Security:** Never commit sensitive data in migrations
+{{/if}}
 
 ### Sensitive Data
 - Never log sensitive data (passwords, tokens, PII)
