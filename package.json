@@ -1,6 +1,6 @@
 {
   "name": "@setai/cli",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "CLI Tool to generate .cursor configuration structure for AI-assisted development",
   "type": "module",
   "main": "./dist/index.js",
