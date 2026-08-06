@@ -1,65 +1,89 @@
 # Technology Stack
 
-## Objective
-This file documents the complete technology stack of the project, including versions, allowed dependencies, and technical restrictions.
+All items below are **Current State** unless labeled otherwise. Sources are repository evidence (manifests, lockfiles, configs).
 
-## Scope
-- Complete technology stack
-- Specific versions
-- Allowed dependencies
-- Technical restrictions
+## Identity and versions
+
+| Item | Value | Source |
+|------|-------|--------|
+| Package / project name | {{PROJECT_NAME}} | {{SOURCE_IDENTITY}} |
+| Package version | {{VERSION}} | {{SOURCE_VERSION}} |
+| License | {{LICENSE}} | package.json |
+| Module system | {{MODULE_SYSTEM}} | package.json |
+| Package manager | {{PACKAGE_MANAGER}} | lockfile / scan |
+
+### Engines
+
+{{ENGINES}}
+
+### Bin
+
+{{BIN}}
 
 ---
 
-## Language & Runtime
+## Runtime and language
 
 - **Language:** {{LANGUAGE}}
-- **Runtime:** Node.js (if applicable)
-- **Version:** {{VERSION}}
-
----
-
-## Framework
-
-- **Framework:** {{FRAMEWORK}}
-- **Purpose:** Main project framework
-
----
-
-## Database
-
+- **Runtime:** {{RUNTIME}}
+- **Project type:** {{PROJECT_TRAITS}}
+- **Application framework:** {{APPLICATION_FRAMEWORK}}
+- **UI framework:** {{UI_FRAMEWORK}}
+- **CLI framework:** {{CLI_FRAMEWORK}}
+- **Docs framework:** {{DOCS_FRAMEWORK}}
+- **Web/HTTP server:** {{HTTP_SERVER}}
 - **Database:** {{DATABASE}}
-- **Purpose:** Project database
+
+{{DATABASE_NOTE}}
 
 ---
 
-## Development Tools
+## Classified production dependencies
 
-### Code Quality
-- **Linter:** ESLint (recommended)
-- **Formatter:** Prettier (recommended)
-- **Type Checker:** TypeScript (if applicable)
+{{PRODUCTION_DEPS_TABLE}}
 
-### Testing
-- **Unit Tests:** Vitest or Jest (recommended)
-- **E2E Tests:** Playwright or Cypress (if applicable)
+### Raw production dependency names
+
+{{PRODUCTION_DEPS_RAW}}
 
 ---
 
-## Dependencies Policy
+## Classified development dependencies
 
-> See `.cursor/libs/allowed-libs.md` and `.cursor/libs/forbidden-libs.md` for complete list
+{{DEV_DEPS_TABLE}}
 
-### Allowed
-- Libraries listed in `.cursor/libs/allowed-libs.md`
+### Raw development dependency names
 
-### Forbidden
-- Libraries listed in `.cursor/libs/forbidden-libs.md`
+{{DEV_DEPS_RAW}}
 
 ---
 
-## Related Documentation
+## Tooling
 
-- **Allowed Libraries:** `.cursor/libs/allowed-libs.md`
-- **Forbidden Libraries:** `.cursor/libs/forbidden-libs.md`
-- **Code Style:** `.cursor/rules/code-style.md`
+| Tool | Value |
+|------|-------|
+| Build | {{BUILD_TOOL}} |
+| Test runner | {{TEST_FRAMEWORK}} |
+| Coverage | {{COVERAGE_TOOL}} |
+| Linter | {{LINTER}} |
+| Formatter | {{FORMATTER}} |
+
+---
+
+## Scripts (from package.json)
+
+{{SCRIPTS_TABLE}}
+
+---
+
+## Not in the stack (do not assume)
+
+Do not invent Handlebars, Jest, Playwright, Cypress, Express/Next/React as product frameworks, PostgreSQL/MongoDB/Redis, Docker, or JWT auth unless listed above as detected evidence.
+
+---
+
+## Related
+
+- Allowed libs: `.cursor/libs/allowed-libs.md`
+- Architecture: `.cursor/context/architecture.md`
+- Known issues: `.cursor/context/known-issues.md`

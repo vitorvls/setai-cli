@@ -1,13 +1,14 @@
 # Architecture Overview
 
 ## Objective
-This file documents architectural decisions, patterns, and constraints of the project. Serves as the source of truth for understanding how the system is structured.
 
-## Scope
-- Architectural decisions made
-- Patterns and conventions
-- Technical constraints
-- Boundaries and responsibilities
+Document **observed** structure and explicit decisions. Do not invent layered REST, repository patterns, or databases without evidence.
+
+## Labels
+
+- **Current State** — evidenced in the repository
+- **User-declared** — explicit answer during init
+- **Not detected / Not defined** — unknown; do not treat as a task to invent
 
 ---
 
@@ -21,79 +22,27 @@ This file documents architectural decisions, patterns, and constraints of the pr
 **Primary Users:**  
 {{TARGET_USERS}}
 
+**Type:** {{PROJECT_TRAITS}}
+
 **Architectural Style:**  
 {{ARCHITECTURAL_STYLE}}
 
 ---
 
-## 2. High-Level Architecture
+## 2. Observed Project Structure
+
+{{OBSERVED_STRUCTURE}}
 
 {{#if ARCHITECTURAL_DECISIONS}}
-### Main Architectural Decisions
+### Explicit Architectural Decisions
 
 {{ARCHITECTURAL_DECISIONS}}
 
----
-{{else}}
-### Main Architectural Decisions
-
-**Initial Architecture:**
-- **Layered Architecture:** Separation of concerns with distinct layers (routes, controllers, services, data access)
-- **RESTful API Design:** Follow REST principles for API endpoints
-- **Stateless Design:** API is stateless, each request contains all necessary information
-- **Database as Source of Truth:** {{DATABASE}} database is the single source of truth for all data
-
-**Key Decisions:**
-- Use {{FRAMEWORK}} as the main framework for building {{PROJECT_TYPE}}
-{{#if FRAMEWORK_EXPRESS}}
-- Implement middleware pattern for cross-cutting concerns (authentication, logging, error handling)
-- Use dependency injection or service pattern for business logic separation
-- Implement repository pattern for data access layer (if using ORM like Prisma)
 {{/if}}
-
----
-{{/if}}
-
-{{#if DESIGN_PATTERNS}}
-### Design Patterns Used
-
-{{DESIGN_PATTERNS}}
-
----
-{{else}}
-### Design Patterns Used
-
-**Recommended Patterns for {{PROJECT_TYPE}}:**
-{{#if FRAMEWORK_EXPRESS}}
-- **Middleware Pattern:** For Express.js request/response processing
-- **Service Pattern:** For business logic separation
-- **Repository Pattern:** For data access abstraction (if using ORM)
-- **Error Handling Pattern:** Centralized error handling middleware
-- **Validation Pattern:** Input validation middleware
-{{else}}
-- **Service Pattern:** For business logic separation
-- **Repository Pattern:** For data access abstraction
-- **Error Handling Pattern:** Centralized error handling
-- **Validation Pattern:** Input validation
-{{/if}}
-
----
-{{/if}}
-
-### Main Components
-
-- **Main system components** (to be defined as the project evolves)
 
 ### Communication
 
 {{COMMUNICATION_PATTERN}}
-
-{{#if FRAMEWORK_EXPRESS}}
-**Details:**
-- API endpoints follow RESTful conventions
-- Request/Response format: JSON
-- Status codes follow HTTP standards
-{{/if}}
 
 ### Interaction Model
 
@@ -101,202 +50,46 @@ This file documents architectural decisions, patterns, and constraints of the pr
 
 ---
 
-## 3. Technology Stack
+## 3. Technology Stack (summary)
 
-> Complete stack details are in `.cursor/context/tech-stack.md`
+> Full details: `.cursor/context/tech-stack.md`
 
-### Runtime
 - **Language:** {{LANGUAGE}}
 - **Runtime:** {{RUNTIME}}
 - **Module System:** {{MODULE_SYSTEM}}
-
-### Framework
-- **Framework:** {{FRAMEWORK}}
-- **Purpose:** Main project framework
-
-### Database
+- **CLI framework:** {{CLI_FRAMEWORK}}
+- **Application framework:** {{APPLICATION_FRAMEWORK}}
+- **UI framework:** {{UI_FRAMEWORK}}
+- **HTTP server:** {{HTTP_SERVER}}
 - **Database:** {{DATABASE}}
-- **Purpose:** Project database
-
-### Build & Distribution
-- **Build Tool:** {{BUILD_TOOL}}
-- **Package Registry:** npm or pnpm (recommended)
-- **Distribution:** {{DEPLOYMENT_PLATFORM}}
-
-### Infrastructure
-- **CI/CD:** {{CI_CD_TOOL}}
-- **Hosting:** {{DEPLOYMENT_PLATFORM}}
+- **Build:** {{BUILD_TOOL}}
+- **Test:** {{TEST_FRAMEWORK}}
+- **Package manager:** {{PACKAGE_MANAGER}}
 
 ---
 
-## 4. Data & State Management
-
-### Source of Truth
+## 4. Source of Truth
 
 {{SOURCE_OF_TRUTH}}
 
-### Caching Strategy
-
-{{CACHING_STRATEGY}}
-
-### State Management
-
-{{STATE_MANAGEMENT}}
-
 ---
 
-## 5. Security & Access
+## 5. What this project is NOT (unless evidence appears later)
 
-> Complete details are in `.cursor/rules/security-rules.md`
-
-### Authentication
-
-{{AUTHENTICATION}}
-
-{{#if PROJECT_TYPE_REST_API}}
-**Implementation notes:**
-- Token-based authentication
-- Secure token storage required
-- Token expiration and refresh strategy needed
-{{/if}}
-
-### Authorization
-
-{{AUTHORIZATION}}
-
-### Security Constraints
-
-{{SECURITY_CONSTRAINTS}}
-
----
-
-## 6. Scalability & Reliability
-
-### Expected Scale
-
-{{EXPECTED_SCALE}}
-
-### Scaling Strategy
-
-{{SCALING_STRATEGY}}
-
-### Failure Handling
-
-{{FAILURE_HANDLING}}
-
----
-
-## 7. Observability & Operations
-
-### Logging
-
-{{LOGGING_STRATEGY}}
-
-### Monitoring & Metrics
-
-{{MONITORING_METRICS}}
-
-### Alerts & Incident Handling
-
-{{ALERTS_INCIDENT_HANDLING}}
-
----
-
-## 8. Architecture Diagrams
-
-### High-Level System Flow
-
-{{#if ARCHITECTURE_DIAGRAM_HIGH_LEVEL}}
-{{ARCHITECTURE_DIAGRAM_HIGH_LEVEL}}
-{{else}}
-**To be created:** High-level system flow diagram showing:
-- Request flow from client to API
-- Main components and their interactions
-- Data flow through the system
-- External dependencies (database, external APIs)
-
-**Recommended Tools:** Draw.io, Mermaid, or similar diagramming tools
-{{/if}}
-
-### Component Interaction
-
-{{#if ARCHITECTURE_DIAGRAM_COMPONENT}}
-{{ARCHITECTURE_DIAGRAM_COMPONENT}}
-{{else}}
-**To be created:** Component interaction diagram showing:
-- How components communicate
-- Dependencies between components
-- Data flow between layers
-- External integrations
-
-**Recommended Tools:** Draw.io, Mermaid, or similar diagramming tools
+{{#unless HAS_HTTP}}
+- Not a product HTTP API / REST service (no HTTP server framework detected)
+{{/unless}}
+{{#unless HAS_DATABASE}}
+- Not a database-backed application (no database packages detected)
+{{/unless}}
+{{#if IS_CLI}}
+- Primary surface is a CLI tool, not a web UI product
 {{/if}}
 
 ---
 
-## 9. Architectural Decisions & Trade-offs
+## Related
 
-{{#if ARCHITECTURAL_DECISIONS}}
-### Key Decisions
-
-{{ARCHITECTURAL_DECISIONS}}
-{{else}}
-### Key Decisions
-
-**Initial Architecture:**
-- **Layered Architecture:** Separation of concerns with distinct layers (routes, controllers, services, data access)
-- **RESTful API Design:** Follow REST principles for API endpoints
-- **Stateless Design:** API is stateless, each request contains all necessary information
-- **Database as Source of Truth:** {{DATABASE}} database is the single source of truth for all data
-
-**Key Decisions:**
-- Use {{FRAMEWORK}} as the main framework for building {{PROJECT_TYPE}}
-{{#if FRAMEWORK_EXPRESS}}
-- Implement middleware pattern for cross-cutting concerns (authentication, logging, error handling)
-- Use dependency injection or service pattern for business logic separation
-- Implement repository pattern for data access layer (if using ORM like Prisma)
-{{/if}}
-{{/if}}
-
-### Trade-offs & Limitations
-
-{{#if ARCHITECTURE_TRADE_OFFS}}
-{{ARCHITECTURE_TRADE_OFFS}}
-{{else}}
-**Initial Trade-offs:**
-
-- **REST API over GraphQL:**
-  - **Chosen:** Simplicity, wide tooling support, easy to understand
-  - **Sacrificed:** Over-fetching/under-fetching flexibility, real-time subscriptions
-
-- **Stateless Design:**
-  - **Chosen:** Horizontal scalability, easier deployment, no session management
-  - **Sacrificed:** Server-side session state, some caching complexity
-
-- **{{FRAMEWORK}} over alternatives:**
-  - **Chosen:** {{FRAMEWORK}} ecosystem, community support, flexibility
-  - **Sacrificed:** (To be documented as project evolves)
-
-**Note:** Document additional trade-offs as architectural decisions are made during development.
-{{/if}}
-
-- **Known limitations:**
-{{#if ARCHITECTURE_LIMITATIONS}}
-{{ARCHITECTURE_LIMITATIONS}}
-{{else}}
-- **Scalability:** Initial design supports moderate scale (see Expected Scale section). May need optimization for very high traffic.
-- **Real-time Features:** REST API is request/response based. Real-time features (websockets, SSE) would require additional infrastructure.
-- **Offline Support:** API requires network connectivity. Offline functionality not supported in initial design.
-
-**Note:** Document additional limitations as they are discovered during development.
-{{/if}}
-
----
-
-## 10. Related Documentation
-
-- **Tech Stack:** `.cursor/context/tech-stack.md`
-- **Project Goals:** `.cursor/context/project-goals.md`
-- **Deployment:** `.cursor/context/deployment.md`
-- **Security:** `.cursor/rules/security-rules.md`
-- **Business Rules:** `.cursor/rules/business-rules.md`
+- Tech stack: `.cursor/context/tech-stack.md`
+- Project structure: `.cursor/context/project-structure.md`
+- Known issues: `.cursor/context/known-issues.md`

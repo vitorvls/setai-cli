@@ -1,82 +1,31 @@
-# Configuración .cursor
+# {{PROJECT_NAME}} — AI Context
 
-## Objetivo
-Esta carpeta contiene toda la configuración y contexto para el uso eficiente de IA en el desarrollo del proyecto.
+This folder is the operational context for AI-assisted development.
 
-## Estructura
+## Labels
 
-### 📂 `context/`
-Contexto persistente del proyecto - responde "¿Cómo piensa este proyecto?"
+| Label | Meaning |
+|-------|---------|
+| **Current State** | Evidenced in the repository |
+| **User-declared** | Explicit human input |
+| **Known Issue** | Real limitation or conflict |
+| **Planned / Recommended** | Not current — do not implement as existing |
 
-- `architecture.md` - Decisiones arquitectónicas y patrones
-- `tech-stack.md` - Stack tecnológico completo
-- `project-goals.md` - Objetivos y contexto de negocio
-- `deployment.md` - Infraestructura y proceso de despliegue
+**Code wins over documentation.** Prefer `src/`, manifests, and configs when docs disagree.
 
-### 📂 `rules/`
-Reglas duras - contrato con la IA
+## Contents
 
-- `code-style.md` - Estándares de código obligatorios
-- `testing-rules.md` - Estrategia y reglas de pruebas
-- `git-rules.md` - Estándares de commit y PR
-- `security-rules.md` - Reglas de seguridad obligatorias
-- `ai-usage-rules.md` - Dónde y cómo usar IA
-- `business-rules.md` - Reglas de negocio
+- `context/` — goals, stack, architecture, deployment, structure, known issues
+- `rules/` — coding, testing, security, git, business, AI usage
+- `libs/` — allowed/forbidden libs, AI providers
+- `commands/` — agent workflows (reference context; do not invent stack)
 
-### 📂 `libs/`
-Fuente de verdad sobre dependencias
+## Project snapshot
 
-- `allowed-libs.md` - Bibliotecas permitidas
-- `forbidden-libs.md` - Bibliotecas prohibidas
-- `ai-models.md` - Modelos de IA permitidos y cuándo usarlos
+- **Type:** {{PROJECT_TRAITS}}
+- **Language:** {{LANGUAGE}}
+- **Version:** {{VERSION}}
 
-### 📂 `commands/`
-Prompts ejecutables - comandos reutilizables
+## Related
 
-- `kickoff-project.md` - Alinear entendimiento de negocio
-- `architecture-review.md` - Validar decisiones arquitectónicas
-- `extract-business-rules.md` - Extraer reglas de negocio
-- `test-strategy.md` - Estructurar estrategia de pruebas
-- `generate-boilerplate.md` - Generar código boilerplate
-- `refactor-controlled.md` - Refactorización controlada
-- `generate-docs.md` - Generar documentación técnica
-- `review-pr.md` - Revisión de PR
-- `challenge-solution.md` - Contestar soluciones
-- `pre-deploy-validation.md` - Validación pre-despliegue
-
-## Cómo Usar
-
-### Para Desarrolladores
-1. **Configure lint y formatter ANTES de comenzar** (ver `rules/code-style.md`)
-2. Lea los archivos en `context/` para entender el proyecto
-3. Siga las reglas en `rules/`
-4. Use solo libs en `libs/allowed-libs.md`
-5. Use los prompts en `commands/` cuando sea apropiado
-
-### Para IA
-La IA debe:
-1. **Verificar si lint está configurado antes de generar código**
-2. Leer `rules/` primero (reglas duras)
-3. Consultar `context/` para entender el proyecto
-4. Verificar `libs/` antes de sugerir dependencias
-5. Usar `commands/` como plantillas de prompts
-6. **Siempre generar código que pase el lint configurado**
-
-## Principios
-
-- **Contexto explícito > Prompt bonito**
-- **Reglas duras, no sugerencias**
-- **Documentación viva, no estática**
-- **IA propone, humanos aprueban**
-
-## Mantenimiento
-
-- Actualice archivos cuando haya cambios
-- Mantenga consistencia entre archivos
-- Documente decisiones importantes
-- Revise periódicamente
-
----
-
-**Basado en las mejores prácticas de desarrollo con IA en 2026**
-
+Start with `.cursor/context/project-goals.md` and `.cursor/context/tech-stack.md`.

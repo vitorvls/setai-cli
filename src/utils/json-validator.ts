@@ -11,6 +11,15 @@ const AIGeneratedContentSchema = z.object({
   enhancedDescription: z.string().optional(),
   problemImportance: z.string().optional(),
   businessGoals: z.array(z.string()).optional(),
+  recommendations: z
+    .array(
+      z.object({
+        id: z.string(),
+        topic: z.string(),
+        text: z.string(),
+      })
+    )
+    .optional(),
   architectureDecisions: z.array(z.string()).optional(),
   bestPractices: z.array(z.string()).optional(),
   aiUsageGuidelines: z.string().optional(),

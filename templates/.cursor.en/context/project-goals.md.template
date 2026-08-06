@@ -1,66 +1,48 @@
 # Project Goals
 
-## Objective
-This file documents the business context, objectives, and constraints of the project. It serves to align understanding before any implementation.
+## Identity
 
-## Scope
-- Problem we are solving
-- End user
-- Business objective
-- Technical or legal constraints
+**Name:** {{PROJECT_NAME}}  
+**Type:** {{PROJECT_TRAITS}}  
+**Version:** {{VERSION}}
 
----
-
-## 1. Problem Statement
-
-**Problem we are solving:**
+## What the project does
 
 {{PROJECT_DESCRIPTION}}
 
-**Why this problem matters:**
+## Why it matters
 
 {{PROBLEM_IMPORTANCE}}
 
----
-
-## 2. Target Users
-
-### Primary Users
+## Target users
 
 {{TARGET_USERS}}
 
----
-
-## 3. Business Objectives
-
-### Primary Goals
+## Business goals
 
 {{BUSINESS_GOALS}}
 
----
-
-## 4. Constraints
-
-### Technical Constraints
+## Technical constraints
 
 {{TECHNICAL_CONSTRAINTS}}
 
-### Business Constraints
+## Business constraints
 
 {{BUSINESS_CONSTRAINTS}}
 
----
-
-## 5. Non-Goals
-
-**What this project does NOT do:**
+## Non-goals
 
 {{NON_GOALS}}
 
----
+## Explicit product constraints (for agents)
 
-## Related Documentation
+- Prefer repository evidence over assumptions
+- Unknown is better than wrong
+- Core generation must work offline without AI API keys
+- Do not invent databases, HTTP APIs, or auth stacks without evidence
+- Recommendations are not current state
 
-- **Architecture:** `.cursor/context/architecture.md`
-- **Business Rules:** `.cursor/rules/business-rules.md`
+## Related
 
+- Architecture: `.cursor/context/architecture.md`
+- Tech stack: `.cursor/context/tech-stack.md`

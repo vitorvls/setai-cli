@@ -1,53 +1,30 @@
-# Revisión de Arquitectura
+﻿# architecture-review
 
-## Objetivo
-Validar decisiones arquitectónicas antes de escribir código. Evaluar arquitectura existente y sugerir mejoras.
+## Goal
 
-## Input
-- Contexto del proyecto
-- Código existente (si aplica)
-- Arquitectura actual
-- Decisiones tomadas
+Agent workflow for **{{PROJECT_NAME}}**. Read context files first; do not invent stack.
 
-## Instrucciones
-Estás actuando como arquitecto responsable de la calidad del sistema.
+## Required reading
 
-Con base en el contexto del proyecto y el código existente:
+- .cursor/context/project-goals.md
+- .cursor/context/tech-stack.md
+- .cursor/context/architecture.md
+- .cursor/context/known-issues.md
 
-1. **Evalúa la arquitectura actual**
-   - Puntos fuertes
-   - Puntos débiles
-   - Alineación con objetivos
+## Constraints
 
-2. **Señala acoplamientos excesivos**
-   - Dependencias problemáticas
-   - Acoplamiento entre módulos
-   - Violaciones de límites
+- Type: {{PROJECT_TRAITS}}
+- Language: {{LANGUAGE}}
+- Database: {{DATABASE}}
+- HTTP server: {{HTTP_SERVER}}
 
-3. **Sugiere mejoras visando:**
-   - Escalabilidad
-   - Testabilidad
-   - Claridad
-   - Mantenibilidad
+## Hard rules
 
-4. **Explica los trade-offs de cada decisión**
-   - Lo que se ganó
-   - Lo que se sacrificó
-   - Alternativas consideradas
-
-## Restricciones
-- No implementes nada aún
-- Enfócate en análisis y sugerencias
-- Sé constructivo y técnico
-- Considera contexto y restricciones del proyecto
+- Do not invent databases, REST/CRUD APIs, JWT auth, or CI pipelines without evidence
+- Prefer Current State over Planned/Recommended
+- Unknown is better than wrong
+- Reference context docs instead of restating an invented stack
 
 ## Output
-Análisis estructurado con:
-- Evaluación de arquitectura
-- Problemas identificados
-- Sugerencias de mejora
-- Trade-offs explicados
 
-## Documentación Relacionada
-- **Arquitectura:** `.cursor/context/architecture.md`
-- **Stack Tecnológico:** `.cursor/context/tech-stack.md`
+Produce actionable guidance consistent with the repository evidence above.

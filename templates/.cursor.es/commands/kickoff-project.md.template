@@ -1,55 +1,30 @@
-# Inicio de Proyecto
+﻿# kickoff-project
 
-## Objetivo
-Alinear entendimiento de negocio antes de cualquier implementación. Este prompt debe usarse al inicio de un nuevo proyecto o feature.
+## Goal
 
-## Input
-- Problema que estamos resolviendo
-- Usuario final
-- Objetivo de negocio
-- Restricciones técnicas o legales
+Agent workflow for **{{PROJECT_NAME}}**. Read context files first; do not invent stack.
 
-## Instrucciones
-Eres un arquitecto de software sénior.
+## Required reading
 
-Con base en el contexto proporcionado:
+- .cursor/context/project-goals.md
+- .cursor/context/tech-stack.md
+- .cursor/context/architecture.md
+- .cursor/context/known-issues.md
 
-1. **Lista los principales requisitos funcionales**
-   - Qué debe hacer el sistema
-   - Features principales
-   - Flujos de usuario
+## Constraints
 
-2. **Lista los requisitos no funcionales**
-   - Rendimiento
-   - Seguridad
-   - Escalabilidad
-   - Disponibilidad
+- Type: {{PROJECT_TRAITS}}
+- Language: {{LANGUAGE}}
+- Database: {{DATABASE}}
+- HTTP server: {{HTTP_SERVER}}
 
-3. **Identifica riesgos técnicos y de producto**
-   - Riesgos técnicos
-   - Riesgos de negocio
-   - Dependencias externas
-   - Limitaciones conocidas
+## Hard rules
 
-4. **Sugiere una arquitectura inicial (alto nivel)**
-   - Componentes principales
-   - Comunicación entre componentes
-   - Decisiones arquitectónicas iniciales
-   - Trade-offs considerados
-
-## Restricciones
-- No generes código
-- Responde de forma estructurada y objetiva
-- Enfócate en entendimiento, no en implementación
-- Considera restricciones técnicas y de negocio
+- Do not invent databases, REST/CRUD APIs, JWT auth, or CI pipelines without evidence
+- Prefer Current State over Planned/Recommended
+- Unknown is better than wrong
+- Reference context docs instead of restating an invented stack
 
 ## Output
-Documento estructurado con:
-- Requisitos funcionales
-- Requisitos no funcionales
-- Riesgos identificados
-- Arquitectura inicial propuesta
 
-## Documentación Relacionada
-- **Arquitectura:** `.cursor/context/architecture.md`
-- **Objetivos del Proyecto:** `.cursor/context/project-goals.md`
+Produce actionable guidance consistent with the repository evidence above.

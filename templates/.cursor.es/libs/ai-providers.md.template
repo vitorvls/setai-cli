@@ -1,0 +1,29 @@
+# AI Providers
+
+## Objective
+
+Document **optional** AI provider SDKs detected in the repository and how they relate to product behavior.
+
+{{AI_PROVIDERS_SECTION}}
+
+## Product boundary
+
+- Core context generation is deterministic and works **without** API keys
+- `--beta` may enrich prose / recommendations only
+- AI output must never overwrite repository evidence or invent stack facts
+- Validate AI JSON/schema before trusting structured output
+
+## Models
+
+Preferred chat models are **not** prescribed here unless the user explicitly configured them during advanced setup.
+
+- Architecture: {{AI_MODEL_ARCHITECTURE}}
+- Implementation: {{AI_MODEL_IMPLEMENTATION}}
+- Refactoring: {{AI_MODEL_REFACTORING}}
+- Debug: {{AI_MODEL_DEBUG}}
+- Boilerplate: {{AI_MODEL_BOILERPLATE}}
+
+## Related
+
+- AI usage rules: `.cursor/rules/ai-usage-rules.md`
+- Tech stack: `.cursor/context/tech-stack.md`

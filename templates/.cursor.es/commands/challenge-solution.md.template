@@ -1,50 +1,30 @@
-# Desafiar Solución
+﻿# challenge-solution
 
-## Objetivo
-Evitar sesgo de un solo modelo. Cuestionar y validar soluciones propuestas.
+## Goal
 
-## Input
-- Solución propuesta anteriormente
-- Contexto del problema
-- Decisiones tomadas
-- Alternativas consideradas
+Agent workflow for **{{PROJECT_NAME}}**. Read context files first; do not invent stack.
 
-## Instrucciones
-Analiza la solución propuesta anteriormente.
+## Required reading
 
-Desafía las decisiones tomadas:
+- .cursor/context/project-goals.md
+- .cursor/context/tech-stack.md
+- .cursor/context/architecture.md
+- .cursor/context/known-issues.md
 
-1. **¿Qué puede salir mal?**
-   - Riesgos técnicos
-   - Riesgos de negocio
-   - Puntos de falla
-   - Casos no considerados
+## Constraints
 
-2. **¿Existen alternativas más simples?**
-   - Soluciones más directas
-   - Menos abstracciones
-   - Menos complejidad
-   - Menos dependencias
+- Type: {{PROJECT_TRAITS}}
+- Language: {{LANGUAGE}}
+- Database: {{DATABASE}}
+- HTTP server: {{HTTP_SERVER}}
 
-3. **¿Dónde hay riesgo de overengineering?**
-   - Abstracciones innecesarias
-   - Complejidad prematura
-   - Optimizaciones prematuras
-   - Features no necesarias
+## Hard rules
 
-## Restricciones
-- Sé crítico y directo
-- Enfócate en problemas reales, no en perfección teórica
-- Considera contexto y restricciones
-- Sugiere alternativas cuando sea apropiado
+- Do not invent databases, REST/CRUD APIs, JWT auth, or CI pipelines without evidence
+- Prefer Current State over Planned/Recommended
+- Unknown is better than wrong
+- Reference context docs instead of restating an invented stack
 
 ## Output
-Análisis crítico con:
-- Riesgos identificados
-- Alternativas más simples
-- Puntos de overengineering
-- Recomendaciones
 
-## Documentación Relacionada
-- **Arquitectura:** `.cursor/context/architecture.md`
-- **Reglas de Uso de IA:** `.cursor/rules/ai-usage-rules.md`
+Produce actionable guidance consistent with the repository evidence above.

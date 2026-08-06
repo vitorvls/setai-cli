@@ -20,7 +20,7 @@ For now, please refer to the [Portuguese documentation](../README.md) or use tra
 
 ## 📝 Roadmap
 
-See [Internationalization TODO](../../local/TODO_INTERNACIONALIZACAO.md) for the complete roadmap.
+Internationalization improvements for generated files are planned; question locales (`pt-BR`, `en`, `es`) are already supported via `--lang`.
 
 ---
 

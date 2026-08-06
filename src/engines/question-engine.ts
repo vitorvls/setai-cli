@@ -3,9 +3,16 @@ import type { ProjectInfo } from '../types/project-info.js';
 import { collectAdvancedGroups } from './advanced-groups-collector.js';
 import { tQuestion, tValidation, t, setLocale } from '../utils/i18n.js';
 import { getLanguageConfig } from '../config/config-manager.js';
+import {
+  noneChoice,
+  otherChoice,
+  normalizeOptionalStackValue,
+  isNoneConstraint,
+} from '../questions/normalize.js';
 
 /**
- * Question Engine - Coleta informações do usuário através de perguntas interativas
+ * Question Engine — legacy full questionnaire (still used by some tests).
+ * Prefer collectAdaptiveAnswers for init (evidence-first).
  */
 
 interface InquirerAnswers {
@@ -19,58 +26,14 @@ interface InquirerAnswers {
   nonGoals: string;
   version: string;
   language: string;
-  framework?: string;
-  database?: string;
+  framework?: string | null;
+  database?: string | null;
   useTDD: boolean;
   strictMode?: boolean;
-  // Advanced options
   useAdvanced?: boolean;
-  advancedGroups?: string[];
-  // Grupo 1: AI Usage
-  preferredModelArchitecture?: string;
-  preferredModelImplementation?: string;
-  preferredModelRefactoring?: string;
-  preferredModelDebug?: string;
-  preferredModelBoilerplate?: string;
-  allowArchitecturePlanning?: boolean;
-  allowCodeGeneration?: boolean;
-  allowRefactoring?: boolean;
-  allowDebug?: boolean;
-  allowDocumentation?: boolean;
-  customConstraints?: string;
-  // Grupo 2: Responsabilidades
-  ctoResponsibility?: string;
-  techLeadResponsibility?: string;
-  devResponsibility?: string;
-  // Grupo 3: Bibliotecas
-  allowedLibraries?: string;
-  forbiddenLibraries?: string;
-  libraryNotes?: string;
-  // Grupo 4: Arquitetura
-  architecturalStyle?: string;
-  architecturalDecisions?: string;
-  designPatterns?: string;
-  // Grupo 5: Segurança
-  authenticationMethod?: string;
-  dataProtection?: string;
-  securityRules?: string;
-  // Grupo 6: Testes
-  testStrategy?: string;
-  testCoverage?: string;
-  testTools?: string;
-  // Grupo 7: Deploy
-  deploymentMethod?: string;
-  infrastructure?: string;
-  ciCd?: string;
-  environments?: string;
-  // Grupo 8: Documentação
-  documentationStandards?: string;
-  apiDocumentation?: string;
-  codeComments?: string;
 }
 
 export async function collectProjectInfo(advanced: boolean = false): Promise<ProjectInfo> {
-  // Carrega configuração de idioma para perguntas
   const langConfig = getLanguageConfig();
   const questionLocale = langConfig.questions || 'pt-BR';
   await setLocale(questionLocale as 'pt-BR' | 'en' | 'es');
@@ -79,20 +42,30 @@ export async function collectProjectInfo(advanced: boolean = false): Promise<Pro
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const answers = (await inquirer.prompt(questions as any)) as InquirerAnswers;
 
+  const framework = normalizeOptionalStackValue(answers.framework);
+  const database = normalizeOptionalStackValue(answers.database);
+
   const projectInfo: ProjectInfo = {
     projectName: answers.projectName,
     projectDescription: answers.projectDescription,
     problemImportance: answers.problemImportance,
     targetUsers: answers.targetUsers,
     businessGoals: answers.businessGoals,
-    technicalConstraints: answers.technicalConstraints,
-    businessConstraints: answers.businessConstraints,
+    technicalConstraints: isNoneConstraint(answers.technicalConstraints)
+      ? 'None'
+      : answers.technicalConstraints,
+    businessConstraints: isNoneConstraint(answers.businessConstraints)
+      ? 'None'
+      : answers.businessConstraints,
     nonGoals: answers.nonGoals,
     version: answers.version,
     techStack: {
-      language: answers.language,
-      framework: answers.framework,
-      database: answers.database,
+      language:
+        typeof answers.language === 'string' && answers.language.includes('templates.')
+          ? 'Unknown'
+          : answers.language,
+      ...(framework ? { framework } : {}),
+      ...(database ? { database } : {}),
     },
     preferences: {
       useTDD: answers.useTDD,
@@ -100,9 +73,7 @@ export async function collectProjectInfo(advanced: boolean = false): Promise<Pro
     },
   };
 
-  // Adiciona configurações avançadas se solicitado
   if (advanced && answers.useAdvanced) {
-    // Coleta grupos avançados de forma iterativa
     projectInfo.advanced = await collectAdvancedGroups();
   }
 
@@ -115,56 +86,36 @@ export function createQuestions(advanced: boolean = false) {
       type: 'input',
       name: 'projectName',
       message: tQuestion('project.name'),
-      validate: (input: string) => {
-        if (!input || input.trim().length === 0) {
-          return tValidation('project.name.required');
-        }
-        return true;
-      },
+      validate: (input: string) =>
+        input?.trim() ? true : tValidation('project.name.required'),
     },
     {
       type: 'input',
       name: 'projectDescription',
       message: tQuestion('project.description'),
-      validate: (input: string) => {
-        if (!input || input.trim().length === 0) {
-          return tValidation('project.description.required');
-        }
-        return true;
-      },
+      validate: (input: string) =>
+        input?.trim() ? true : tValidation('project.description.required'),
     },
     {
       type: 'input',
       name: 'problemImportance',
       message: tQuestion('project.problemImportance'),
-      validate: (input: string) => {
-        if (!input || input.trim().length === 0) {
-          return tValidation('project.problemImportance.required');
-        }
-        return true;
-      },
+      validate: (input: string) =>
+        input?.trim() ? true : tValidation('project.problemImportance.required'),
     },
     {
       type: 'input',
       name: 'targetUsers',
       message: tQuestion('project.targetUsers'),
-      validate: (input: string) => {
-        if (!input || input.trim().length === 0) {
-          return tValidation('project.targetUsers.required');
-        }
-        return true;
-      },
+      validate: (input: string) =>
+        input?.trim() ? true : tValidation('project.targetUsers.required'),
     },
     {
       type: 'input',
       name: 'businessGoals',
       message: tQuestion('project.businessGoals'),
-      validate: (input: string) => {
-        if (!input || input.trim().length === 0) {
-          return tValidation('project.businessGoals.required');
-        }
-        return true;
-      },
+      validate: (input: string) =>
+        input?.trim() ? true : tValidation('project.businessGoals.required'),
     },
     {
       type: 'input',
@@ -182,12 +133,8 @@ export function createQuestions(advanced: boolean = false) {
       type: 'input',
       name: 'nonGoals',
       message: tQuestion('project.nonGoals'),
-      validate: (input: string) => {
-        if (!input || input.trim().length === 0) {
-          return tValidation('project.nonGoals.required');
-        }
-        return true;
-      },
+      validate: (input: string) =>
+        input?.trim() ? true : tValidation('project.nonGoals.required'),
     },
     {
       type: 'input',
@@ -195,12 +142,8 @@ export function createQuestions(advanced: boolean = false) {
       message: tQuestion('project.version'),
       default: '0.1.0',
       validate: (input: string) => {
-        if (!input || input.trim().length === 0) {
-          return tValidation('project.version.required');
-        }
-        // Validação básica de versão semântica
-        const versionPattern = /^\d+\.\d+\.\d+(-.*)?$/;
-        if (!versionPattern.test(input.trim())) {
+        if (!input?.trim()) return tValidation('project.version.required');
+        if (!/^\d+\.\d+\.\d+(-.*)?$/.test(input.trim())) {
           return tValidation('project.version.invalid');
         }
         return true;
@@ -210,7 +153,14 @@ export function createQuestions(advanced: boolean = false) {
       type: 'list',
       name: 'language',
       message: tQuestion('tech.language'),
-      choices: ['TypeScript', 'JavaScript', 'Python', 'Go', 'Rust', t('templates.other')],
+      choices: [
+        'TypeScript',
+        'JavaScript',
+        'Python',
+        'Go',
+        'Rust',
+        otherChoice(t('templates.other')),
+      ],
       default: 'TypeScript',
     },
     {
@@ -225,8 +175,8 @@ export function createQuestions(advanced: boolean = false) {
         'Express',
         'FastAPI',
         'Django',
-        t('templates.none'),
-        t('templates.other'),
+        noneChoice(t('templates.none')),
+        otherChoice(t('templates.other')),
       ],
       when: (answers: InquirerAnswers) =>
         answers.language === 'TypeScript' || answers.language === 'JavaScript',
@@ -235,13 +185,21 @@ export function createQuestions(advanced: boolean = false) {
       type: 'list',
       name: 'database',
       message: tQuestion('tech.database'),
-      choices: ['PostgreSQL', 'MySQL', 'MongoDB', 'SQLite', 'Supabase', t('templates.none'), t('templates.other')],
+      choices: [
+        'PostgreSQL',
+        'MySQL',
+        'MongoDB',
+        'SQLite',
+        'Supabase',
+        noneChoice(t('templates.none')),
+        otherChoice(t('templates.other')),
+      ],
     },
     {
       type: 'confirm',
       name: 'useTDD',
       message: tQuestion('preferences.useTDD'),
-      default: true,
+      default: false,
     },
     {
       type: 'confirm',
@@ -252,7 +210,6 @@ export function createQuestions(advanced: boolean = false) {
     },
   ];
 
-  // Adiciona pergunta sobre opções avançadas se solicitado
   if (advanced) {
     questions.push({
       type: 'confirm',
@@ -260,7 +217,6 @@ export function createQuestions(advanced: boolean = false) {
       message: tQuestion('advanced.confirm'),
       default: false,
     });
-    // As perguntas dos grupos avançados são coletadas de forma iterativa em collectAdvancedGroups()
   }
 
   return questions;

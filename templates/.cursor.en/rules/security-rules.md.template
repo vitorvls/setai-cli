@@ -1,231 +1,103 @@
 # Security Rules
 
 ## Objective
-This file defines mandatory security rules. Violations are considered critical.
+
+Mandatory security rules **for capabilities this project actually has**. Do not apply unrelated web-app checklists.
 
 ## Scope
-- Mandatory security rules
-- What never to do
-- Mandatory validations
-- Sensitive data handling
+
+Capability-based controls derived from repository evidence.
+
+### Detected security capabilities
+
+{{SECURITY_CAPABILITIES}}
 
 ---
 
-## Authentication & Authorization
-
-### Authentication Method
-{{AUTHENTICATION}}
+## Secrets Management
 
 ### Rules
-- Always validate user authentication
-- Never trust client-side validation alone
-- Use proper session management
-- Implement proper logout
+
+- Never commit secrets, API keys, tokens, or private keys
+- Keep credentials out of generated context files
+- Prefer OS user config (`~/.setai/`) over embedding secrets in the repo
+
+### Prohibited
+
+- Do NOT commit `.env` files with secrets
+- Do NOT log API keys or tokens
+
+---
+
+## Filesystem & Paths
+
+{{#if HAS_CLI}}
+### CLI / local tooling
+
+- Validate and normalize user-provided paths
+- Confirm before overwriting existing config folders
+- Avoid path traversal when writing generated files
+{{/if}}
+
+---
+
+{{#if HAS_EXTERNAL_AI}}
+## External AI Providers
+
+- API keys for optional AI enrichment must stay outside the repository
+- Treat model output as untrusted until validated (e.g. schema checks)
+- Do not send secrets or unnecessary PII to external providers
+- Core context generation must work **without** AI / API keys
+
+{{/if}}
+
+{{#if HAS_HTTP}}
+## HTTP Request Handling
+
+- Validate and sanitize all request inputs
+- Use proper status codes and safe error messages
+- Do not trust client-side checks alone
 
 {{#if PROJECT_TYPE_REST_API}}
-### For REST API Projects
+### When an HTTP API is present
 
-- **Token Management:** Secure JWT token storage and validation
-- **Token Expiration:** Implement token expiration and refresh mechanism
-- **Rate Limiting:** Implement rate limiting to prevent abuse
-- **CORS:** Configure CORS properly for production (allow only trusted origins)
+- Configure CORS only for trusted origins when applicable
+- Apply rate limiting where abuse is a risk
+{{/if}}
 {{/if}}
 
-### Prohibited
-- Do NOT store passwords in plain text
-- Do NOT expose authentication tokens in URLs
-- Do NOT skip authorization checks
+{{#if HAS_DATABASE}}
+## Database Safety
 
----
+{{DATABASE_NOTE}}
 
-## Input Validation
+- Use parameterized queries or trusted ORM APIs
+- Never concatenate untrusted input into queries
+- Do not commit credentials in migrations
 
-### Rules
-- Validate all user inputs
-- Sanitize inputs before processing
-- Use parameterized queries (SQL injection prevention)
-- Validate file uploads (type, size, content)
-
-{{#if FRAMEWORK_EXPRESS}}
-### For Express Projects
-
-- **Validation Libraries:** Use express-validator, zod, or joi
-- **Middleware:** Validate requests before reaching route handlers
-- **Error Handling:** Return proper error responses for invalid inputs
 {{/if}}
 
-### Prohibited
-- Do NOT trust user input
-- Do NOT use eval() or similar
-- Do NOT concatenate user input in queries
+## Authentication
 
----
-
-## Data Protection
-
-### Security Patterns for {{PROJECT_TYPE}}
-
-{{SECURITY_CONSTRAINTS}}
-
-### Database Security
-
-{{#if DATABASE}}
-**Database:** {{DATABASE}}
-
-- **Connection Security:** Use connection strings with SSL
-- **SQL Injection Prevention:** {{DATABASE_CLIENT}} handles parameterized queries
-- **Migration Security:** Never commit sensitive data in migrations
-{{/if}}
-
-### Sensitive Data
-- Never log sensitive data (passwords, tokens, PII)
-- Encrypt sensitive data at rest
-- Use HTTPS for all communications
-- Hash passwords with proper algorithms (bcrypt, argon2)
-
-### Prohibited
-- Do NOT commit secrets to repository
-- Do NOT expose API keys in frontend code
-- Do NOT store sensitive data in localStorage
+{{AUTHENTICATION}}
 
 {{#if SECURITY_RULES_CUSTOM}}
 ### Custom Security Rules
 
 {{SECURITY_RULES_CUSTOM}}
-
----
 {{/if}}
-## Secrets Management
-
-### Rules
-- Use environment variables for secrets
-- Never hardcode secrets
-- Use secret management tools in production
-- Rotate secrets regularly
-
-### Prohibited
-- Do NOT commit .env files
-- Do NOT share secrets in chat/email
-- Do NOT use default credentials
 
 ---
 
-## API Security
+## Prohibited (general)
 
-### Rules
-- Implement rate limiting
-- Use proper CORS configuration
-- Validate request origins
-- Implement request size limits
-
-### Prohibited
-- Do NOT allow unlimited API calls
-- Do NOT expose internal endpoints publicly
-- Do NOT skip CORS validation
+- Do NOT invent JWT/OAuth/RBAC requirements when the product has no auth surface
+- Do NOT copy web checklist items (XSS, CSP, upload scanning) unless those capabilities exist
+- Do NOT disable security validation to “make demos work”
 
 ---
 
-## Error Handling
+## Related
 
-### Rules
-- Never expose internal errors to clients
-- Log errors securely
-- Use generic error messages for users
-- Include error tracking (Sentry, etc.)
-
-### Prohibited
-- Do NOT expose stack traces to users
-- Do NOT log sensitive data in errors
-- Do NOT reveal system internals in errors
-
----
-
-## Dependencies
-
-### Rules
-- Keep dependencies updated
-- Scan for vulnerabilities regularly
-- Use only trusted packages
-- Review dependency changes
-
-### Prohibited
-- Do NOT use packages with known vulnerabilities
-- Do NOT ignore security warnings
-- Do NOT use unmaintained packages
-
----
-
-## File Uploads
-
-### Rules
-- Validate file types
-- Limit file sizes
-- Scan files for malware
-- Store uploads outside web root
-
-### Prohibited
-- Do NOT allow executable file uploads
-- Do NOT trust file extensions
-- Do NOT serve uploads directly
-
----
-
-## XSS Prevention
-
-### Rules
-- Sanitize user-generated content
-- Use Content Security Policy (CSP)
-- Escape output properly
-- Use framework's built-in protections
-
-### Prohibited
-- Do NOT use innerHTML with user input
-- Do NOT disable CSP
-- Do NOT trust third-party scripts blindly
-
----
-
-## SQL Injection Prevention
-
-### Rules
-- Always use parameterized queries
-- Use ORM/query builder
-- Validate input types
-- Limit database permissions
-
-### Prohibited
-- Do NOT concatenate user input in SQL
-- Do NOT use raw SQL with user input
-- Do NOT use database admin account for app
-
----
-
-## Security Checklist
-
-Before deploying:
-- [ ] All inputs validated
-- [ ] Secrets properly managed
-- [ ] Dependencies scanned
-- [ ] HTTPS configured
-- [ ] Error handling secure
-- [ ] Authentication/authorization tested
-- [ ] Rate limiting configured
-
----
-
-## Incident Response
-
-### If Security Issue Found
-1. Assess severity immediately
-2. Fix or mitigate quickly
-3. Document the issue
-4. Review similar code
-5. Update security rules if needed
-
----
-
-## Related Documentation
-
-- **Architecture:** `.cursor/context/architecture.md`
-- **Deployment:** `.cursor/context/deployment.md`
-- **Code Style:** `.cursor/rules/code-style.md`
+- Tech stack: `.cursor/context/tech-stack.md`
+- Business rules: `.cursor/rules/business-rules.md`

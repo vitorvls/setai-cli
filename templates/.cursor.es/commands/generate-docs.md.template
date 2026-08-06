@@ -1,50 +1,30 @@
-# Generar Documentación
+﻿# generate-docs
 
-## Objetivo
-Generar documentación técnica viva. Documentar módulos, componentes y decisiones.
+## Goal
 
-## Input
-- Módulo/componente a documentar
-- Código relacionado
-- Decisiones tomadas
-- Contexto del proyecto
+Agent workflow for **{{PROJECT_NAME}}**. Read context files first; do not invent stack.
 
-## Instrucciones
-Genera documentación técnica para este módulo abordando:
+## Required reading
 
-1. **Responsabilidad**
-   - Qué hace este módulo
-   - Cuál es su propósito
-   - Qué no hace
+- .cursor/context/project-goals.md
+- .cursor/context/tech-stack.md
+- .cursor/context/architecture.md
+- .cursor/context/known-issues.md
 
-2. **Flujo de datos**
-   - Cómo entran los datos
-   - Cómo se procesan
-   - Cómo salen
+## Constraints
 
-3. **Dependencias**
-   - De qué depende este módulo
-   - Qué depende de este módulo
-   - Integraciones externas
+- Type: {{PROJECT_TRAITS}}
+- Language: {{LANGUAGE}}
+- Database: {{DATABASE}}
+- HTTP server: {{HTTP_SERVER}}
 
-4. **Decisiones importantes**
-   - Por qué fue implementado así
-   - Trade-offs considerados
-   - Alternativas descartadas
+## Hard rules
 
-## Restricciones
-- Escribe como documentación interna para el equipo
-- Evita lenguaje genérico
-- Sé específico y técnico
-- Incluye ejemplos cuando sea útil
+- Do not invent databases, REST/CRUD APIs, JWT auth, or CI pipelines without evidence
+- Prefer Current State over Planned/Recommended
+- Unknown is better than wrong
+- Reference context docs instead of restating an invented stack
 
 ## Output
-Documentación técnica completa con:
-- Responsabilidad clara
-- Flujo de datos documentado
-- Dependencias mapeadas
-- Decisiones explicadas
 
-## Documentación Relacionada
-- **Arquitectura:** `.cursor/context/architecture.md`
-- **Estilo de Código:** `.cursor/rules/code-style.md`
+Produce actionable guidance consistent with the repository evidence above.

@@ -1,47 +1,30 @@
-# Extraer Reglas de Negocio
+﻿# extract-business-rules
 
-## Objetivo
-Hacer reglas de negocio explícitas y probables. Extraer reglas del código y documentación existente.
+## Goal
 
-## Input
-- Contexto del proyecto
-- Código relacionado
-- Documentación existente
-- Requisitos de negocio
+Agent workflow for **{{PROJECT_NAME}}**. Read context files first; do not invent stack.
 
-## Instrucciones
-Analiza el contexto y el código relacionado.
+## Required reading
 
-Extrae y documenta:
+- .cursor/context/project-goals.md
+- .cursor/context/tech-stack.md
+- .cursor/context/architecture.md
+- .cursor/context/known-issues.md
 
-1. **Reglas de negocio explícitas**
-   - Reglas claramente definidas en el código
-   - Validaciones de negocio
-   - Lógica de dominio
+## Constraints
 
-2. **Reglas implícitas inferidas del código**
-   - Reglas no documentadas pero presentes en el código
-   - Comportamientos esperados
-   - Suposiciones del código
+- Type: {{PROJECT_TRAITS}}
+- Language: {{LANGUAGE}}
+- Database: {{DATABASE}}
+- HTTP server: {{HTTP_SERVER}}
 
-3. **Puntos ambiguos que necesitan validación con producto**
-   - Comportamientos no claros
-   - Casos límite no tratados
-   - Reglas conflictivas
+## Hard rules
 
-## Restricciones
-- Organiza en formato de documentación funcional
-- Sé específico y claro
-- Identifica fuentes (código, docs, etc.)
-- Destaca ambigüedades
+- Do not invent databases, REST/CRUD APIs, JWT auth, or CI pipelines without evidence
+- Prefer Current State over Planned/Recommended
+- Unknown is better than wrong
+- Reference context docs instead of restating an invented stack
 
 ## Output
-Documentación estructurada con:
-- Reglas explícitas
-- Reglas implícitas
-- Puntos ambiguos
-- Recomendaciones de validación
 
-## Documentación Relacionada
-- **Reglas de Negocio:** `.cursor/rules/business-rules.md`
-- **Objetivos del Proyecto:** `.cursor/context/project-goals.md`
+Produce actionable guidance consistent with the repository evidence above.

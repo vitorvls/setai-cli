@@ -15,9 +15,13 @@ import { getAPIKey } from '../config/config-manager.js';
  * Interface para conteúdo gerado pela IA
  */
 export interface AIGeneratedContent {
+  /** Prose enrichment only — never factual stack */
   enhancedDescription?: string;
   problemImportance?: string;
   businessGoals?: string[];
+  /** Recommendations channel — never promoted to confirmed facts */
+  recommendations?: Array<{ id: string; topic: string; text: string }>;
+  /** @deprecated Legacy fields ignored by FactResolver for stack facts */
   architectureDecisions?: string[];
   bestPractices?: string[];
   aiUsageGuidelines?: string;

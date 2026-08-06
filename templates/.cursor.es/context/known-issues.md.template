@@ -1,0 +1,24 @@
+# Known Issues & Open Questions
+
+Issues and conflicts discovered during context compilation. These are **not** invented TODOs.
+
+## Conflicts (observed vs declared)
+
+{{CONFLICTS}}
+
+## Unknowns
+
+{{UNKNOWNS}}
+
+## Warnings from scan
+
+{{WARNINGS}}
+
+## Detailed notes
+
+{{KNOWN_ISSUES}}
+
+## Related
+
+- Tech stack: `.cursor/context/tech-stack.md`
+- Architecture: `.cursor/context/architecture.md`

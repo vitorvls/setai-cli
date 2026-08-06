@@ -1,66 +1,48 @@
-# Objetivos del Proyecto
+# Project Goals
 
-## Objetivo
-Este archivo documenta el contexto de negocio, objetivos y restricciones del proyecto. Sirve para alinear el entendimiento antes de cualquier implementación.
+## Identity
 
-## Alcance
-- Problema que estamos resolviendo
-- Usuario final
-- Objetivo de negocio
-- Restricciones técnicas o legales
+**Name:** {{PROJECT_NAME}}  
+**Type:** {{PROJECT_TRAITS}}  
+**Version:** {{VERSION}}
 
----
-
-## 1. Declaración del Problema
-
-**Problema que estamos resolviendo:**
+## What the project does
 
 {{PROJECT_DESCRIPTION}}
 
-**Por qué importa este problema:**
+## Why it matters
 
 {{PROBLEM_IMPORTANCE}}
 
----
-
-## 2. Usuarios Objetivo
-
-### Usuarios Principales
+## Target users
 
 {{TARGET_USERS}}
 
----
-
-## 3. Objetivos de Negocio
-
-### Objetivos Principales
+## Business goals
 
 {{BUSINESS_GOALS}}
 
----
-
-## 4. Restricciones
-
-### Restricciones Técnicas
+## Technical constraints
 
 {{TECHNICAL_CONSTRAINTS}}
 
-### Restricciones de Negocio
+## Business constraints
 
 {{BUSINESS_CONSTRAINTS}}
 
----
-
-## 5. No Objetivos
-
-**Lo que este proyecto NO hace:**
+## Non-goals
 
 {{NON_GOALS}}
 
----
+## Explicit product constraints (for agents)
 
-## Documentación Relacionada
+- Prefer repository evidence over assumptions
+- Unknown is better than wrong
+- Core generation must work offline without AI API keys
+- Do not invent databases, HTTP APIs, or auth stacks without evidence
+- Recommendations are not current state
 
-- **Arquitectura:** `.cursor/context/architecture.md`
-- **Reglas de Negocio:** `.cursor/rules/business-rules.md`
+## Related
 
+- Architecture: `.cursor/context/architecture.md`
+- Tech stack: `.cursor/context/tech-stack.md`

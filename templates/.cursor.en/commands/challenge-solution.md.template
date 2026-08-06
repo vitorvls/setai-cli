@@ -1,58 +1,30 @@
-# Challenge Solution
+﻿# challenge-solution
 
-## Objective
-Avoid single model bias. Challenge and validate proposed solutions.
+## Goal
 
-## Project Context
+Agent workflow for **{{PROJECT_NAME}}**. Read context files first; do not invent stack.
 
-**Project:** {{PROJECT_NAME}}  
-**Type:** {{PROJECT_TYPE}}  
-**Stack:** {{LANGUAGE}} + {{FRAMEWORK}}{{#if DATABASE}} + {{DATABASE}}{{/if}}
+## Required reading
 
-**Constraints:** {{TECHNICAL_CONSTRAINTS}}
-
-## Input
-- Previously proposed solution
-- Problem context
-- Decisions made
-- Alternatives considered
-
-## Instructions
-Analyze the previously proposed solution.
-
-Challenge the decisions made:
-
-1. **What can go wrong?**
-   - Technical risks
-   - Business risks
-   - Failure points
-   - Cases not considered
-
-2. **Are there simpler alternatives?**
-   - More direct solutions
-   - Fewer abstractions
-   - Less complexity
-   - Fewer dependencies
-
-3. **Where is there risk of overengineering?**
-   - Unnecessary abstractions
-   - Premature complexity
-   - Premature optimizations
-   - Unnecessary features
+- .cursor/context/project-goals.md
+- .cursor/context/tech-stack.md
+- .cursor/context/architecture.md
+- .cursor/context/known-issues.md
 
 ## Constraints
-- Be critical and direct
-- Focus on real problems, not theoretical perfection
-- Consider context and constraints
-- Suggest alternatives when appropriate
+
+- Type: {{PROJECT_TRAITS}}
+- Language: {{LANGUAGE}}
+- Database: {{DATABASE}}
+- HTTP server: {{HTTP_SERVER}}
+
+## Hard rules
+
+- Do not invent databases, REST/CRUD APIs, JWT auth, or CI pipelines without evidence
+- Prefer Current State over Planned/Recommended
+- Unknown is better than wrong
+- Reference context docs instead of restating an invented stack
 
 ## Output
-Critical analysis with:
-- Identified risks
-- Simpler alternatives
-- Overengineering points
-- Recommendations
 
-## Related Documentation
-- **Architecture:** `.cursor/context/architecture.md`
-- **AI Usage Rules:** `.cursor/rules/ai-usage-rules.md`
+Produce actionable guidance consistent with the repository evidence above.

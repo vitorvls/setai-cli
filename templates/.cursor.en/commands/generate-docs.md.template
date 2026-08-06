@@ -1,56 +1,30 @@
-# Generate Documentation
+﻿# generate-docs
 
-## Objective
-Generate living technical documentation. Document modules, components, and decisions.
+## Goal
 
-## Project Context
+Agent workflow for **{{PROJECT_NAME}}**. Read context files first; do not invent stack.
 
-**Project:** {{PROJECT_NAME}}  
-**Type:** {{PROJECT_TYPE}}  
-**Stack:** {{LANGUAGE}} + {{FRAMEWORK}}{{#if DATABASE}} + {{DATABASE}}{{/if}}
+## Required reading
 
-## Input
-- Module/component to document
-- Related code
-- Decisions made
-- Project context
-
-## Instructions
-Generate technical documentation for this module covering:
-
-1. **Responsibility**
-   - What this module does
-   - Its purpose
-   - What it doesn't do
-
-2. **Data flow**
-   - How data enters
-   - How it's processed
-   - How it exits
-
-3. **Dependencies**
-   - What this module depends on
-   - What depends on this module
-   - External integrations
-
-4. **Important decisions**
-   - Why it was implemented this way
-   - Trade-offs considered
-   - Alternatives discarded
+- .cursor/context/project-goals.md
+- .cursor/context/tech-stack.md
+- .cursor/context/architecture.md
+- .cursor/context/known-issues.md
 
 ## Constraints
-- Write as internal documentation for the team
-- Avoid generic language
-- Be specific and technical
-- Include examples when useful
+
+- Type: {{PROJECT_TRAITS}}
+- Language: {{LANGUAGE}}
+- Database: {{DATABASE}}
+- HTTP server: {{HTTP_SERVER}}
+
+## Hard rules
+
+- Do not invent databases, REST/CRUD APIs, JWT auth, or CI pipelines without evidence
+- Prefer Current State over Planned/Recommended
+- Unknown is better than wrong
+- Reference context docs instead of restating an invented stack
 
 ## Output
-Complete technical documentation with:
-- Clear responsibility
-- Documented data flow
-- Mapped dependencies
-- Explained decisions
 
-## Related Documentation
-- **Architecture:** `.cursor/context/architecture.md`
-- **Code Style:** `.cursor/rules/code-style.md`
+Produce actionable guidance consistent with the repository evidence above.

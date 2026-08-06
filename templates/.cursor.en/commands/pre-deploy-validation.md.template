@@ -1,64 +1,30 @@
-# Pre-Deploy Validation
+﻿# pre-deploy-validation
 
-## Objective
-Final check before production. Final validation before deployment.
+## Goal
 
-## Project Context
+Agent workflow for **{{PROJECT_NAME}}**. Read context files first; do not invent stack.
 
-**Project:** {{PROJECT_NAME}}  
-**Type:** {{PROJECT_TYPE}}  
-**Stack:** {{LANGUAGE}} + {{FRAMEWORK}}{{#if DATABASE}} + {{DATABASE}}{{/if}}
+## Required reading
 
-{{#if FRAMEWORK_EXPRESS}}
-**Deployment Platform:** {{DEPLOYMENT_PLATFORM}}
-{{/if}}
-
-## Input
-- Code to be deployed
-- Changes since last deploy
-- Project context
-- Deployment checklist
-
-## Instructions
-Before deployment, perform final validation considering:
-
-1. **Business rules**
-   - Were all rules followed?
-   - Is business logic correct?
-   - Are validations implemented?
-
-2. **Security**
-   - Are inputs validated?
-   - Are secrets not exposed?
-   - Does authentication/authorization work?
-   - Are dependencies updated?
-
-3. **Observability**
-   - Are logs configured?
-   - Are errors captured?
-   - Are metrics available?
-   - Is monitoring active?
-
-4. **Maintainability**
-   - Is code documented?
-   - Are tests present?
-   - Were patterns followed?
-   - Is code clean?
+- .cursor/context/project-goals.md
+- .cursor/context/tech-stack.md
+- .cursor/context/architecture.md
+- .cursor/context/known-issues.md
 
 ## Constraints
-- Don't alter code
-- Focus on validation and checklist
-- Be specific about problems
-- Prioritize critical over warnings
+
+- Type: {{PROJECT_TRAITS}}
+- Language: {{LANGUAGE}}
+- Database: {{DATABASE}}
+- HTTP server: {{HTTP_SERVER}}
+
+## Hard rules
+
+- Do not invent databases, REST/CRUD APIs, JWT auth, or CI pipelines without evidence
+- Prefer Current State over Planned/Recommended
+- Unknown is better than wrong
+- Reference context docs instead of restating an invented stack
 
 ## Output
-Structured validation with:
-- Complete checklist
-- Attention points
-- Critical problems (if any)
-- Final suggestions
 
-## Related Documentation
-- **Security Rules:** `.cursor/rules/security-rules.md`
-- **Testing Rules:** `.cursor/rules/testing-rules.md`
-- **Deployment:** `.cursor/context/deployment.md`
+Produce actionable guidance consistent with the repository evidence above.

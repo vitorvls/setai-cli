@@ -1,290 +1,42 @@
-# Deployment
+# Deployment & Operations
 
-## Objective
-This file documents infrastructure, deployment process, and environment configuration.
+## Current State
 
-## Scope
-- Infrastructure and hosting
-- Deployment process
-- Environment configuration
-- Environment variables
+### Package distribution
 
----
+- Package name: {{PROJECT_NAME}}
+- Version: {{VERSION}}
+- License: {{LICENSE}}
 
-## 1. Infrastructure Overview
+### Scripts
 
-### Deployment Platform
-
-**Recommended:** {{DEPLOYMENT_PLATFORM}}
-
-{{#if FRAMEWORK_EXPRESS}}
-### For Express Applications
-
-- **Platform Options:**
-  - Railway (recommended for Express APIs)
-  - Render
-  - AWS Elastic Beanstalk
-  - DigitalOcean App Platform
-  - Heroku
-  
-- **Requirements:**
-  - {{RUNTIME}} runtime
-  - Environment variables for configuration
-  - Database connection string for {{DATABASE}}
-{{/if}}
-
-{{#if FRAMEWORK_NEXTJS}}
-### For Next.js Applications
-
-- **Platform Options:**
-  - Vercel (recommended for Next.js)
-  - Netlify
-  - AWS Amplify
-  
-- **Requirements:**
-  - Node.js runtime
-  - Environment variables for configuration
-  - Database connection string for {{DATABASE}} (if applicable)
-{{/if}}
+{{SCRIPTS_TABLE}}
 
 ### CI/CD
 
-**Tool:** {{CI_CD_TOOL}}
+{{CI_CD}}
 
-### Binary Distribution (Future)
+{{#if HAS_CICD_COMMENTED}}
+**Important:** CI workflow files exist but are commented/disabled. Do not assume formatting or tests run on every PR via CI.
+{{/if}}
 
-**Optional Binaries:**
-- **Windows:** `.exe` via pkg or nexe
-- **macOS:** Universal binary
-- **Linux:** Static binary
+### Deployment method
 
-**Purpose:** Installation without Node.js (future, not in MVP)
-
----
-
-## 2. Environments
-
-### Development
-- **Location:** Local repository
-- **Purpose:** Local development and testing
-- **Access:** Project developers
-- **Installation:** `npm link` for local development
-
-### Staging / Beta
-- **Location:** npm with `beta` or `next` tag
-- **Purpose:** Testing with beta users before release
-- **Access:** Public (anyone can install with `npm install -g @setai/cli@beta`)
-- **Versioning:** Beta versions (e.g., `1.0.0-beta.1`)
-
-### Production
-- **Location:** npm with `latest` tag
-- **Purpose:** Stable version for all users
-- **Access:** Public (default installation)
-- **Versioning:** Stable semantic versions (e.g., `1.0.0`)
+{{DEPLOYMENT_METHOD}}
 
 ---
 
-## 3. Deployment Process
+## Planned / Recommended (not current state)
 
-### Pre-Deployment Checklist
+Do not implement the following as if they already exist unless evidence appears:
 
-- [ ] All tests passing (unit + integration)
-- [ ] Code review approved
-- [ ] CHANGELOG updated
-- [ ] Version updated in package.json
-- [ ] Local build working
-- [ ] Tested locally with `npm link`
-- [ ] README updated if necessary
-
-### Deployment Steps
-
-1. **Update version:**
-   ```bash
-   npm version patch|minor|major
-   ```
-
-2. **Build project:**
-   ```bash
-   npm run build
-   ```
-
-3. **Final tests:**
-   ```bash
-   npm test
-   ```
-
-4. **Publish to npm:**
-   ```bash
-   npm publish
-   ```
-   (or `npm publish --tag beta` for beta version)
-
-5. **Create GitHub release:**
-   - Version tag
-   - Release notes from CHANGELOG
-
-### Rollback Procedure
-
-- **How to rollback:**
-  1. Publish previous version with `npm publish`
-  2. Or deprecate problematic version: `npm deprecate @setai/cli@x.x.x "reason"`
-  
-- **When to rollback:**
-  - Critical bug that breaks core functionality
-  - Security issue
-  - Regression affecting many users
+- Enabling commented CI workflows
+- Container orchestration, unless added to the repository later
+- Cloud platform defaults invented by tooling
 
 ---
 
-## 4. Environment Variables
+## Related
 
-### Required Variables
-
-**Development:**
-```env
-NODE_ENV=development
-```
-
-**Build/Production:**
-- No environment variables required (local CLI)
-- All configurations are from end user
-
-### Variable Management
-
-- **Not applicable:** CLI does not use sensitive environment variables
-- **User configuration:** Done via interactive prompts
-- **Templates:** Included in npm package (not configurable via env)
-
----
-
-## 5. CI/CD Pipeline
-
-**Tool:** {{CI_CD_TOOL}}
-
-### Basic Pipeline Steps
-
-1. **Install Dependencies**
-   ```bash
-   npm install
-   ```
-
-2. **Run Tests**
-   ```bash
-   npm test
-   ```
-
-3. **Build**
-   ```bash
-   npm run build
-   ```
-
-4. **Deploy**
-   - Automatic deployment on main branch
-   - Manual deployment for other branches
-
-### Pipeline Stages
-
-1. **Lint & Type Check:**
-   - ESLint
-   {{#if LANGUAGE_TYPESCRIPT}}
-   - TypeScript type checking
-   {{/if}}
-   - Prettier check
-
-2. **Test:**
-   - Unit tests ({{TEST_FRAMEWORK}})
-   - Integration tests
-   - Coverage report
-
-3. **Build:**
-   {{#if LANGUAGE_TYPESCRIPT}}
-   - Compile TypeScript
-   - Bundle with {{BUILD_TOOL}}
-   {{/if}}
-   - Validate package structure
-
-4. **Deploy:**
-   - Deploy to {{DEPLOYMENT_PLATFORM}}
-
-### Automated Deployments
-
-- **Triggers:** Tag push (e.g., `v1.0.0`)
-- **Branches:** `main` only
-- **Condition:** All tests passing, successful build
-
-### Manual Deployments
-
-- **When:** 
-  - Beta versions
-  - Urgent hotfixes
-  - First version
-- **Process:** 
-  ```bash
-  npm version patch|minor|major
-  git push --tags
-  # CI/CD publishes automatically
-  ```
-
----
-
-## 6. Monitoring & Alerts
-
-### Monitoring
-
-- **Tools:** 
-  - npm download stats (via npmjs.com)
-  - GitHub stars/forks
-  - GitHub Issues/PRs
-- **Metrics:** 
-  - Downloads per version
-  - Open issues
-  - Bug report rate
-
-### Alerts
-
-- **Critical Alerts:** 
-  - Critical GitHub issues (security, breaking changes)
-  - CI/CD failures
-- **Warning Alerts:** 
-  - Increase in issues
-  - Negative user feedback
-
----
-
-## 7. Backup & Recovery
-
-### Backup Strategy
-
-- **Frequency:** N/A (code versioned in Git)
-- **Retention:** Undefined (Git maintains history)
-- **Location:** GitHub (main repository)
-
-### Recovery Procedure
-
-- **Code:** Always available in Git, can restore any version
-- **npm Package:** Old versions remain on npm, can be reinstalled
-- **RTO/RPO:** N/A (no data to recover, only code)
-
----
-
-## 8. Security
-
-### Package Security
-
-- **npm audit:** Run regularly
-- **Dependencies:** Keep updated
-- **Vulnerabilities:** Fix immediately
-- **2FA:** Required for npm publishing
-
-### Access Control
-
-- **npm Publishing:** Only authorized maintainers
-- **GitHub Repository:** Public (open-source)
-- **CI/CD Secrets:** npm tokens protected in GitHub Secrets
-
----
-
-## Related Documentation
-
-- **Architecture:** `.cursor/context/architecture.md`
-- **Security Rules:** `.cursor/rules/security-rules.md`
+- Tech stack: `.cursor/context/tech-stack.md`
+- Known issues: `.cursor/context/known-issues.md`

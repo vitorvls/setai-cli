@@ -1,55 +1,30 @@
-# Extract Business Rules
+﻿# extract-business-rules
 
-## Objective
-Make business rules explicit and testable. Extract rules from existing code and documentation.
+## Goal
 
-## Project Context
+Agent workflow for **{{PROJECT_NAME}}**. Read context files first; do not invent stack.
 
-**Project:** {{PROJECT_NAME}}  
-**Type:** {{PROJECT_TYPE}}  
-**Description:** {{PROJECT_DESCRIPTION}}
+## Required reading
 
-**Business Goals:** {{BUSINESS_GOALS}}
-
-## Input
-- Project context
-- Related code
-- Existing documentation
-- Business requirements
-
-## Instructions
-Analyze context and related code.
-
-Extract and document:
-
-1. **Explicit business rules**
-   - Rules clearly defined in code
-   - Business validations
-   - Domain logic
-
-2. **Implicit rules inferred from code**
-   - Undocumented rules present in code
-   - Expected behaviors
-   - Code assumptions
-
-3. **Ambiguous points that need product validation**
-   - Unclear behaviors
-   - Untreated edge cases
-   - Conflicting rules
+- .cursor/context/project-goals.md
+- .cursor/context/tech-stack.md
+- .cursor/context/architecture.md
+- .cursor/context/known-issues.md
 
 ## Constraints
-- Organize in functional documentation format
-- Be specific and clear
-- Identify sources (code, docs, etc.)
-- Highlight ambiguities
+
+- Type: {{PROJECT_TRAITS}}
+- Language: {{LANGUAGE}}
+- Database: {{DATABASE}}
+- HTTP server: {{HTTP_SERVER}}
+
+## Hard rules
+
+- Do not invent databases, REST/CRUD APIs, JWT auth, or CI pipelines without evidence
+- Prefer Current State over Planned/Recommended
+- Unknown is better than wrong
+- Reference context docs instead of restating an invented stack
 
 ## Output
-Structured documentation with:
-- Explicit rules
-- Implicit rules
-- Ambiguous points
-- Validation recommendations
 
-## Related Documentation
-- **Business Rules:** `.cursor/rules/business-rules.md`
-- **Project Goals:** `.cursor/context/project-goals.md`
+Produce actionable guidance consistent with the repository evidence above.

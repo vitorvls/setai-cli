@@ -1,123 +1,39 @@
 # Business Rules
 
 ## Objective
-This file documents the business rules of the {{PROJECT_NAME}} system. These rules must be followed in all implementations.
 
-## Scope
-- Explicit business rules
-- Mandatory validations
-- Expected behaviors
-- Edge cases
+Business and product constraints for agents working on {{PROJECT_NAME}}.
 
----
+## Facts vs recommendations
 
-## Project Context
+- **Facts** come from repository evidence or explicit user answers
+- **Recommendations** are optional and must never be treated as current state
+- Templates must not invent architecture, database, auth, or CI
 
-**Project:** {{PROJECT_NAME}}  
-**Type:** {{PROJECT_TYPE}}  
-**Description:** {{PROJECT_DESCRIPTION}}
+## Goals & non-goals
 
-**Main Users:**
-{{TARGET_USERS}}
+See `.cursor/context/project-goals.md`.
 
-**Business Goals:**
-{{BUSINESS_GOALS}}
-
-**Technical Constraints:**
-{{TECHNICAL_CONSTRAINTS}}
-
-**Business Constraints:**
-{{BUSINESS_CONSTRAINTS}}
-
-**Non-Goals:**
+**Non-goals:**  
 {{NON_GOALS}}
 
----
+## Out of scope (unless evidence appears)
 
-## General Business Rules
+{{#unless HAS_HTTP}}
+- Building REST/GraphQL product APIs
+{{/unless}}
+{{#unless HAS_DATABASE}}
+- Introducing a database or ORM as if it already existed
+{{/unless}}
+- Claiming JWT/OAuth end-user auth without an auth surface
 
-### Data Validation
-- All user inputs must be validated before processing
-- Validation must be clear and provide immediate feedback
-- Invalid inputs must be rejected with explanatory message
+## Custom constraints
 
-### Error Handling
-- Errors must be handled gracefully
-- Error messages must be clear and actionable for the user
-- Never expose stack traces or internal technical details
-- Always offer next steps when possible
+{{TECHNICAL_CONSTRAINTS}}
 
-{{#if PROJECT_TYPE_REST_API}}
-### API-Specific Rules
-- All API endpoints must follow RESTful conventions
-- Use appropriate HTTP status codes
-- Return consistent JSON response format
-- Implement proper error responses
-- All requests must be authenticated (unless public endpoint)
-{{/if}}
+{{BUSINESS_CONSTRAINTS}}
 
----
+## Related
 
-## Specific Business Rules
-
-{{#if PROJECT_TYPE_REST_API}}
-### API Business Rules
-
-Based on the project description and goals, the following business rules apply:
-
-**Rule 1: Data Consistency**
-- All data operations must maintain data integrity
-- Use database transactions for operations that modify multiple records
-- Implement proper error handling and rollback mechanisms
-
-**Rule 2: Performance Requirements**
-{{#if TECHNICAL_CONSTRAINTS}}
-- Must meet performance requirements: {{TECHNICAL_CONSTRAINTS}}
-{{/if}}
-- API responses should be fast and efficient
-- Implement caching where appropriate
-
-**Rule 3: Security**
-- All sensitive operations require authentication
-- User data must be protected according to security rules
-- Follow security patterns defined in `.cursor/rules/security-rules.md`
-
-**Rule 4: Business Constraints**
-{{#if BUSINESS_CONSTRAINTS}}
-- Must respect: {{BUSINESS_CONSTRAINTS}}
-{{/if}}
-- All decisions must align with business goals
-
-**Note:** These are general rules. As the project evolves, add specific business rules here based on domain requirements.
-{{/if}}
-
----
-
-## Edge Cases
-
-### Common Edge Cases to Consider
-
-1. **Empty Data:**
-   - Handle cases where no data is available
-   - Return appropriate empty responses (empty array, not null)
-
-2. **Invalid Input:**
-   - Validate all inputs before processing
-   - Return clear error messages with validation details
-
-3. **Concurrent Operations:**
-   - Handle race conditions appropriately
-   - Use optimistic locking or transactions where needed
-
-4. **Resource Limits:**
-   - Handle cases where resources are exhausted
-   - Implement proper rate limiting and quotas
-
----
-
-## Related Documentation
-
-- **Project Goals:** `.cursor/context/project-goals.md`
-- **Architecture:** `.cursor/context/architecture.md`
-- **Security Rules:** `.cursor/rules/security-rules.md`
-- **Extract Business Rules:** `.cursor/commands/extract-business-rules.md`
+- Project goals: `.cursor/context/project-goals.md`
+- Security: `.cursor/rules/security-rules.md`

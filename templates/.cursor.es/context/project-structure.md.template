@@ -1,0 +1,22 @@
+# Project Structure
+
+Observed layout from a bounded filesystem scan (not a full static analysis).
+
+{{OBSERVED_STRUCTURE}}
+
+## Where do I change X?
+
+Use this map as a starting point. Prefer searching the repository when unsure.
+
+| Goal | Start here |
+|------|------------|
+| CLI entry / commands | `src/index.ts`, `src/commands/` |
+| Context generation pipeline | `src/context/`, `src/scanner/`, `src/engines/` |
+| Templates | `templates/` |
+| Locales | `locales/` |
+| Tests | `src/__tests__/`, `tests/` |
+
+## Related
+
+- Architecture: `.cursor/context/architecture.md`
+- Tech stack: `.cursor/context/tech-stack.md`

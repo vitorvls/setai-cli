@@ -1,54 +1,30 @@
-# Validación Pre-Despliegue
+﻿# pre-deploy-validation
 
-## Objetivo
-Última verificación antes de producción. Validación final antes del despliegue.
+## Goal
 
-## Input
-- Código a desplegar
-- Cambios desde último despliegue
-- Contexto del proyecto
-- Checklist de despliegue
+Agent workflow for **{{PROJECT_NAME}}**. Read context files first; do not invent stack.
 
-## Instrucciones
-Antes del despliegue, haz una validación final considerando:
+## Required reading
 
-1. **Reglas de negocio**
-   - ¿Todas las reglas fueron seguidas?
-   - ¿La lógica de negocio está correcta?
-   - ¿Las validaciones están implementadas?
+- .cursor/context/project-goals.md
+- .cursor/context/tech-stack.md
+- .cursor/context/architecture.md
+- .cursor/context/known-issues.md
 
-2. **Seguridad**
-   - ¿Los inputs están validados?
-   - ¿Los secretos no están expuestos?
-   - ¿La autenticación/autorización funcionan?
-   - ¿Las dependencias están actualizadas?
+## Constraints
 
-3. **Observabilidad**
-   - ¿Los logs están configurados?
-   - ¿Los errores son capturados?
-   - ¿Las métricas están disponibles?
-   - ¿El monitoreo está activo?
+- Type: {{PROJECT_TRAITS}}
+- Language: {{LANGUAGE}}
+- Database: {{DATABASE}}
+- HTTP server: {{HTTP_SERVER}}
 
-4. **Mantenibilidad**
-   - ¿El código está documentado?
-   - ¿Las pruebas están presentes?
-   - ¿Los patrones fueron seguidos?
-   - ¿El código está limpio?
+## Hard rules
 
-## Restricciones
-- No alteres código
-- Enfócate en validación y checklist
-- Sé específico sobre problemas
-- Prioriza críticos sobre advertencias
+- Do not invent databases, REST/CRUD APIs, JWT auth, or CI pipelines without evidence
+- Prefer Current State over Planned/Recommended
+- Unknown is better than wrong
+- Reference context docs instead of restating an invented stack
 
 ## Output
-Validación estructurada con:
-- Checklist completo
-- Puntos de atención
-- Problemas críticos (si los hay)
-- Sugerencias finales
 
-## Documentación Relacionada
-- **Reglas de Seguridad:** `.cursor/rules/security-rules.md`
-- **Reglas de Pruebas:** `.cursor/rules/testing-rules.md`
-- **Despliegue:** `.cursor/context/deployment.md`
+Produce actionable guidance consistent with the repository evidence above.

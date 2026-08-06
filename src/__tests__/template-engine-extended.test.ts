@@ -35,22 +35,22 @@ describe('Template Engine Extended', () => {
       expect(result).toBe('Hello John, welcome to SetAI!');
     });
 
-    it('should handle empty values', () => {
+    it('should clear placeholders when value is empty', () => {
       const template = 'Name: {{name}}';
       const data = { name: '' };
 
       const result = processTemplate(template, data);
 
-      expect(result).toBe('Name: {{name}}');
+      expect(result).toBe('Name: ');
     });
 
-    it('should handle undefined values', () => {
+    it('should clear placeholders when value is undefined', () => {
       const template = 'Name: {{name}}';
       const data = { name: undefined };
 
       const result = processTemplate(template, data);
 
-      expect(result).toBe('Name: {{name}}');
+      expect(result).toBe('Name: ');
     });
 
     it('should remove conditional blocks when value is empty', () => {

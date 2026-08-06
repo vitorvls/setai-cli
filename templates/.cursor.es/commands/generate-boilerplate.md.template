@@ -1,47 +1,30 @@
-# Generar Boilerplate
+﻿# generate-boilerplate
 
-## Objetivo
-Delegar trabajo mecánico a la IA. Generar código boilerplate siguiendo patrones del proyecto.
+## Goal
 
-## Input
-- Tipo de boilerplate necesario (componente, API, service, etc.)
-- Arquitectura definida
-- Patrones del proyecto
+Agent workflow for **{{PROJECT_NAME}}**. Read context files first; do not invent stack.
 
-## Instrucciones
-Con base en la arquitectura definida y los patrones del proyecto:
+## Required reading
 
-Genera el boilerplate necesario para este módulo siguiendo:
+- .cursor/context/project-goals.md
+- .cursor/context/tech-stack.md
+- .cursor/context/architecture.md
+- .cursor/context/known-issues.md
 
-1. **Sigue estrictamente los patrones existentes**
-   - Estructura de archivos
-   - Convenciones de nomenclatura
-   - Patrones de código
+## Constraints
 
-2. **No introduzcas nuevas abstracciones**
-   - Usa solo patrones ya establecidos
-   - No crees nuevas capas sin necesidad
-   - Mantén consistencia
+- Type: {{PROJECT_TRAITS}}
+- Language: {{LANGUAGE}}
+- Database: {{DATABASE}}
+- HTTP server: {{HTTP_SERVER}}
 
-3. **Comenta solo donde sea necesario para claridad**
-   - Evita comentarios obvios
-   - Comenta decisiones importantes
-   - Documenta complejidad
+## Hard rules
 
-## Restricciones
-- Sigue reglas en `.cursor/rules/code-style.md`
-- Usa bibliotecas permitidas (`.cursor/libs/allowed-libs.md`)
-- No uses bibliotecas prohibidas (`.cursor/libs/forbidden-libs.md`)
-- Mantén estructura consistente
+- Do not invent databases, REST/CRUD APIs, JWT auth, or CI pipelines without evidence
+- Prefer Current State over Planned/Recommended
+- Unknown is better than wrong
+- Reference context docs instead of restating an invented stack
 
 ## Output
-Código boilerplate listo para usar con:
-- Estructura correcta
-- Patrones seguidos
-- Comentarios apropiados
-- Explicación rápida de la estructura creada
 
-## Documentación Relacionada
-- **Estilo de Código:** `.cursor/rules/code-style.md`
-- **Arquitectura:** `.cursor/context/architecture.md`
-- **Bibliotecas Permitidas:** `.cursor/libs/allowed-libs.md`
+Produce actionable guidance consistent with the repository evidence above.

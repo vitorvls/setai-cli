@@ -1,63 +1,30 @@
-# Review PR
+﻿# review-pr
 
-## Objective
-Critical and educational review. Evaluate PR as senior engineer.
+## Goal
 
-## Project Context
+Agent workflow for **{{PROJECT_NAME}}**. Read context files first; do not invent stack.
 
-**Project:** {{PROJECT_NAME}}  
-**Type:** {{PROJECT_TYPE}}  
-**Stack:** {{LANGUAGE}} + {{FRAMEWORK}}{{#if DATABASE}} + {{DATABASE}}{{/if}}
+## Required reading
 
-{{#if USE_TDD}}
-**TDD:** This project uses Test-Driven Development. Ensure tests are present and adequate.
-{{/if}}
-
-## Input
-- Pull Request to review
-- Changed code
-- PR context
-- PR description
-
-## Instructions
-You are a senior engineer reviewing this PR.
-
-Evaluate:
-
-1. **Solution clarity**
-   - Is code easy to understand?
-   - Are names clear?
-   - Does structure make sense?
-
-2. **Business rules correctness**
-   - Is logic correct?
-   - Were business rules followed?
-   - Were edge cases considered?
-
-3. **Test quality**
-   - Do tests cover important cases?
-   - Are tests clear and maintainable?
-   - Is coverage adequate?
-
-4. **Possible future impacts**
-   - Can changes break something?
-   - Is there excessive coupling?
-   - Was maintainability considered?
+- .cursor/context/project-goals.md
+- .cursor/context/tech-stack.md
+- .cursor/context/architecture.md
+- .cursor/context/known-issues.md
 
 ## Constraints
-- Assume PR was made by a junior developer
-- Be technical, constructive, and educational
-- Explain the why of suggestions
-- Prioritize actionable feedback
+
+- Type: {{PROJECT_TRAITS}}
+- Language: {{LANGUAGE}}
+- Database: {{DATABASE}}
+- HTTP server: {{HTTP_SERVER}}
+
+## Hard rules
+
+- Do not invent databases, REST/CRUD APIs, JWT auth, or CI pipelines without evidence
+- Prefer Current State over Planned/Recommended
+- Unknown is better than wrong
+- Reference context docs instead of restating an invented stack
 
 ## Output
-Structured review with:
-- Positive points
-- Identified problems
-- Improvement suggestions
-- Educational explanations
 
-## Related Documentation
-- **Code Style:** `.cursor/rules/code-style.md`
-- **Testing Rules:** `.cursor/rules/testing-rules.md`
-- **Git Rules:** `.cursor/rules/git-rules.md`
+Produce actionable guidance consistent with the repository evidence above.

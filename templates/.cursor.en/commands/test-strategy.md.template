@@ -1,78 +1,30 @@
-# Test Strategy
+﻿# test-strategy
 
-## Objective
-Structure tests before or alongside code. Define testing strategy for a module or feature.
+## Goal
 
-## Project Context
+Agent workflow for **{{PROJECT_NAME}}**. Read context files first; do not invent stack.
 
-**Project:** {{PROJECT_NAME}}  
-**Type:** {{PROJECT_TYPE}}  
-**Stack:** {{LANGUAGE}} + {{FRAMEWORK}}{{#if DATABASE}} + {{DATABASE}}{{/if}}
+## Required reading
 
-{{#if USE_TDD}}
-**TDD:** This project uses Test-Driven Development (TDD). Tests must be written BEFORE code.
-{{/if}}
-
-## Input
-- Module/feature to be tested
-- Existing code (if applicable)
-- Functional requirements
-- Business rules
-
-## Instructions
-You are responsible for project testing strategy.
-
-For this module:
-
-1. **List critical scenarios**
-   - Main flows
-   - Essential use cases
-   - Critical integrations
-
-2. **Define necessary unit tests**
-   - Functions to test
-   - Test cases per function
-   - Expected coverage
-
-3. **Define integration tests**
-   - Integrations to test
-   - End-to-end flows
-   - Necessary mocks
-
-4. **Point out edge cases and expected failures**
-   - Edge cases
-   - Error handling
-   - Input validations
+- .cursor/context/project-goals.md
+- .cursor/context/tech-stack.md
+- .cursor/context/architecture.md
+- .cursor/context/known-issues.md
 
 ## Constraints
-- Don't write code yet
-- Focus on strategy and planning
-- Consider minimum coverage (see `.cursor/rules/testing-rules.md`)
-- Be specific about what to test
+
+- Type: {{PROJECT_TRAITS}}
+- Language: {{LANGUAGE}}
+- Database: {{DATABASE}}
+- HTTP server: {{HTTP_SERVER}}
+
+## Hard rules
+
+- Do not invent databases, REST/CRUD APIs, JWT auth, or CI pipelines without evidence
+- Prefer Current State over Planned/Recommended
+- Unknown is better than wrong
+- Reference context docs instead of restating an invented stack
 
 ## Output
-Structured strategy with:
-- Critical scenarios
-- Planned unit tests
-- Planned integration tests
-- Identified edge cases
 
-## Project-Specific Notes
-
-{{#if FRAMEWORK_EXPRESS}}
-- This is an Express API project
-- Use Supertest for API endpoint testing
-- Test database interactions with test database
-- Mock external services
-{{/if}}
-
-{{#if USE_TDD}}
-- **TDD is mandatory:** Write tests first, then implement
-- Follow Red-Green-Refactor cycle
-- All new code must have tests
-{{/if}}
-
-## Related Documentation
-- **Testing Rules:** `.cursor/rules/testing-rules.md`
-- **Code Style:** `.cursor/rules/code-style.md`
-- **Architecture:** `.cursor/context/architecture.md`
+Produce actionable guidance consistent with the repository evidence above.
